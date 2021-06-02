@@ -1,6 +1,8 @@
 import 'package:aston_math_application/ui/screens/login/login_page.dart';
 import 'package:aston_math_application/util/styles/ButtonStyles.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:get/get.dart';
 
 class LandingPageWidget extends StatelessWidget {
@@ -37,7 +39,7 @@ class LandingPageWidget extends StatelessWidget {
             children: [
               Container(
                 child: TextButton(
-                  child: Text('Sign in'),
+                  child: Text('signin').tr(),
                   style: flatButtonStyle,
                   onPressed: () => onSignInPressed(context),
                 ),
