@@ -13,7 +13,7 @@ class LoginPageWidget extends StatelessWidget {
     ExampleRepository repo = GetIt.I();
     List<ExampleResponse> films = await repo.getResponse();
     films.forEach((film) => print(film.title + '\n'));
-    
+
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
