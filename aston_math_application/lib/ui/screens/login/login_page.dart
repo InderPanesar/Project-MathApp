@@ -4,6 +4,7 @@ import 'package:aston_math_application/ui/screens/home/home_page.dart';
 import 'package:aston_math_application/util/styles/ButtonStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:math_keyboard/math_keyboard.dart';
 
 
 class LoginPageWidget extends StatelessWidget {
@@ -54,6 +55,22 @@ class LoginPageWidget extends StatelessWidget {
                             border: UnderlineInputBorder(),
                             labelText: 'Enter your password',
                           ),
+                        ),
+                        margin: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                      ),
+                      Container(
+                        child: MathField(
+                          // No parameters are required.
+                          keyboardType: MathKeyboardType.expression,
+                          variables: const ['x', 'y', 'z'],
+                          decoration: const InputDecoration(),
+                          onChanged: (String value) {
+                            print("EDITED: " + "" + value + "");
+                          }, // Respond to changes in the input field.
+                          onSubmitted: (String value) {
+                            print("SUBMITTED: " + value);
+                          },
+                          autofocus: false, // Enable or disable autofocus of the input field.
                         ),
                         margin: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                       )
