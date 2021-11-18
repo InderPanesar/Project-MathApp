@@ -44,7 +44,7 @@ class LoginPageWidget extends StatelessWidget {
                         child: TextFormField(
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
-                            labelText: 'Enter your username',
+                            labelText: 'Enter your email',
                           ),
                         ),
                         margin: EdgeInsets.fromLTRB(16, 30, 16, 30),
@@ -55,22 +55,6 @@ class LoginPageWidget extends StatelessWidget {
                             border: UnderlineInputBorder(),
                             labelText: 'Enter your password',
                           ),
-                        ),
-                        margin: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                      ),
-                      Container(
-                        child: MathField(
-                          // No parameters are required.
-                          keyboardType: MathKeyboardType.expression,
-                          variables: const ['x', 'y', 'z'],
-                          decoration: const InputDecoration(),
-                          onChanged: (String value) {
-                            print("EDITED: " + "" + value + "");
-                          }, // Respond to changes in the input field.
-                          onSubmitted: (String value) {
-                            print("SUBMITTED: " + value);
-                          },
-                          autofocus: false, // Enable or disable autofocus of the input field.
                         ),
                         margin: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                       )

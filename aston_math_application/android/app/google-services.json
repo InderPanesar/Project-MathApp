@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "440798581522",
+    "project_id": "emp-mathsapp",
+    "storage_bucket": "emp-mathsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440798581522:android:7f50fd3e7e7c0d83e799cb",
+        "android_client_info": {
+          "package_name": "com.aston.mathapp.aston_math_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440798581522-6826df3nirb9lc1ft1andvp3aj7gbmkb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmiyb5f_zWB_S9wupU8BjJcICAAT42JN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440798581522-6826df3nirb9lc1ft1andvp3aj7gbmkb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
