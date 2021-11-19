@@ -32,7 +32,7 @@ class LandingPageWidget extends StatelessWidget {
             margin: EdgeInsets.only(top: 228),
             child: Text(
               'title',
-              //ToDo: Add default textStyle to spage. (DefaultTextStyle)
+              //ToDo: Add default textStyle to page. (DefaultTextStyle)
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black, decoration: TextDecoration.none),
               textAlign: TextAlign.center,
             ).tr(),

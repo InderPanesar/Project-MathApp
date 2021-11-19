@@ -10,12 +10,14 @@ part 'example_state.dart';
 
 class ExampleCubit extends Cubit<ExampleState> {
   ExampleCubit({required this.repo}) : super(ExampleState.loading()) {
-    getOffers();
+    emit(ExampleState.empty());
   }
 
   ExampleRepository repo;
 
   Future<void> getOffers() async {
+    emit(ExampleState.loading());
+    await Future.delayed(const Duration(milliseconds: 1000));
     List<ExampleResponse> data = await repo.getResponse();
     if(data == null){
       emit(ExampleState.failed());

@@ -1,7 +1,8 @@
 import 'package:aston_math_application/engine/comms/api/example_api.dart';
 import 'package:aston_math_application/engine/repository/example_repository.dart';
-import 'package:aston_math_application/ui/screens/login/exampleCubit/example_cubit.dart';
+import 'package:aston_math_application/ui/screens/authentication/login/exampleCubit/example_cubit.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:get_it/get_it.dart';
 
 class Dependencies {
@@ -42,6 +43,6 @@ class Dependencies {
   }
 
   void _setupAnalytics() {
-    //_getIt.registerLazySingleton<FirebaseCrashlytics>(() => FirebaseCrashlytics.instance);
+    _getIt.registerLazySingleton<FirebaseCrashlytics>(() => FirebaseCrashlytics.instance);
   }
 }
