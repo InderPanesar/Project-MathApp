@@ -1,7 +1,9 @@
+import 'package:aston_math_application/engine/auth/authentication_service.dart';
 import 'package:aston_math_application/engine/comms/api/example_api.dart';
 import 'package:aston_math_application/engine/repository/example_repository.dart';
 import 'package:aston_math_application/ui/screens/authentication/login/exampleCubit/example_cubit.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:get_it/get_it.dart';
 
@@ -28,6 +30,7 @@ class Dependencies {
 
   void _setupUtils() {
       //_getIt.registerSingleton<NavigationService>(NavigationService());
+    _getIt.registerSingleton<AuthenticationService>(AuthenticationService(FirebaseAuth.instance));
   }
 
   void _setupRepositories() {

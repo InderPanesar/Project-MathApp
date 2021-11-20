@@ -1,29 +1,33 @@
-import 'package:aston_math_application/engine/model/example/example_response.dart';
-import 'package:aston_math_application/engine/repository/example_repository.dart';
+import 'package:aston_math_application/ui/screens/authentication/login/exampleCubit/example_cubit.dart';
+import 'package:aston_math_application/ui/screens/authentication/register/registerCubit/register_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/home_page.dart';
-import 'package:aston_math_application/util/styles/ButtonStyles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:progress_state_button/progress_button.dart';
 
 
-class RegisterPageWidget extends StatelessWidget {
 
-  Future<void> onRegisterPressed(BuildContext context) async {
+class RegisterPageWidget extends StatefulWidget {
+  @override
+  _RegisterPageWidgetState createState() => _RegisterPageWidgetState();
+}
 
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => HomePage(),
-        ),
-        ModalRoute.withName(''));
+class _RegisterPageWidgetState extends State<RegisterPageWidget> {
+  ButtonState loginButtonState = ButtonState.idle;
+  RegisterCubit _bloc = RegisterCubit(service: GetIt.I());
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
+  void onLogInPressed(BuildContext context, String email, String password) {
+    _bloc.signUpUser(email, password);
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Sign Up"),
+          title: Text("Log in"),
         ),
         body: Container(
             color: Colors.white,
@@ -37,21 +41,23 @@ class RegisterPageWidget extends StatelessWidget {
                       children: [
                         Container(
                           child: TextFormField(
+                            controller: emailController,
                             decoration: InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: 'Enter your email',
                             ),
                           ),
-                          margin: EdgeInsets.fromLTRB(16, 30, 16, 30),
+                          margin: EdgeInsets.fromLTRB(0, 30, 0, 30),
                         ),
                         Container(
                           child: TextFormField(
+                            controller: passwordController,
                             decoration: InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: 'Enter your password',
                             ),
                           ),
-                          margin: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                          margin: EdgeInsets.symmetric(vertical: 4, horizontal: 0),
                         )
                       ],
                     ),
@@ -60,20 +66,55 @@ class RegisterPageWidget extends StatelessWidget {
 
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      child: TextButton(
-                        child: Text('Sign up'),
-                        style: flatButtonStyle,
-                        onPressed: () => onRegisterPressed(context),
-                      ),
-                      margin: EdgeInsets.fromLTRB(16, 4, 16, 37),
+                    BlocConsumer<RegisterCubit, RegisterState>(
+                      bloc: _bloc,
+                      listener: (context, state) {
+
+                        if(state is RegisterStateSuccess) {
+                          loginButtonState = ButtonState.idle;
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => HomePage(),
+                              ),
+                              ModalRoute.withName(''));
+                        }
+                        else if(state is RegisterStateLoading) {
+                          setState(() {
+                            loginButtonState = ButtonState.loading;
+                          });
+                        }
+                        else {
+                          setState(() {
+                            loginButtonState = ButtonState.idle;
+                          });                        }
+                      },
+                      builder: (context, state) {
+                        return ProgressButton(
+                          stateWidgets: {
+                            ButtonState.idle: Text("Sign Up",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),),
+                            ButtonState.loading: Text("Loading",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),),
+                            ButtonState.fail: Text("",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),),
+                            ButtonState.success: Text("",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),)
+                          },
+                          stateColors: {
+                            ButtonState.idle: Colors.grey.shade400,
+                            ButtonState.loading: Colors.blue.shade300,
+                            ButtonState.fail: Colors.red.shade300,
+                            ButtonState.success: Colors.green.shade400,
+                          },
+                          onPressed: () => onLogInPressed(context, emailController.text, passwordController.text),
+                          state: loginButtonState,
+                        );
+                      },
                     ),
                   ],
                 )
               ],
-            )
+            ),
+            padding: EdgeInsets.fromLTRB(16, 0, 16, 16)
         )
     );
   }
