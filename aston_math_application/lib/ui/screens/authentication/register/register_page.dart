@@ -1,6 +1,4 @@
-import 'package:aston_math_application/ui/screens/authentication/login/exampleCubit/example_cubit.dart';
 import 'package:aston_math_application/ui/screens/authentication/register/registerCubit/register_cubit.dart';
-import 'package:aston_math_application/ui/screens/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';

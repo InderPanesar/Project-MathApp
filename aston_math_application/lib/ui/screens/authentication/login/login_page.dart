@@ -1,12 +1,9 @@
-
-import 'package:aston_math_application/ui/screens/authentication/login/exampleCubit/example_cubit.dart';
-import 'package:aston_math_application/ui/screens/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:progress_state_button/progress_button.dart';
+import 'loginCubit/login_cubit.dart';
 
-import 'exampleCubit/example_cubit.dart';
 
 
 class LoginPageWidget extends StatefulWidget {
@@ -16,10 +13,13 @@ class LoginPageWidget extends StatefulWidget {
 
 class _LoginPageWidgetState extends State<LoginPageWidget> {
   ButtonState loginButtonState = ButtonState.idle;
-  ExampleCubit _bloc = ExampleCubit(repo: GetIt.I());
+  LoginCubit _bloc = LoginCubit(service: GetIt.I());
 
-  void onLogInPressed(BuildContext context) {
-    _bloc.getOffers();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
+  void onLogInPressed(BuildContext context, String email, String password) {
+    _bloc.signInUser(email, password);
   }
 
 
@@ -41,18 +41,20 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                     children: [
                       Container(
                         child: TextFormField(
+                          controller: emailController,
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
-                            labelText: 'Enter your email',
+                            labelText: 'Email',
                           ),
                         ),
                         margin: EdgeInsets.fromLTRB(0, 30, 0, 30),
                       ),
                       Container(
                         child: TextFormField(
+                          controller: passwordController,
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
-                            labelText: 'Enter your password',
+                            labelText: 'Password',
                           ),
                         ),
                         margin: EdgeInsets.symmetric(vertical: 4, horizontal: 0),
@@ -66,22 +68,15 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  BlocConsumer<ExampleCubit, ExampleState>(
+                  BlocConsumer<LoginCubit, LoginState>(
                     bloc: _bloc,
                     listener: (context, state) {
 
-                      if(state is ExampleStateSuccess) {
+                      if(state is LoginStateSuccess) {
                         loginButtonState = ButtonState.idle;
-                        final films = state.films;
-                        films.forEach((film) => print(film.title + '\n'));
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => HomePage(),
-                            ),
-                            ModalRoute.withName(''));
+                        Navigator.of(context).popUntil((route) => route.isFirst);
                       }
-                      else if(state is ExampleStateLoading) {
+                      else if(state is LoginStateLoading) {
                         setState(() {
                           loginButtonState = ButtonState.loading;
                         });
@@ -89,7 +84,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                       else {
                         setState(() {
                           loginButtonState = ButtonState.idle;
-                        });                        }
+                        });
+                      }
                     },
                     builder: (context, state) {
                       return ProgressButton(
@@ -105,7 +101,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           ButtonState.fail: Colors.red.shade300,
                           ButtonState.success: Colors.green.shade400,
                         },
-                        onPressed: () => onLogInPressed(context),
+                        onPressed: () => onLogInPressed(context, emailController.text, passwordController.text),
                         state: loginButtonState,
                       );
                     },
