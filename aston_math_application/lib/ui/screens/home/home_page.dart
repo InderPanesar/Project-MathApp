@@ -1,4 +1,6 @@
+import 'package:aston_math_application/engine/auth/authentication_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,7 +12,18 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   final _pageOptions = [
-    Container(color: Colors.red,),
+    Container(
+      alignment: Alignment.center,
+      color: Colors.red,
+      child: TextButton.icon(
+        onPressed: () async {
+          AuthenticationService service = GetIt.instance();
+          await service.signOut();
+        },
+        icon: Icon(Icons.door_back_door, size: 18),
+        label: Text("LOG OUT"),
+      ),
+    ),
     Container(color: Colors.white,),
     Container(color: Colors.lightBlue,),
     Container(color: Colors.lightGreen,)

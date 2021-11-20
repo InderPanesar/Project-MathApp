@@ -42,20 +42,23 @@ class _RegisterPageWidgetState extends State<RegisterPageWidget> {
                         Container(
                           child: TextFormField(
                             controller: emailController,
+                            keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               border: UnderlineInputBorder(),
-                              labelText: 'Enter your email',
+                              labelText: 'Email',
                             ),
+
                           ),
-                          margin: EdgeInsets.fromLTRB(0, 30, 0, 30),
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 30),
                         ),
                         Container(
                           child: TextFormField(
                             controller: passwordController,
                             decoration: InputDecoration(
                               border: UnderlineInputBorder(),
-                              labelText: 'Enter your password',
+                              labelText: 'Password',
                             ),
+                            obscureText: true,
                           ),
                           margin: EdgeInsets.symmetric(vertical: 4, horizontal: 0),
                         )
@@ -74,12 +77,7 @@ class _RegisterPageWidgetState extends State<RegisterPageWidget> {
 
                         if(state is RegisterStateSuccess) {
                           loginButtonState = ButtonState.idle;
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) => HomePage(),
-                              ),
-                              ModalRoute.withName(''));
+                          Navigator.of(context).popUntil((route) => route.isFirst);
                         }
                         else if(state is RegisterStateLoading) {
                           setState(() {

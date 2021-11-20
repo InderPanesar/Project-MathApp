@@ -1,13 +1,12 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
-import 'package:aston_math_application/ui/screens/authentication/login/exampleCubit/example_cubit.dart';
+import 'package:aston_math_application/ui/screens/home/home_page.dart';
 import 'package:aston_math_application/ui/screens/landing/landing_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get_it/get_it.dart';
-import 'package:provider/provider.dart';
 import 'engine/di/dependencies.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +45,21 @@ class MyApp extends StatelessWidget {
 class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return LandingPageWidget();
+    return StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          final user = snapshot.data;
+          if(snapshot.hasData) {
+            print("user is logged in");
+            return HomePage();
+          }
+          else {
+            print("user is not logged in");
+            return LandingPageWidget();
+          }
+        }
+    );
+    //return LandingPageWidget();
   }
 
 }

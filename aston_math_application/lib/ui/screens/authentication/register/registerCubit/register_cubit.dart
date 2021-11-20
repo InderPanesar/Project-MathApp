@@ -17,13 +17,13 @@ class RegisterCubit extends Cubit<RegisterState> {
   Future<void> signUpUser(String email, String password) async {
     emit(RegisterState.loading());
 
-    String status = await service.signUp(email.trim(), password.trim());
+    String statusSignUp = await service.signUp(email.trim(), password.trim());
 
-    if(status != "Signed up") {
-      print(status);
+    if(statusSignUp != "Signed up") {
+      print(statusSignUp);
       emit(RegisterState.failed());
     } else {
-      print("SIGNED IN TO APPLICATION");
+      print("SIGNED UP TO APPLICATION");
       emit(RegisterState.success());
     }
     return;
