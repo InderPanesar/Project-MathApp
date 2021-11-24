@@ -5,7 +5,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-class HomeTabPage extends StatelessWidget {
+class HomeTabPage extends StatefulWidget {
+  @override
+  _HomeTabPageState createState() => _HomeTabPageState();
+}
+
+class _HomeTabPageState extends State<HomeTabPage> {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
@@ -13,6 +18,8 @@ class HomeTabPage extends StatelessWidget {
   UserDetailsRepository repository = GetIt.I();
   AuthenticationService service = GetIt.I();
 
+  String? name;
+  String? age;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +58,24 @@ class HomeTabPage extends StatelessWidget {
               await repository.addUserDetails(details);
             },
             child: const Text('Submit'),
+          ),
+          Text(name ?? ""),
+          Text(age ?? ""),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+              backgroundColor: Colors.white,
+            ),
+            onPressed: () async {
+              var details = await repository.getUserDetails();
+              if(details != null) {
+                setState(() {
+                  name = details.name;
+                  age = details.age;
+                });
+              }
+            },
+            child: const Text('Retrieve'),
           ),
           TextButton(
             style: TextButton.styleFrom(

@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class UserDetailsRepository {
   Future<void> addUserDetails(UserDetails details);
+  Future<UserDetails?> getUserDetails();
+
 }
 
 class UserDetailsRepositoryImpl implements UserDetailsRepository {
@@ -22,6 +24,21 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
     }, SetOptions(merge: true),
     ).then((value) => print("'full_name' & 'age' merged with existing data!")
     ).catchError((error) => print("Failed to merge data: $error"));
+  }
+
+  @override
+  Future<UserDetails?> getUserDetails() async {
+    UserDetails? details;
+    await _firebaseFirestore.collection('user').doc(_authenticationService.getAuth().currentUser!.uid).get().then((value) {
+      if(value.exists) {
+        details = UserDetails(
+            name: value["full_name"],
+            age: value["age"]
+        );
+      }
+    });
+    return details;
+
   }
 
 
