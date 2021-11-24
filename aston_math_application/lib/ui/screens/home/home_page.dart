@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+import 'homePage/home_tab_page.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -12,19 +14,8 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   final _pageOptions = [
-    Container(
-      alignment: Alignment.center,
-      color: Colors.red,
-      child: TextButton.icon(
-        onPressed: () async {
-          AuthenticationService service = GetIt.instance();
-          await service.signOut();
-        },
-        icon: Icon(Icons.door_back_door, size: 18),
-        label: Text("LOG OUT"),
-      ),
-    ),
-    Container(color: Colors.white,),
+    HomeTabPage(),
+    Container(color: Colors.deepPurple,),
     Container(color: Colors.lightBlue,),
     Container(color: Colors.lightGreen,)
   ];
