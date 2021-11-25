@@ -41,6 +41,4 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
 
   }
 
-
-
 }

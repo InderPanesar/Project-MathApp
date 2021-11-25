@@ -1,5 +1,8 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
+import 'package:aston_math_application/engine/model/Questions/question.dart';
 import 'package:aston_math_application/engine/model/UserDetails/UserDetails.dart';
+import 'package:aston_math_application/engine/repository/question_repository.dart';
+import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
 import 'package:aston_math_application/engine/repository/user_details_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +19,9 @@ class _HomeTabPageState extends State<HomeTabPage> {
   TextEditingController ageController = TextEditingController();
 
   UserDetailsRepository repository = GetIt.I();
+  QuestionMapRepository repository2 = GetIt.I();
+  QuestionRepository repository3 = GetIt.I();
+
   AuthenticationService service = GetIt.I();
 
   String? name;
@@ -86,6 +92,21 @@ class _HomeTabPageState extends State<HomeTabPage> {
               await service.signOut();
             },
             child: const Text('Logout'),
+          ),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+              backgroundColor: Colors.white,
+            ),
+            onPressed: () async {
+              List<Question> details = await repository3.getUserDetails("REPLACEWITHMAPCALL");
+              print("MAP: ");
+              print(details[0].answer);
+              print(details[0].preQuestion);
+              print(details[0].question);
+
+            },
+            child: const Text('Hello'),
           ),
         ],
       )

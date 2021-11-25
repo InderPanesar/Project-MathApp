@@ -1,6 +1,8 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
 import 'package:aston_math_application/engine/comms/api/example_api.dart';
 import 'package:aston_math_application/engine/repository/example_repository.dart';
+import 'package:aston_math_application/engine/repository/question_repository.dart';
+import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
 import 'package:aston_math_application/engine/repository/user_details_repository.dart';
 import 'package:aston_math_application/ui/screens/authentication/exampleCubit/example_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -44,6 +46,14 @@ class Dependencies {
     _getIt.registerFactory<UserDetailsRepository>(() => UserDetailsRepositoryImpl(
       _getIt.get<FirebaseFirestore>(),
       _getIt.get<AuthenticationService>(),
+    ));
+
+    _getIt.registerFactory<QuestionMapRepository>(() => QuestionMapRepositoryImpl(
+      _getIt.get<FirebaseFirestore>(),
+    ));
+
+    _getIt.registerFactory<QuestionRepository>(() => QuestionRepositoryImpl(
+      _getIt.get<FirebaseFirestore>(),
     ));
   }
 
