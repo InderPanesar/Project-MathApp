@@ -1,4 +1,7 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
+import 'package:aston_math_application/ui/screens/home/questionsPage/questions_tab_page.dart';
+import 'package:aston_math_application/ui/screens/home/settingsPage/settings_tab_page.dart';
+import 'package:aston_math_application/ui/screens/home/videosPage/videos_tab_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -13,12 +16,48 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  final _pageOptions = [
-    HomeTabPage(),
-    Container(color: Colors.deepPurple,),
-    Container(color: Colors.lightBlue,),
-    Container(color: Colors.lightGreen,)
-  ];
+  final _homeScreen = GlobalKey<NavigatorState>();
+  final _questionsScreen = GlobalKey<NavigatorState>();
+  final _videosScreen = GlobalKey<NavigatorState>();
+  final _settingsScreen = GlobalKey<NavigatorState>();
+
+  var _pageOptions = [];
+
+  //Allows for nested navigation in each page.
+  _HomePageState() {
+    _pageOptions = [
+      Navigator(
+        key: _homeScreen,
+        onGenerateRoute: (route) => MaterialPageRoute(
+          settings: route,
+          builder: (context) => HomeTabPage(),
+        ),
+      ),
+      Navigator(
+        key: _questionsScreen,
+        onGenerateRoute: (route) => MaterialPageRoute(
+          settings: route,
+          builder: (context) => QuestionTabPage(),
+        ),
+      ),
+      Navigator(
+        key: _videosScreen,
+        onGenerateRoute: (route) => MaterialPageRoute(
+          settings: route,
+          builder: (context) => VideosTabPage(),
+        ),
+      ),
+      Navigator(
+        key: _settingsScreen,
+        onGenerateRoute: (route) => MaterialPageRoute(
+          settings: route,
+          builder: (context) => SettingsTabPage(),
+        ),
+      ),
+
+
+    ];
+  }
 
   static const TextStyle optionStyle =  TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
 
@@ -28,15 +67,15 @@ class _HomePageState extends State<HomePage> {
       style: optionStyle,
     ),
     Text(
-      'Likes',
+      'Questions',
       style: optionStyle,
     ),
     Text(
-      'Search',
+      'Videos',
       style: optionStyle,
     ),
     Text(
-      'Profile',
+      'Settings',
       style: optionStyle,
     ),
   ];
@@ -78,15 +117,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                   GButton(
                     icon: Icons.line_style_rounded,
-                    text: 'Likes',
+                    text: 'Questions',
                   ),
                   GButton(
                     icon: Icons.search_rounded,
-                    text: 'Search',
+                    text: 'Videos',
                   ),
                   GButton(
-                    icon: Icons.ac_unit,
-                    text: 'Profile',
+                    icon: Icons.settings,
+                    text: 'Settings',
                   ),
                 ],
                 selectedIndex: _selectedIndex,

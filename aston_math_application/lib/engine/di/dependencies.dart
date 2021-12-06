@@ -4,7 +4,10 @@ import 'package:aston_math_application/engine/repository/example_repository.dart
 import 'package:aston_math_application/engine/repository/question_repository.dart';
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
 import 'package:aston_math_application/engine/repository/user_details_repository.dart';
+import 'package:aston_math_application/engine/repository/videos_repository.dart';
 import 'package:aston_math_application/ui/screens/authentication/exampleCubit/example_cubit.dart';
+import 'package:aston_math_application/ui/screens/home/questionsPage/questionsTabPageCubit/questions_tab_page_cubit.dart';
+import 'package:aston_math_application/ui/screens/home/videosPage/videosTabPageCubit/videos_tab_page_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -55,11 +58,23 @@ class Dependencies {
     _getIt.registerFactory<QuestionRepository>(() => QuestionRepositoryImpl(
       _getIt.get<FirebaseFirestore>(),
     ));
+
+    _getIt.registerFactory<VideosRepository>(() => VideosRepositoryImpl(
+      _getIt.get<FirebaseFirestore>(),
+    ));
   }
 
   void _setupBlocs() {
     _getIt.registerFactory<ExampleCubit>(() => ExampleCubit(
       repo: _getIt.get<ExampleRepository>(),
+    ));
+
+    _getIt.registerFactory<QuestionTabPageCubit>(() => QuestionTabPageCubit(
+      repo: _getIt.get<QuestionMapRepository>(),
+    ));
+
+    _getIt.registerFactory<VideosTabPageCubit>(() => VideosTabPageCubit(
+      repo: _getIt.get<VideosRepository>(),
     ));
   }
 

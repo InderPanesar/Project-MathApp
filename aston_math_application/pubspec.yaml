@@ -49,6 +49,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   math_keyboard: ^0.1.2
   progress_state_button: ^1.0.4
+  youtube_player_flutter: ^8.0.0
+
 
 dev_dependencies:
   flutter_test:
