@@ -6,6 +6,8 @@ import 'package:aston_math_application/engine/repository/question_topics_reposit
 import 'package:aston_math_application/engine/repository/user_details_repository.dart';
 import 'package:aston_math_application/engine/repository/videos_repository.dart';
 import 'package:aston_math_application/ui/screens/authentication/exampleCubit/example_cubit.dart';
+import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questionDetailPageCubit/questions_detail_page_cubit.dart';
+import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questions_detail_page.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionsTabPageCubit/questions_tab_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/videosPage/videosTabPageCubit/videos_tab_page_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -75,6 +77,10 @@ class Dependencies {
 
     _getIt.registerFactory<VideosTabPageCubit>(() => VideosTabPageCubit(
       repo: _getIt.get<VideosRepository>(),
+    ));
+
+    _getIt.registerFactory<QuestionDetailPageCubit>(() => QuestionDetailPageCubit(
+      repo: _getIt.get<QuestionRepository>(),
     ));
   }
 

@@ -25,3 +25,4 @@ class QuestionTabPageStateSuccess extends Equatable implements QuestionTabPageSt
   QuestionTabPageStateSuccess(this.questions);
   @override List<Object> get props => [this.questions];
 }
+

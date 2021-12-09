@@ -22,7 +22,6 @@ class _HomeTabPageState extends State<HomeTabPage> {
 
   UserDetailsRepository repository = GetIt.I();
   QuestionMapRepository repository2 = GetIt.I();
-  QuestionRepository repository3 = GetIt.I();
   VideosRepository repository4 = GetIt.I();
 
   AuthenticationService service = GetIt.I();

@@ -23,7 +23,8 @@ class QuestionRepositoryImpl implements QuestionRepository {
               Question(
                 answer: value["answer"][i],
                 question: value["questions"][i],
-                preQuestion: value["pre-question"][i]
+                preQuestion: value["pre-question"][i],
+                description: value["description"]
               )
           );
         }

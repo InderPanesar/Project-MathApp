@@ -1,4 +1,5 @@
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
+import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questions_detail_page.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionsTabPageCubit/questions_tab_page_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,6 +69,11 @@ class _QuestionTabPageState extends State<QuestionTabPage> {
                                 splashColor: Colors.blue.withAlpha(30),
                                 onTap: () {
                                   print('Card tapped. Code: ' + _map![newList[index]]);
+                                  var detailPage = QuestionDetailPage(id: _map![newList[index]], topicName: newList[index],);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => detailPage),
+                                  );
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
