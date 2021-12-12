@@ -8,6 +8,7 @@ import 'package:aston_math_application/engine/repository/videos_repository.dart'
 import 'package:aston_math_application/ui/screens/authentication/exampleCubit/example_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questionDetailPageCubit/questions_detail_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questions_detail_page.dart';
+import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_service.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionsTabPageCubit/questions_tab_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/videosPage/videosTabPageCubit/videos_tab_page_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -41,6 +42,7 @@ class Dependencies {
       //_getIt.registerSingleton<NavigationService>(NavigationService());
     _getIt.registerSingleton<AuthenticationService>(AuthenticationService(FirebaseAuth.instance));
     _getIt.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
+    _getIt.registerLazySingleton<QuestionService>(() => QuestionService());
   }
 
   void _setupRepositories() {

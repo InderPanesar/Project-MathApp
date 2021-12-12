@@ -1,7 +1,10 @@
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questionDetailPageCubit/questions_detail_page_cubit.dart';
+import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_page.dart';
+import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:math_keyboard/math_keyboard.dart';
 
 class QuestionDetailPage extends StatefulWidget {
 
@@ -13,13 +16,14 @@ class QuestionDetailPage extends StatefulWidget {
 }
 
 class _QuestionDetailPageState extends State<QuestionDetailPage> {
-
   QuestionDetailPageCubit _bloc = GetIt.instance();
 
   String id, topicName;
   _QuestionDetailPageState({required this.id, required this.topicName}) {
     _bloc.getQuestions(id);
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +75,10 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
                                           backgroundColor: MaterialStateProperty.all(Colors.red),
                                           foregroundColor: MaterialStateProperty.all(Colors.white),
                                       ),
-                                      onPressed: () { },
+                                      onPressed: () {
+                                          QuestionService service = GetIt.I();
+                                          service.start(context, state.questions);
+                                      },
                                       child: Text('Start Quiz'),
                                     ),
                                     padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),

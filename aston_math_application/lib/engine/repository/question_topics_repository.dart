@@ -39,6 +39,7 @@ class QuestionMapRepositoryImpl implements QuestionMapRepository {
                   answer: value["answer"][i],
                   question: value["questions"][i],
                   preQuestion: value["pre-question"][i],
+                  afterQuestion: value["after-question"][i],
                   description: value["description"]
               )
           );
