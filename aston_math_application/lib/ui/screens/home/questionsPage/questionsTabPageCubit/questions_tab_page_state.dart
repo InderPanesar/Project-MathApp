@@ -5,7 +5,7 @@ abstract class QuestionTabPageState {
   factory QuestionTabPageState.loading() = QuestionTabPageStateLoading;
   factory QuestionTabPageState.empty() = QuestionTabPageStateEmpty;
   factory QuestionTabPageState.failed() = QuestionTabPageStateFailed;
-  factory QuestionTabPageState.success(Map<String, dynamic> questions) = QuestionTabPageStateSuccess;
+  factory QuestionTabPageState.success(List<QuestionTopic> questions) = QuestionTabPageStateSuccess;
 }
 
 class QuestionTabPageStateLoading extends Equatable implements QuestionTabPageState {
@@ -21,7 +21,7 @@ class QuestionTabPageStateFailed extends Equatable implements QuestionTabPageSta
 }
 
 class QuestionTabPageStateSuccess extends Equatable implements QuestionTabPageState {
-  final Map<String, dynamic> questions;
+  final List<QuestionTopic> questions;
   QuestionTabPageStateSuccess(this.questions);
   @override List<Object> get props => [this.questions];
 }

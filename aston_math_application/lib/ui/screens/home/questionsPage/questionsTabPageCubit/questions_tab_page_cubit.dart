@@ -1,3 +1,4 @@
+import 'package:aston_math_application/engine/model/Questions/QuestionTopic.dart';
 import 'package:aston_math_application/engine/model/Questions/question.dart';
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -17,7 +18,7 @@ class QuestionTabPageCubit extends Cubit<QuestionTabPageState> {
 
   Future<void> getQuestions() async {
     emit(QuestionTabPageState.loading());
-    Map<String, dynamic>? data = await repo.getUserDetails();
+    List<QuestionTopic> data = await repo.getUserDetails();
     if(data == null){
       emit(QuestionTabPageState.failed());
     } else if (data.isEmpty) {

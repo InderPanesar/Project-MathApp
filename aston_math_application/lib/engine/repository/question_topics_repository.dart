@@ -1,10 +1,12 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
+import 'package:aston_math_application/engine/model/Questions/QuestionTopic.dart';
 import 'package:aston_math_application/engine/model/Questions/question.dart';
 import 'package:aston_math_application/engine/model/UserDetails/UserDetails.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 abstract class QuestionMapRepository {
-  Future<Map<String, dynamic>?> getUserDetails();
+  Future<List<QuestionTopic>> getUserDetails();
   Future<List<Question>> getQuestions(String id);
 
 }
@@ -15,14 +17,20 @@ class QuestionMapRepositoryImpl implements QuestionMapRepository {
   QuestionMapRepositoryImpl(this._firebaseFirestore);
 
   @override
-  Future<Map<String, dynamic>?> getUserDetails() async {
+  Future<List<QuestionTopic>> getUserDetails() async {
     Map<String, dynamic>? details;
+    List<QuestionTopic> topics = [];
     await _firebaseFirestore.collection('question-map').doc("2x5m7WRDcjtqSCdqJg7y").get().then((value) {
       if(value.exists) {
         details = new Map<String, dynamic>.from(value["questions"]);
+        for(String name in details!.keys.toList()) {
+          topics.add(QuestionTopic(name: name, id: List<String>.from(details![name])));
+        }
+
+
       }
     });
-    return details;
+    return topics;
 
   }
 
