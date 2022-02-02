@@ -6,9 +6,11 @@ import 'package:aston_math_application/engine/repository/question_repository.dar
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
 import 'package:aston_math_application/engine/repository/user_details_repository.dart';
 import 'package:aston_math_application/engine/repository/videos_repository.dart';
+import 'package:aston_math_application/util/styles/CustomColors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class HomeTabPage extends StatefulWidget {
   @override
@@ -33,12 +35,63 @@ class _HomeTabPageState extends State<HomeTabPage> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      color: Colors.red,
       padding: EdgeInsets.all(16),
+      color: CustomColors.BlueZodiac,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          SizedBox(
+            height: 25,
+            width: 1,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: new CircularPercentIndicator(
+                  radius: 75.0,
+                  lineWidth: 13.0,
+                  animation: true,
+                  percent: 0.7,
+                  center: new Text(
+                    "70.0%",
+                    style:
+                    new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white),
+                  ),
+                  circularStrokeCap: CircularStrokeCap.round,
+                  progressColor: Colors.white,
+                  backgroundColor: Color.fromRGBO(222, 226, 230, 0.5),
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Home",
+                      style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      "Good Morning",
+                      style: const TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                    Text(
+                      "John",
+                      style: const TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ],
+                ),
+              )
+
+
+            ],
+          ),
+
+
           TextFormField(
             controller: nameController,
             decoration: InputDecoration(

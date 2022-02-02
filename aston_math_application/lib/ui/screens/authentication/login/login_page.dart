@@ -30,7 +30,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
           title: Text("Log in"),
         ),
         body: Container(
-        color: Colors.white,
+        color: Color.fromRGBO(219, 233, 247, 1),
           child: Stack(
             children: [
               Column(
