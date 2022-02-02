@@ -52,7 +52,7 @@ dependencies:
   youtube_player_flutter: ^8.0.0
   percent_indicator: ^4.0.0
   smooth_page_indicator: ^1.0.0+2
-  page_indicator: ^0.4.1
+  dialogs: ^0.0.7
 
 
 dev_dependencies:

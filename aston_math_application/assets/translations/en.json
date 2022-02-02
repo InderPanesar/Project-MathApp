@@ -1,6 +1,7 @@
 {
   "login":"Login",
   "signin":"Sign In",
-  "title":"Essential Mathematics Preparation"
+  "title":"Essential Mathematics Preparation",
+  "hint_message":"Two adjacent letters are treated as a single variable: xy is not interpreted as the product of x and \uD835\uDC66, \uD835\uDC65×\uD835\uDC66\n\nYou must use the multiplication symbol to separate the two variables, i.e. enter x*y."
 
 }

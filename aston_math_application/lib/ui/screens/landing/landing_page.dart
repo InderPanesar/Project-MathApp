@@ -2,8 +2,10 @@ import 'package:aston_math_application/ui/screens/authentication/login/login_pag
 import 'package:aston_math_application/ui/screens/authentication/register/register_page.dart';
 import 'package:aston_math_application/ui/screens/landing/page_view_pages.dart';
 import 'package:aston_math_application/util/styles/ButtonStyles.dart';
+import 'package:aston_math_application/util/styles/CustomColors.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 
 
@@ -53,14 +55,27 @@ class LandingPageWidget extends StatelessWidget {
                   controller: controller,
                   // itemCount: pages.length,
                   itemBuilder: (_, index) {
-                    return pages[index! % pages.length];
+                    return pages[index % pages.length];
                   },
                 ),
               ),
-
-
-
-
+              
+              Container(
+                alignment: Alignment.center,
+                child: SmoothPageIndicator(
+                  controller: controller,
+                  count: pages.length,
+                  effect: WormEffect(
+                    dotHeight: 9,
+                    dotWidth: 9,
+                    type: WormType.normal,
+                    strokeWidth: 1,
+                    activeDotColor: CustomColors.BlueZodiac,
+                  ),
+                ),
+                padding: EdgeInsets.all(12),
+              ),
+              
               Padding(
                 padding: const EdgeInsets.only(
                   left: 40,

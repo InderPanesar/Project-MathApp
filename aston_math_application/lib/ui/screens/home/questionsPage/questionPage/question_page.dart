@@ -2,11 +2,14 @@ import 'package:aston_math_application/engine/model/Questions/question.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questionDetailPageCubit/questions_detail_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_service.dart';
+import 'package:dialogs/dialogs/message_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:get_it/get_it.dart';
 import 'package:math_keyboard/math_keyboard.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 
 class QuestionPage extends StatefulWidget {
 
@@ -33,6 +36,25 @@ class _QuestionPageState extends State<QuestionPage> {
           title: Text(cubit.appBarText()),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
+          actions: <Widget>[
+            IconButton(
+              onPressed: () {
+                MessageDialog messageDialog = MessageDialog(
+                    dialogBackgroundColor: Colors.white,
+                    buttonOkColor: Colors.red,
+                    title: 'Hint',
+                    titleColor: Colors.black,
+                    message: 'hint_message'.tr(),
+                    messageColor: Colors.black,
+                    buttonOkText: 'Ok',
+                    dialogRadius: 15.0,
+                    buttonRadius: 18.0,
+                    iconButtonOk: Icon(Icons.one_k));
+                messageDialog.show(context, barrierColor: Colors.white);
+              },
+              icon: Icon(Icons.help),
+            ),
+          ],
         ),
         body: CustomScrollView(
             slivers: [
