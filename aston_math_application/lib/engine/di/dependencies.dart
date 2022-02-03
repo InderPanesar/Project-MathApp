@@ -24,8 +24,8 @@ class Dependencies {
   void setup() {
     _setupAPIs();
     _setupAnalytics();
-    _setupUtils();
     _setupRepositories();
+    _setupUtils();
     _setupBlocs();
   }
 
@@ -43,7 +43,13 @@ class Dependencies {
       //_getIt.registerSingleton<NavigationService>(NavigationService());
     _getIt.registerSingleton<AuthenticationService>(AuthenticationService(FirebaseAuth.instance));
     _getIt.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
-    _getIt.registerLazySingleton<QuestionService>(() => QuestionService());
+    _getIt.registerLazySingleton<QuestionService>(() => QuestionService(
+      repo: _getIt.get<UserDetailsRepository>(),
+    ));
+    _getIt.registerLazySingleton<HomePageCubit>(() => HomePageCubit(
+      repo: _getIt.get<UserDetailsRepository>(),
+      secondaryRepo: _getIt.get<QuestionRepository>(),
+    ));
   }
 
   void _setupRepositories() {
@@ -86,10 +92,7 @@ class Dependencies {
       repo: _getIt.get<QuestionRepository>(),
     ));
 
-    _getIt.registerFactory<HomePageCubit>(() => HomePageCubit(
-      repo: _getIt.get<UserDetailsRepository>(),
-      secondaryRepo: _getIt.get<QuestionRepository>(),
-    ));
+
   }
 
   void _setupAnalytics() {

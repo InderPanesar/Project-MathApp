@@ -1,3 +1,4 @@
+import 'package:aston_math_application/ui/screens/home/homePage/home_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questionDetailPageCubit/questions_detail_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_page.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_service.dart';
@@ -28,80 +29,81 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         title: Text(topicName),
         backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-    ),
-    body: CustomScrollView(
-        slivers: [
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: Container(
-                      alignment: Alignment.center,
-                      color: Colors.white,
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
-                      child: BlocBuilder<QuestionDetailPageCubit, QuestionDetailPageState>(
-                        bloc: _bloc,
-                        builder: (context, state) {
-                          if(state is QuestionDetailPageStateSuccess) {
-                            return Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 200,
-                                    color: Colors.black,
-                                    margin: EdgeInsets.all(16),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        child: Text(topicName, style: TextStyle(fontSize: 32, color: Colors.black), textAlign: TextAlign.start,),
-                                        padding: EdgeInsets.all(16),
-                                      ),
-                                      Spacer()
-                                    ],
-                                  ),
-
-                                  Container(
-                                    child: Text(state.questions[0].description, style: TextStyle(fontSize: 16, color: Colors.black),),
-                                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                                  ),
-                                  Container(
-                                    width: double.infinity,
-                                    child: TextButton(
-                                      style: ButtonStyle(
-                                          backgroundColor: MaterialStateProperty.all(Colors.red),
-                                          foregroundColor: MaterialStateProperty.all(Colors.white),
-                                      ),
-                                      onPressed: () {
-                                          QuestionService service = GetIt.I();
-                                          service.start(context, state.questions);
-                                      },
-                                      child: Text('Start Quiz'),
+        foregroundColor: Colors.black,
+      ),
+      body: CustomScrollView(
+            slivers: [
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Container(
+                    alignment: Alignment.center,
+                    color: Colors.white,
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
+                    child: BlocBuilder<QuestionDetailPageCubit, QuestionDetailPageState>(
+                      bloc: _bloc,
+                      builder: (context, state) {
+                        if(state is QuestionDetailPageStateSuccess) {
+                          return Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 200,
+                                  color: Colors.black,
+                                  margin: EdgeInsets.all(16),
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      child: Text(topicName, style: TextStyle(fontSize: 32, color: Colors.black), textAlign: TextAlign.start,),
+                                      padding: EdgeInsets.all(16),
                                     ),
-                                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                                    Spacer()
+                                  ],
+                                ),
+
+                                Container(
+                                  child: Text(state.questions[0].description, style: TextStyle(fontSize: 16, color: Colors.black),),
+                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  child: TextButton(
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all(Colors.red),
+                                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                                    ),
+                                    onPressed: () {
+                                      QuestionService service = GetIt.I();
+                                      print("ID VALUE : " + id);
+                                      service.start(context, state.questions, id);
+                                    },
+                                    child: Text('Start Quiz'),
                                   ),
+                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                                ),
 
-                                  Spacer(),
-                                ]
-                            );
-                          }
-                          if(state is QuestionDetailPageStateFailed) return Spacer(); //ToDo: Implement Error State
-                          if (state is QuestionDetailPageStateLoading) {
-                            return Center(
-                                child: CircularProgressIndicator()
-                            );
-                          }
-                          return Spacer();
-                        },
-                      )
+                                Spacer(),
+                              ]
+                          );
+                        }
+                        if(state is QuestionDetailPageStateFailed) return Spacer(); //ToDo: Implement Error State
+                        if (state is QuestionDetailPageStateLoading) {
+                          return Center(
+                              child: CircularProgressIndicator()
+                          );
+                        }
+                        return Spacer();
+                      },
+                    )
 
-                  ),
-            )
-        ]
-    )
+                ),
+              )
+            ]
+        ),
     );
   }
 }

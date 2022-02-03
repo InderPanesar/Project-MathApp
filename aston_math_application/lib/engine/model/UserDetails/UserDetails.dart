@@ -1,8 +1,8 @@
 class UserDetails {
-  UserDetails({required this.name, required this.age, required this.doneHomeQuiz});
+  UserDetails({required this.name, required this.age, required this.doneHomeQuiz, required this.scores});
 
   final String name;
   final String age;
-  final bool doneHomeQuiz;
-
+  bool doneHomeQuiz;
+  Map<String, int> scores;
 }

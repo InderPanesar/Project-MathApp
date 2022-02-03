@@ -21,7 +21,8 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
     return users.doc(_authenticationService.getAuth().currentUser!.uid).set({
       'full_name': details.name,
       'age': details.age,
-      'done_home_quiz' : details.doneHomeQuiz
+      'done_home_quiz' : details.doneHomeQuiz,
+      'scores' : details.scores
     }, SetOptions(merge: true),
     ).then((value) => print("'full_name' & 'age' merged with existing data!")
     ).catchError((error) => print("Failed to merge data: $error"));
@@ -30,13 +31,25 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
   @override
   Future<UserDetails?> getUserDetails() async {
     UserDetails? details;
+
+
     print("UID: "+ _authenticationService.getAuth().currentUser!.uid);
     await _firebaseFirestore.collection('user').doc(_authenticationService.getAuth().currentUser!.uid).get().then((value) {
       if(value.exists) {
+
+        Map<String, dynamic> _values = Map<String, dynamic>.from(value["scores"]);
+        Map<String, int> values = {};
+
+        for(String name in _values.keys.toList()) {
+            values[name] = _values[name] as int;
+            print(values.keys.toString());
+
+        }
         details = UserDetails(
             name: value["full_name"],
             age: value["age"],
-            doneHomeQuiz: value["done_home_quiz"]
+            doneHomeQuiz: value["done_home_quiz"],
+            scores: values
         );
       }
     });
