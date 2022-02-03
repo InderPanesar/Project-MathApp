@@ -79,7 +79,7 @@ class _QuestionPageState extends State<QuestionPage> {
                           ),
                         ),
                         texView(cubit.returnQuestions()),
-                        mathKeyboard(),
+                        mathKeyboard(cubit.question),
                         Spacer(),
                         nextButton()
                       ],
@@ -108,10 +108,10 @@ class _QuestionPageState extends State<QuestionPage> {
     );
   }
 
-  Widget mathKeyboard() {
+  Widget mathKeyboard(Question question) {
     return MathField(
       keyboardType: MathKeyboardType.expression, // Specify the keyboard type (expression or number only).
-      variables: const ['x', 'y', 'z', 'm', 'n'], // Specify the variables the user can use (only in expression mode).
+      variables: question.characters, // Specify the variables the user can use (only in expression mode).
       onSubmitted: (String value) {
         print(value);
         input = value;

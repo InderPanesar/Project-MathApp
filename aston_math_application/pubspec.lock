@@ -427,6 +427,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  future_progress_dialog:
+    dependency: "direct main"
+    description:
+      name: future_progress_dialog
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   get:
     dependency: "direct main"
     description:
@@ -559,7 +566,7 @@ packages:
       name: math_keyboard
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.2"
+    version: "0.1.4"
   meta:
     dependency: transitive
     description:

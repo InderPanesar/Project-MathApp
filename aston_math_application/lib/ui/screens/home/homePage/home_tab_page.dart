@@ -6,11 +6,18 @@ import 'package:aston_math_application/engine/repository/question_repository.dar
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
 import 'package:aston_math_application/engine/repository/user_details_repository.dart';
 import 'package:aston_math_application/engine/repository/videos_repository.dart';
+import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_service.dart';
+import 'package:aston_math_application/ui/screens/home/questionsPage/questionsTabPageCubit/questions_tab_page_cubit.dart';
 import 'package:aston_math_application/util/styles/CustomColors.dart';
+import 'package:dialogs/dialogs/progress_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get_it/get_it.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+
+import 'home_page_cubit.dart';
 
 class HomeTabPage extends StatefulWidget {
   @override
@@ -28,139 +35,169 @@ class _HomeTabPageState extends State<HomeTabPage> {
 
   AuthenticationService service = GetIt.I();
 
+  HomePageCubit _bloc = GetIt.instance();
+  UserDetails? details;
+
+
+
   String? name;
   String? age;
 
   @override
   Widget build(BuildContext context) {
+    ProgressDialog progressDialog = ProgressDialog(
+      context: context,
+      backgroundColor: CustomColors.BlueZodiac,
+      textColor: Colors.white,
+    );
+
+    AlertDialog introQuestionAlert =AlertDialog(
+      content: new Row(
+        children: [
+          CircularProgressIndicator(),
+          Container(margin: EdgeInsets.only(left: 10),child:Text("Getting Intro Questions..." )),
+        ],),
+    );
+
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.all(16),
       color: CustomColors.BlueZodiac,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(
-            height: 25,
-            width: 1,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: new CircularPercentIndicator(
-                  radius: 75.0,
-                  lineWidth: 13.0,
-                  animation: true,
-                  percent: 0.7,
-                  center: new Text(
-                    "70.0%",
-                    style:
-                    new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white),
-                  ),
-                  circularStrokeCap: CircularStrokeCap.round,
-                  progressColor: Colors.white,
-                  backgroundColor: Color.fromRGBO(222, 226, 230, 0.5),
+      child: BlocBuilder<HomePageCubit, HomePageState>(
+        bloc: _bloc,
+        builder: (context, state) {
+          if(state is HomePageStateFailed) {
+            return Center(
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 20),
+                  backgroundColor: Colors.white,
                 ),
+                onPressed: () async {
+                   await _bloc.getAccountDetails();
+                },
+                child: const Text('Retry'),
               ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+            ); //ToDo: Implement Error State
+          }
+          if (state is HomePageStateLoading) {
+            return Center(
+                child: CircularProgressIndicator()
+
+            );
+          }
+
+          //If Data Received
+          if(state is HomePageStateSuccess) {
+            details = state.details;
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(
+                  height: 25,
+                  width: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                      "Home",
-                      style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+                    Expanded(
+                      child: new CircularPercentIndicator(
+                        radius: 75.0,
+                        lineWidth: 13.0,
+                        animation: true,
+                        percent: getPercentageNumber(details!),
+                        center: new Text(
+                          getPercentageString(details!),
+                          style:
+                          new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white),
+                        ),
+                        circularStrokeCap: CircularStrokeCap.round,
+                        progressColor: Colors.white,
+                        backgroundColor: Color.fromRGBO(222, 226, 230, 0.5),
+                      ),
                     ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Text(
-                      "Good Morning",
-                      style: const TextStyle(fontSize: 20, color: Colors.white),
-                    ),
-                    Text(
-                      "John",
-                      style: const TextStyle(fontSize: 20, color: Colors.white),
-                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            "Home",
+                            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            "Good Morning",
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                          Text(
+                            details?.name ?? "",
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    )
+
+
                   ],
                 ),
-              )
+                SizedBox(
+                  height: 16,
+                ),
+                Visibility(
+                  visible: !details!.doneHomeQuiz,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 20),
+                      backgroundColor: Colors.white,
+                    ),
 
+                    onPressed: () async {
+                      var result = await showDialog(
+                        context: context,
+                        builder: (context) =>
+                            FutureProgressDialog(
+                                _bloc.getIntroQuestions(),
+                                message: Text('Getting Intro Questions...')
+                            ),
+                      ) as List<Question>?;
 
-            ],
-          ),
+                      if(result != null) {
+                        QuestionService service = GetIt.I();
+                        service.startIntroQuiz(context, result);
+                      }
+                      else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("Error: Unable to start personal quizzes"),
+                        ));
+                      }
+                    },
+                    child: const Text('Do initial quiz'),
+                  ),
+                )
 
+              ],
+            );
+          }
+          else return Spacer();
 
-          TextFormField(
-            controller: nameController,
-            decoration: InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Name',
-            ),
-          ),
-          TextFormField(
-            controller: ageController,
-            decoration: InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Age',
-            ),
-          ),
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 20),
-              backgroundColor: Colors.white,
-            ),
-            onPressed: () async {
-              var details = UserDetails(name: nameController.text, age: ageController.text);
-              print(FirebaseAuth.instance.currentUser!.uid);
-              print(details.name);
-              print(details.age);
-              await repository.addUserDetails(details);
-            },
-            child: const Text('Submit'),
-          ),
-          Text(name ?? ""),
-          Text(age ?? ""),
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 20),
-              backgroundColor: Colors.white,
-            ),
-            onPressed: () async {
-              var details = await repository.getUserDetails();
-              if(details != null) {
-                setState(() {
-                  name = details.name;
-                  age = details.age;
-                });
-              }
-            },
-            child: const Text('Retrieve'),
-          ),
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 20),
-              backgroundColor: Colors.white,
-            ),
-            onPressed: () async {
-              await service.signOut();
-            },
-            child: const Text('Logout'),
-          ),
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 20),
-              backgroundColor: Colors.white,
-            ),
-            onPressed: () async {
-              List<VideoModel> details = await repository4.getUserDetails();
+        },
 
-            },
-            child: const Text('Hello'),
-          ),
-        ],
       )
+      /*
+      child:
+       */
     );
   }
+
+  String getPercentageString(UserDetails details) {
+    return "n/a";
+  }
+
+  double getPercentageNumber(UserDetails details) {
+    return 0.0;
+  }
+
 }

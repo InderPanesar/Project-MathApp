@@ -2,7 +2,7 @@ import 'package:aston_math_application/engine/model/Questions/question.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class QuestionRepository {
-  Future<List<Question>> getUserDetails(String id);
+  Future<List<Question>> getQuestions(String id);
 
 }
 
@@ -12,7 +12,7 @@ class QuestionRepositoryImpl implements QuestionRepository {
   QuestionRepositoryImpl(this._firebaseFirestore);
 
   @override
-  Future<List<Question>> getUserDetails(String id) async {
+  Future<List<Question>> getQuestions(String id) async {
     List<Question> details = [];
     await _firebaseFirestore.collection('questions').doc(id).get().then((value) {
       if(value.exists) {
@@ -25,7 +25,8 @@ class QuestionRepositoryImpl implements QuestionRepository {
                 question: value["questions"][i],
                 preQuestion: value["pre-question"][i],
                 afterQuestion: value["after-question"][i],
-                description: value["description"]
+                description: value["description"],
+                characters: value["characters"][i].split(",")
               )
           );
         }

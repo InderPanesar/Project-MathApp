@@ -16,7 +16,7 @@ class QuestionDetailPageCubit extends Cubit<QuestionDetailPageState> {
     emit(QuestionDetailPageState.loading());
     List<Question>? data;
     try {
-       data = await repo.getUserDetails(id);
+       data = await repo.getQuestions(id);
     } catch(e) {
       print("ERROR");
       emit(QuestionDetailPageState.failed());

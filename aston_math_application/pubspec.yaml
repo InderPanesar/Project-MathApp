@@ -47,12 +47,13 @@ dependencies:
   flutter_tex: ^4.0.1
   google_nav_bar: ^5.0.5
   cupertino_icons: ^1.0.2
-  math_keyboard: ^0.1.2
+  math_keyboard: ^0.1.4
   progress_state_button: ^1.0.4
   youtube_player_flutter: ^8.0.0
   percent_indicator: ^4.0.0
   smooth_page_indicator: ^1.0.0+2
   dialogs: ^0.0.7
+  future_progress_dialog: ^0.2.0
 
 
 dev_dependencies:

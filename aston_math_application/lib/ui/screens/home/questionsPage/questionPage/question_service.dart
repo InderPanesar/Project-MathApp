@@ -9,12 +9,27 @@ class QuestionService {
 
   List<Question> _questions = [];
   List<String> _answers = [];
+  bool isIntroQuiz = false;
 
   void start(BuildContext context, List<Question> questions) {
     if(questions.length == 0) throw Exception;
 
     _questions = questions;
     _answers = [];
+    isIntroQuiz = false;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => QuestionPage(question: _questions[0], index: 0,)),
+    );
+  }
+
+  void startIntroQuiz(BuildContext context, List<Question> questions) {
+    if(questions.length == 0) throw Exception;
+
+    _questions = questions;
+    _answers = [];
+    isIntroQuiz = true;
 
     Navigator.push(
       context,
