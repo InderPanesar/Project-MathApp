@@ -49,6 +49,7 @@ class Dependencies {
     _getIt.registerLazySingleton<HomePageCubit>(() => HomePageCubit(
       repo: _getIt.get<UserDetailsRepository>(),
       secondaryRepo: _getIt.get<QuestionRepository>(),
+      thirdRepo: _getIt.get<QuestionMapRepository>(),
     ));
   }
 

@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class QuestionMapRepository {
-  Future<List<QuestionTopic>> getUserDetails();
+  Future<List<QuestionTopic>> getQuestionTopics();
   Future<List<Question>> getQuestions(String id);
 
 }
@@ -17,7 +17,7 @@ class QuestionMapRepositoryImpl implements QuestionMapRepository {
   QuestionMapRepositoryImpl(this._firebaseFirestore);
 
   @override
-  Future<List<QuestionTopic>> getUserDetails() async {
+  Future<List<QuestionTopic>> getQuestionTopics() async {
     Map<String, dynamic>? details;
     List<QuestionTopic> topics = [];
     await _firebaseFirestore.collection('question-map').doc("2x5m7WRDcjtqSCdqJg7y").get().then((value) {
@@ -26,8 +26,6 @@ class QuestionMapRepositoryImpl implements QuestionMapRepository {
         for(String name in details!.keys.toList()) {
           topics.add(QuestionTopic(name: name, id: List<String>.from(details![name])));
         }
-
-
       }
     });
     return topics;

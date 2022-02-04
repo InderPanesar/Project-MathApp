@@ -22,7 +22,9 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
       'full_name': details.name,
       'age': details.age,
       'done_home_quiz' : details.doneHomeQuiz,
-      'scores' : details.scores
+      'scores' : details.scores,
+      'last_active' : details.lastActive,
+      'recommendation_quiz' : details.questions
     }, SetOptions(merge: true),
     ).then((value) => print("'full_name' & 'age' merged with existing data!")
     ).catchError((error) => print("Failed to merge data: $error"));
@@ -42,14 +44,22 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
 
         for(String name in _values.keys.toList()) {
             values[name] = _values[name] as int;
-            print(values.keys.toString());
-
         }
+
+        Map<String, dynamic> _questions = Map<String, dynamic>.from(value["recommendation_quiz"]);
+        Map<String, String> questions = {};
+
+        for(String name in _questions.keys.toList()) {
+          questions[name] = _questions[name] as String;
+        }
+
         details = UserDetails(
             name: value["full_name"],
             age: value["age"],
             doneHomeQuiz: value["done_home_quiz"],
-            scores: values
+            scores: values,
+            lastActive: value['last_active'] as Timestamp,
+            questions: questions
         );
       }
     });

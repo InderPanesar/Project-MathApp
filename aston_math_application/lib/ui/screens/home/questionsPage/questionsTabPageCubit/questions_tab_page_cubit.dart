@@ -18,7 +18,7 @@ class QuestionTabPageCubit extends Cubit<QuestionTabPageState> {
 
   Future<void> getQuestions() async {
     emit(QuestionTabPageState.loading());
-    List<QuestionTopic> data = await repo.getUserDetails();
+    List<QuestionTopic> data = await repo.getQuestionTopics();
     if(data == null){
       emit(QuestionTabPageState.failed());
     } else if (data.isEmpty) {

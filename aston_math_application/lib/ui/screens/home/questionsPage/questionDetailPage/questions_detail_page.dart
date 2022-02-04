@@ -78,8 +78,7 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
                                     ),
                                     onPressed: () {
                                       QuestionService service = GetIt.I();
-                                      print("ID VALUE : " + id);
-                                      service.start(context, state.questions, id);
+                                      service.start(context, state.questions, topicName);
                                     },
                                     child: Text('Start Quiz'),
                                   ),

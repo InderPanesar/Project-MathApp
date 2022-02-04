@@ -176,6 +176,29 @@ class _HomeTabPageState extends State<HomeTabPage> {
                     },
                     child: const Text('Do initial quiz'),
                   ),
+                ),
+                Visibility(
+                  visible: details!.doneHomeQuiz,
+                  child: Container(
+                    color: Colors.grey,
+                    child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: details!.questions.length,
+                      itemBuilder: (context, index) {
+                        String topicName = details!.questions.keys.toList()[index];
+                        String idName = details!.questions.values.toList()[index];
+                        return Container(
+                          height: 50,
+                          child: Card(
+                            child: Center(
+                              child: Text(topicName),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 )
 
               ],
@@ -186,9 +209,6 @@ class _HomeTabPageState extends State<HomeTabPage> {
         },
 
       )
-      /*
-      child:
-       */
     );
   }
 
