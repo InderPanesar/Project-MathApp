@@ -96,8 +96,13 @@ class _QuestionPageState extends State<QuestionPage> {
     return TeXView(
       child: TeXViewColumn(children: [
             TeXViewDocument(message,
-                style: TeXViewStyle.fromCSS(
-                    'padding: 15px; color: black; background: white')
+                style: TeXViewStyle(
+                  textAlign: TeXViewTextAlign.Center,
+                  contentColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  
+
+                )
           )]
         ),
       style: TeXViewStyle(
