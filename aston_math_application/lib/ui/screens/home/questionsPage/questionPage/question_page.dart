@@ -104,6 +104,7 @@ class _QuestionPageState extends State<QuestionPage> {
         elevation: 0,
         borderRadius: TeXViewBorderRadius.all(25),
         backgroundColor: Colors.white,
+        contentColor: Colors.black
       ),
     );
   }
