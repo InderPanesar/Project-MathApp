@@ -100,7 +100,7 @@ class _QuestionPageState extends State<QuestionPage> {
                   textAlign: TeXViewTextAlign.Center,
                   contentColor: Colors.black,
                   backgroundColor: Colors.white,
-                  
+
 
                 )
           )]
