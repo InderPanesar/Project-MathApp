@@ -1,11 +1,8 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
-import 'package:aston_math_application/engine/comms/api/example_api.dart';
-import 'package:aston_math_application/engine/repository/example_repository.dart';
 import 'package:aston_math_application/engine/repository/question_repository.dart';
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
 import 'package:aston_math_application/engine/repository/user_details_repository.dart';
 import 'package:aston_math_application/engine/repository/videos_repository.dart';
-import 'package:aston_math_application/ui/screens/authentication/exampleCubit/example_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/homePage/home_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questionDetailPageCubit/questions_detail_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questions_detail_page.dart';
@@ -36,7 +33,6 @@ class Dependencies {
       return dio;
     }, instanceName: "authorised");
 
-    _getIt.registerLazySingleton<ExampleApi>(() => ExampleApi(_getIt.get<Dio>(instanceName: "authorised")));
   }
 
   void _setupUtils() {
@@ -54,9 +50,7 @@ class Dependencies {
   }
 
   void _setupRepositories() {
-    _getIt.registerFactory<ExampleRepository>(() => ExampleRepositoryImpl(
-      _getIt.get<ExampleApi>(),
-    ));
+
 
     _getIt.registerFactory<UserDetailsRepository>(() => UserDetailsRepositoryImpl(
       _getIt.get<FirebaseFirestore>(),
@@ -77,9 +71,7 @@ class Dependencies {
   }
 
   void _setupBlocs() {
-    _getIt.registerFactory<ExampleCubit>(() => ExampleCubit(
-      repo: _getIt.get<ExampleRepository>(),
-    ));
+
 
     _getIt.registerFactory<QuestionTabPageCubit>(() => QuestionTabPageCubit(
       repo: _getIt.get<QuestionMapRepository>(),

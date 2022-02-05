@@ -1,7 +1,5 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:aston_math_application/engine/model/example/example_response.dart';
-import 'package:aston_math_application/engine/repository/example_repository.dart';
 import 'package:aston_math_application/ui/screens/home/home_page.dart';
 import 'package:aston_math_application/util/styles/ButtonStyles.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +8,6 @@ import 'package:get_it/get_it.dart';
 class LoginPageWidget extends StatelessWidget {
 
   Future<void> onLogInPressed(BuildContext context) async {
-
-    ExampleRepository repo = GetIt.I();
-    List<ExampleResponse> films = await repo.getResponse();
-    films.forEach((film) => print(film.title + '\n'));
 
     Navigator.pushAndRemoveUntil(
         context,
