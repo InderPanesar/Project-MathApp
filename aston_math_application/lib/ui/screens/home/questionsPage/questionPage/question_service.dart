@@ -20,6 +20,7 @@ class QuestionService {
   List<Question> _questions = [];
   List<String> _answers = [];
   bool isIntroQuiz = false;
+  UserDetails? _details;
 
   void start(BuildContext context, List<Question> questions, String id) {
     if(questions.length == 0) throw Exception;
@@ -28,6 +29,21 @@ class QuestionService {
     _answers = [];
     isIntroQuiz = false;
 
+    _id = id;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => QuestionPage(question: _questions[0], index: 0,)),
+    );
+  }
+
+  void startPersonalisationQuiz(BuildContext context, List<Question> questions, String id, UserDetails details) {
+    if(questions.length == 0) throw Exception;
+
+    _questions = questions;
+    _answers = [];
+    isIntroQuiz = false;
+    _details = details;
     _id = id;
 
     Navigator.push(
@@ -66,15 +82,26 @@ class QuestionService {
          if(answer) score++;
          _map[_questions[i]] = answer;
       }
-
       UserDetails? details = await repo.getUserDetails();
+      if(_details != null) {
+        details = _details;
+      }
+
+      //ToDo: Handle Personalisation Quiz Categories
       if(isIntroQuiz) {
         if(details != null) {
+          int? userHistoryScore = details.scores[_id];
+          if (userHistoryScore == null) {
+            userHistoryScore = 0;
+          }
+          userHistoryScore += score;
+          details.scores[_id] = userHistoryScore;
+
           details.doneHomeQuiz = true;
           await repo.addUserDetails(details);
         }
-        //ToDo: add questions statements
       }
+
       else {
         if(details != null) {
           int? userHistoryScore = details.scores[_id];
@@ -82,13 +109,7 @@ class QuestionService {
             userHistoryScore = 0;
           }
           userHistoryScore += score;
-          print("ID IN SERVICE: " + _id);
           details.scores[_id] = userHistoryScore;
-
-          for(var k in details.scores.keys) {
-            int? v = details.scores[k];
-            print('index=$k, value=$v');
-          }
 
           await repo.addUserDetails(details);
         }

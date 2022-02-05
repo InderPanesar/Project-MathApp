@@ -47,11 +47,13 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
         }
 
         Map<String, dynamic> _questions = Map<String, dynamic>.from(value["recommendation_quiz"]);
-        Map<String, String> questions = {};
+        Map<String, List<String>> questions = {};
 
         for(String name in _questions.keys.toList()) {
-          questions[name] = _questions[name] as String;
+          var array = _questions[name];
+          questions[name] = List<String>.from(array);
         }
+
 
         details = UserDetails(
             name: value["full_name"],

@@ -59,6 +59,8 @@ class _HomeTabPageState extends State<HomeTabPage> {
         ],),
     );
 
+    _bloc.getAccountDetails();
+
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.all(16),
@@ -179,20 +181,72 @@ class _HomeTabPageState extends State<HomeTabPage> {
                 ),
                 Visibility(
                   visible: details!.doneHomeQuiz,
+                  child: Text(
+                    "Daily Tasks",
+                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+                Visibility(
+                  visible: details!.doneHomeQuiz,
                   child: Container(
-                    color: Colors.grey,
+                    color: Colors.transparent,
                     child: ListView.builder(
+                      padding: EdgeInsets.only(top: 5, bottom: 5),
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: details!.questions.length,
                       itemBuilder: (context, index) {
                         String topicName = details!.questions.keys.toList()[index];
-                        String idName = details!.questions.values.toList()[index];
-                        return Container(
-                          height: 50,
-                          child: Card(
-                            child: Center(
-                              child: Text(topicName),
+                        String idName = details!.questions.values.toList()[index][0];
+                        String isValid = details!.questions.values.toList()[index][1];
+                        return Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          margin: EdgeInsets.symmetric(vertical: 6, horizontal: 1),
+                          color: Colors.white,
+                          child: InkWell(
+                            splashColor: Colors.blue.withAlpha(30),
+                            onTap: () async {
+                              if(isValid == "false") {
+                                var result = await showDialog(
+                                  context: context,
+                                  builder: (context) =>
+                                      FutureProgressDialog(
+                                          _bloc.getQuestions(idName),
+                                          message: Text('Getting Personalisation Questions...')
+                                      ),
+                                ) as List<Question>?;
+
+                                if(result != null) {
+                                  QuestionService service = GetIt.instance();
+                                  UserDetails _temp = details!;
+                                  _temp.questions.values.toList()[index][1] = "true";
+                                  service.startPersonalisationQuiz(context, result, idName, _temp);
+                                }
+                                else {
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text("Error: Unable to start personal quizzes"),
+                                  ));
+                                }
+                              }
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children:[
+                                  Row(
+                                    children: [
+                                      Text( topicName, style: TextStyle(fontSize: 20, color: Colors.black),),
+                                      Spacer(),
+                                      Checkbox(value: isValid == "true", onChanged: null)
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );
