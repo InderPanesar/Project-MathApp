@@ -39,7 +39,6 @@ class HomePageCubit extends Cubit<HomePageState> {
     }
 
     if(data == null){
-      print("ERROR");
       emit(HomePageState.failed());
     } else {
       DateTime currentTime = Timestamp.now().toDate();
@@ -47,7 +46,20 @@ class HomePageCubit extends Cubit<HomePageState> {
       final difference = currentTime.difference(serverTime).inDays;
       if(difference >= 1 && data.doneHomeQuiz) {
         data.lastActive = Timestamp.now();
-        Map<String, String> topicsMap = await setNewDailyTasks(data.scores);
+        Map<String, List<String>> topicsMap = await setNewDailyTasks(data.scores);
+        data.questions = topicsMap;
+        try {
+          await repo.addUserDetails(data);
+        }
+        catch(e) {
+          emit(HomePageState.failed());
+          return;
+        }
+        emit(HomePageState.success(data));
+      }
+      else if (data.doneHomeQuiz && data.questions.length == 0) {
+        data.lastActive = Timestamp.now();
+        Map<String, List<String>> topicsMap = await setNewDailyTasks(data.scores);
         data.questions = topicsMap;
         try {
           await repo.addUserDetails(data);
@@ -71,7 +83,8 @@ class HomePageCubit extends Cubit<HomePageState> {
     return;
   }
 
-  Future<Map<String, String>> setNewDailyTasks(Map<String, int> scores) async {
+  Future<Map<String, List<String>>> setNewDailyTasks(Map<String, int> scores) async {
+    print(scores.length);
     final sorted = new SplayTreeMap<String,dynamic>.from(scores, (a, b) => scores[a]! > scores[b]! ? 1 : -1 );
     List<String> weakestCategories = [];
     sorted.forEach((key, value) {
@@ -86,13 +99,14 @@ class HomePageCubit extends Cubit<HomePageState> {
       emit(HomePageState.failed());
     }
 
-    Map<String, String> topicsMap = new Map();
+    Map<String, List<String>> topicsMap = new Map();
 
     for(QuestionTopic questionTopic in topics) {
       if(weakestCategories.contains(questionTopic.name)) {
         final _random = new Random();
         String randomId = questionTopic.id[_random.nextInt(questionTopic.id.length)];
-        topicsMap[questionTopic.name] = randomId;
+        List<String> values = [randomId, "false"];
+        topicsMap[questionTopic.name] = values;
       }
     }
 
@@ -107,6 +121,20 @@ class HomePageCubit extends Cubit<HomePageState> {
       return null;
     }
     return data;
+  }
+
+  Future<List<Question>?> getQuestions(String id) async {
+    List<Question>? data;
+    try {
+      data = await secondaryRepo.getQuestions(id);
+    } catch(e) {
+      return null;
+    }
+    return data;
+  }
+
+  double getPercentageDone(List<String> values)  {
+    return 0.0;
   }
 
 

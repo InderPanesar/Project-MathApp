@@ -1,4 +1,7 @@
+import 'package:aston_math_application/engine/auth/authentication_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class SettingsTabPage extends StatefulWidget {
   @override
@@ -30,6 +33,16 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                   ),
                   color: Colors.lightGreen,
                 ),
+
+                TextButton(
+                    onPressed: () {
+                      AuthenticationService service = GetIt.instance();
+                      service.signOut();
+                      FirebaseFirestore firestore = GetIt.instance();
+                      firestore.clearPersistence();
+                    },
+                    child: Text("LogOut")
+                )
 
               ]
           )

@@ -51,11 +51,11 @@ class AuthenticationWrapper extends StatelessWidget {
           final user = snapshot.data;
           if(snapshot.hasData) {
             print("user is logged in");
-            return HomePage();
+            return new HomePage();
           }
           else {
             print("user is not logged in");
-            return LandingPageWidget();
+            return new LandingPageWidget();
           }
         }
     );
