@@ -55,9 +55,8 @@ class _VideosTabPageState extends State<VideosTabPage> {
                         child: ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: _videos!.length ?? 0,
+                          itemCount: _videos!.length,
                           itemBuilder: (context, index) {
-                            print("VIDEO Index " + index.toString());
                             return ExpandableTileVideos(_videos![index]);
                           },
                         ),

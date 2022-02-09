@@ -15,8 +15,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get_it/get_it.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../videosPage/videoPageModal/video_tab_page_modal.dart';
 import 'home_page_cubit.dart';
 
 class HomeTabPage extends StatefulWidget {
@@ -253,10 +256,56 @@ class _HomeTabPageState extends State<HomeTabPage> {
                       },
                     ),
                   ),
-                )
+                ),
+                Visibility(
+                  visible: details!.recommendedVideo.length == 3,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        "Recommended Video",
+                        style: const TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        margin: EdgeInsets.symmetric(vertical: 6, horizontal: 1),
+                        color: Colors.white,
+                        child: InkWell(
+                          splashColor: Colors.blue.withAlpha(30),
+                          onTap: () async {
+                            navigateToVideoModal(context, new VideoModel(title: details!.recommendedVideo[0], attributes: [details!.recommendedVideo[1], details!.recommendedVideo[2]]));
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children:[
+                                Row(
+                                  children: [
+                                    Text( getRecommendedVideoTitle(details!), style: TextStyle(fontSize: 20, color: Colors.black),),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+
+                ),
+
 
               ],
             );
+
+
           }
           else return Spacer();
 
@@ -266,12 +315,50 @@ class _HomeTabPageState extends State<HomeTabPage> {
     );
   }
 
+  String getRecommendedVideoTitle(UserDetails details) {
+    if(details.recommendedVideo.length == 3) {
+      return details.recommendedVideo[0];
+    }
+    return "";
+  }
+
   String getPercentageString(UserDetails details) {
     return "n/a";
   }
 
   double getPercentageNumber(UserDetails details) {
     return 0.0;
+  }
+
+  void navigateToVideoModal(BuildContext context, VideoModel topic) {
+    print('Card tapped. Code: ' + topic.attributes.first);
+    String url = topic.attributes.first;
+    if(url != null) {
+      url = YoutubePlayer.convertUrlToId(url)!;
+    }
+    YoutubePlayerController _controller = YoutubePlayerController(
+      initialVideoId: url,
+      flags: YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+      ),
+    );
+
+    showMaterialModalBottomSheet(
+        useRootNavigator: true,
+        expand: false,
+        shape: RoundedRectangleBorder(  // <-- for border radius
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15.0),
+            topRight: Radius.circular(15.0),
+          ),
+        ),
+        enableDrag: false,
+        context: context,
+        builder: (context) =>
+            VideoTabPageModal(video: topic, controller: _controller)
+    );
+
   }
 
 }

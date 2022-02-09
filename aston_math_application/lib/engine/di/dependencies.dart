@@ -46,6 +46,7 @@ class Dependencies {
       repo: _getIt.get<UserDetailsRepository>(),
       secondaryRepo: _getIt.get<QuestionRepository>(),
       thirdRepo: _getIt.get<QuestionMapRepository>(),
+      videosRepository: _getIt.get<VideosRepository>(),
     ));
   }
 

@@ -19,7 +19,7 @@ class VideosTabPageCubit extends Cubit<VideosTabPageState> {
 
   Future<void> getQuestions() async {
     emit(VideosTabPageState.loading());
-    List<VideoTopic>? videos = await repo.getUserDetails();
+    List<VideoTopic>? videos = await repo.getVideos();
     if(videos == null){
       emit(VideosTabPageState.failed());
     } else if (videos.isEmpty) {

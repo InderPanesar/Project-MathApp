@@ -14,17 +14,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../engine/model/video/VideoTopic.dart';
+import '../../../../engine/repository/videos_repository.dart';
+
 part 'home_page_state.dart';
 
 
 class HomePageCubit extends Cubit<HomePageState> {
-  HomePageCubit({required this.repo, required this.secondaryRepo, required this.thirdRepo}) : super(HomePageState.loading()) {
+  HomePageCubit({required this.repo, required this.secondaryRepo, required this.thirdRepo, required this.videosRepository}) : super(HomePageState.loading()) {
     getAccountDetails();
   }
 
   UserDetailsRepository repo;
   QuestionRepository secondaryRepo;
   QuestionMapRepository thirdRepo;
+  VideosRepository videosRepository;
+
+
 
 
   Future<void> getAccountDetails() async {
@@ -45,30 +51,10 @@ class HomePageCubit extends Cubit<HomePageState> {
       DateTime serverTime = data.lastActive.toDate();
       final difference = currentTime.difference(serverTime).inDays;
       if(difference >= 1 && data.doneHomeQuiz) {
-        data.lastActive = Timestamp.now();
-        Map<String, List<String>> topicsMap = await setNewDailyTasks(data.scores);
-        data.questions = topicsMap;
-        try {
-          await repo.addUserDetails(data);
-        }
-        catch(e) {
-          emit(HomePageState.failed());
-          return;
-        }
-        emit(HomePageState.success(data));
+        await addDailyTask(data);
       }
       else if (data.doneHomeQuiz && data.questions.length == 0) {
-        data.lastActive = Timestamp.now();
-        Map<String, List<String>> topicsMap = await setNewDailyTasks(data.scores);
-        data.questions = topicsMap;
-        try {
-          await repo.addUserDetails(data);
-        }
-        catch(e) {
-          emit(HomePageState.failed());
-          return;
-        }
-        emit(HomePageState.success(data));
+        await addDailyTask(data);
       }
       else {
         data.questions.forEach((key, value) {
@@ -81,6 +67,33 @@ class HomePageCubit extends Cubit<HomePageState> {
 
     }
     return;
+  }
+
+  Future <void> addDailyTask(UserDetails data) async {
+    data.lastActive = Timestamp.now();
+    Map<String, List<String>> topicsMap = await setNewDailyTasks(data.scores);
+    var details = await setDailyVideoRecommendation(topicsMap, data);
+
+    if(details == null) {
+      emit(HomePageState.failed());
+      return;
+    }
+    else {
+      data = details;
+    }
+    if(topicsMap == null) {
+      emit(HomePageState.failed());
+      return;
+    }
+    data.questions = topicsMap;
+    try {
+      await repo.addUserDetails(data);
+    }
+    catch(e) {
+      emit(HomePageState.failed());
+      return;
+    }
+    emit(HomePageState.success(data));
   }
 
   Future<Map<String, List<String>>> setNewDailyTasks(Map<String, int> scores) async {
@@ -111,6 +124,34 @@ class HomePageCubit extends Cubit<HomePageState> {
     }
 
     return topicsMap;
+  }
+
+  Future<UserDetails?> setDailyVideoRecommendation(Map<String, List<String>> scores, UserDetails data) async {
+
+    List<VideoTopic> videos = [];
+    try {
+      videos = await videosRepository.getVideos();
+    } catch (e) {
+      emit(HomePageState.failed());
+      return null;
+    }
+
+
+    for(VideoTopic topic in videos ) {
+      for(String weakestCategory in scores.keys.toList()) {
+        if(topic.category == weakestCategory) {
+          data.recommendedVideo = [
+            topic.videos.first.title,
+            topic.videos.first.attributes.first,
+            topic.videos.first.attributes.last,
+          ];
+          return data;
+        }
+      }
+    }
+
+    return data;
+
   }
 
   Future<List<Question>?> getIntroQuestions() async {

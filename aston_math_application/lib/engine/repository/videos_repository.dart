@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class VideosRepository {
-  Future<List<VideoTopic>> getUserDetails();
+  Future<List<VideoTopic>> getVideos();
 }
 
 class VideosRepositoryImpl implements VideosRepository {
@@ -15,7 +15,7 @@ class VideosRepositoryImpl implements VideosRepository {
   VideosRepositoryImpl(this._firebaseFirestore);
 
   @override
-  Future<List<VideoTopic>> getUserDetails() async {
+  Future<List<VideoTopic>> getVideos() async {
     Map<String, dynamic>? details;
     List<VideoTopic> models = [];
 

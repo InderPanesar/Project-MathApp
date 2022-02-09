@@ -57,6 +57,8 @@ class QuestionService {
 
     _questions = questions;
     _answers = [];
+    //ToDo; Update with finalised quiz answers
+    _id ="Bodmas";
     isIntroQuiz = true;
 
     Navigator.push(
@@ -96,6 +98,8 @@ class QuestionService {
           }
           userHistoryScore += score;
           details.scores[_id] = userHistoryScore;
+
+          print("ID OF QUIZ : " + _id);
 
           details.doneHomeQuiz = true;
           await repo.addUserDetails(details);
