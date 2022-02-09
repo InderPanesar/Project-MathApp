@@ -1,3 +1,4 @@
+import 'package:aston_math_application/engine/model/video/VideoTopic.dart';
 import 'package:aston_math_application/engine/model/video/video_model.dart';
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
 import 'package:aston_math_application/engine/repository/videos_repository.dart';
@@ -18,7 +19,7 @@ class VideosTabPageCubit extends Cubit<VideosTabPageState> {
 
   Future<void> getQuestions() async {
     emit(VideosTabPageState.loading());
-    List<VideoModel>? videos = await repo.getUserDetails();
+    List<VideoTopic>? videos = await repo.getUserDetails();
     if(videos == null){
       emit(VideosTabPageState.failed());
     } else if (videos.isEmpty) {

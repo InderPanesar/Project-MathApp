@@ -1,13 +1,9 @@
-import 'package:aston_math_application/engine/model/video/video_model.dart';
-import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
-import 'package:aston_math_application/ui/screens/home/questionsPage/questionsTabPageCubit/questions_tab_page_cubit.dart';
-import 'package:aston_math_application/ui/screens/home/videosPage/videoPageModal/video_tab_page_modal.dart';
+import 'package:aston_math_application/engine/model/video/VideoTopic.dart';
 import 'package:aston_math_application/ui/screens/home/videosPage/videosTabPageCubit/videos_tab_page_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import '../../../../util/expandable_tile_videos.dart';
 
 class VideosTabPage extends StatefulWidget {
   @override
@@ -17,7 +13,7 @@ class VideosTabPage extends StatefulWidget {
 class _VideosTabPageState extends State<VideosTabPage> {
 
   VideosTabPageCubit _bloc = GetIt.instance();
-  List<VideoModel>? _videos;
+  List<VideoTopic>? _videos;
 
 
 
@@ -59,65 +55,10 @@ class _VideosTabPageState extends State<VideosTabPage> {
                         child: ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: _videos!.length,
+                          itemCount: _videos!.length ?? 0,
                           itemBuilder: (context, index) {
-                            return Card(
-                              clipBehavior: Clip.antiAlias,
-                              margin: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-                              color: Colors.red,
-                              child: InkWell(
-                                splashColor: Colors.blue.withAlpha(30),
-                                onTap: () {
-                                  print('Card tapped. Code: ' + _videos![index].url);
-                                  String url = _videos![index].url;
-                                  if(url != null) {
-                                    url = YoutubePlayer.convertUrlToId(url)!;
-                                  }
-                                  YoutubePlayerController _controller = YoutubePlayerController(
-                                    initialVideoId: url,
-                                    flags: YoutubePlayerFlags(
-                                      autoPlay: true,
-                                      mute: false,
-                                    ),
-                                  );
-
-                                  showMaterialModalBottomSheet(
-                                    useRootNavigator: true,
-                                    expand: false,
-                                    shape: RoundedRectangleBorder(  // <-- for border radius
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(15.0),
-                                        topRight: Radius.circular(15.0),
-                                      ),
-                                    ),
-                                    enableDrag: false,
-                                    context: context,
-                                    builder: (context) =>
-                                    VideoTabPageModal(video: _videos![index], controller: _controller)
-                                  );
-
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children:[
-                                      Row(
-                                        children: [
-                                          Text(_videos![index].title, style: TextStyle(fontSize: 20, color: Colors.white),),
-                                          Spacer(),
-                                          Icon(
-                                            Icons.arrow_right,
-                                            color: Colors.white,
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
+                            print("VIDEO Index " + index.toString());
+                            return ExpandableTileVideos(_videos![index]);
                           },
                         ),
                       );

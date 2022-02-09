@@ -1,8 +1,7 @@
 class VideoModel {
-  VideoModel({required this.title, required this.url, required this.descriptions});
+  VideoModel({required this.title, required this.attributes});
 
   final String title;
-  final String url;
-  final String descriptions;
+  final List<String> attributes;
 
 }

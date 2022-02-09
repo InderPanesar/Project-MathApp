@@ -1,10 +1,12 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
 import 'package:aston_math_application/engine/model/UserDetails/UserDetails.dart';
+import 'package:aston_math_application/engine/model/video/VideoTopic.dart';
 import 'package:aston_math_application/engine/model/video/video_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 abstract class VideosRepository {
-  Future<List<VideoModel>> getUserDetails();
+  Future<List<VideoTopic>> getUserDetails();
 }
 
 class VideosRepositoryImpl implements VideosRepository {
@@ -13,21 +15,29 @@ class VideosRepositoryImpl implements VideosRepository {
   VideosRepositoryImpl(this._firebaseFirestore);
 
   @override
-  Future<List<VideoModel>> getUserDetails() async {
+  Future<List<VideoTopic>> getUserDetails() async {
     Map<String, dynamic>? details;
-    List<VideoModel> models = [];
+    List<VideoTopic> models = [];
+
     await _firebaseFirestore.collection('videos').doc("vn4nQuAGVj2Z2NRtG8vd").get().then((value) {
       if(value.exists) {
         details = new Map<String, dynamic>.from(value["videos"]);
-        var newList = details!.keys.toList();
-        for(String key in newList) {
-          models.add(VideoModel(
-            title: key,
-            url: details![key][0],
-            descriptions: details![key][1]
-          ));
+        Map<String, Map<String, dynamic>> _valuesTemp = {};
+
+        for(String name in details!.keys.toList()) {
+          _valuesTemp[name] = new Map<String, dynamic>.from(details![name]);
         }
 
+        for(String category in _valuesTemp.keys.toList()) {
+          List<VideoModel> videosList = [];
+          Map<String, dynamic> videos = {};
+          videos = new Map<String, dynamic>.from(_valuesTemp[category]!);
+          for(String videoTitle in videos.keys.toList()) {
+            List<String> attributes = new List<String>.from(videos[videoTitle]);
+            videosList.add(new VideoModel(title: videoTitle, attributes: attributes));
+          }
+          models.add(new VideoTopic(category: category, videos: videosList));
+        }
       }
     });
 

@@ -5,7 +5,7 @@ abstract class VideosTabPageState {
   factory VideosTabPageState.loading() = VideosTabPageStateLoading;
   factory VideosTabPageState.empty() = VideosTabPageStateEmpty;
   factory VideosTabPageState.failed() = VideosTabPageStateFailed;
-  factory VideosTabPageState.success(List<VideoModel> videos) = VideosTabPageStateSuccess;
+  factory VideosTabPageState.success(List<VideoTopic> videos) = VideosTabPageStateSuccess;
 }
 
 class VideosTabPageStateLoading extends Equatable implements VideosTabPageState {
@@ -21,7 +21,7 @@ class VideosTabPageStateFailed extends Equatable implements VideosTabPageState {
 }
 
 class VideosTabPageStateSuccess extends Equatable implements VideosTabPageState {
-  final List<VideoModel> videos;
+  final List<VideoTopic> videos;
   VideosTabPageStateSuccess(this.videos);
   @override List<Object> get props => [this.videos];
 }
