@@ -123,7 +123,7 @@ class QuestionService {
       //Go To Results
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (BuildContext context) => QuestionResultPage(map: _map), fullscreenDialog: true),
+          MaterialPageRoute(builder: (BuildContext context) => QuestionResultPage(map: _map, questions:_questions, answers:_answers), fullscreenDialog: true),
           ModalRoute.withName('/')
       ).whenComplete((){
         HomePageCubit cubit = GetIt.instance();
