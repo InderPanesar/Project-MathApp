@@ -1,19 +1,13 @@
 import 'package:aston_math_application/engine/model/Questions/question.dart';
-import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questionDetailPageCubit/questions_detail_page_cubit.dart';
-import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_page_cubit.dart';
-import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_service.dart';
 import 'package:aston_math_application/util/styles/CustomColors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tex/flutter_tex.dart';
-import 'package:get_it/get_it.dart';
-import 'package:math_keyboard/math_keyboard.dart';
 
 class QuestionResultPage extends StatefulWidget {
 
-  Map<Question, bool> map;
-  List<Question> questions;
-  List<String> answers;
+  final Map<Question, bool> map;
+  final List<Question> questions;
+  final List<String> answers;
 
 
   QuestionResultPage({required this.map, required this.questions, required this.answers});
