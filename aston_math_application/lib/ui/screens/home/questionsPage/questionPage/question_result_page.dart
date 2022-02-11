@@ -31,12 +31,26 @@ class _QuestionResultPageState extends State<QuestionResultPage> {
     rows.add(TableRow(children: [
       Container(
         color: Colors.grey,
-        child: Text("Question", textAlign: TextAlign.center),
+        child: Text(
+            "Question",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: "Asap",
+              fontWeight: FontWeight.w700
+            ),
+        ),
         padding: EdgeInsets.symmetric(vertical: 10),
       ),
       Container(
         color: Colors.grey,
-        child: Text("Correct", textAlign: TextAlign.center),
+        child: Text(
+            "Correct",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontFamily: "Asap",
+                fontWeight: FontWeight.w700
+            ),
+        ),
         padding: EdgeInsets.symmetric(vertical: 10),
       ),
     ]));
@@ -48,11 +62,23 @@ class _QuestionResultPageState extends State<QuestionResultPage> {
       }
       rows.add(TableRow(children: [
         Container(
-          child: Text("Question " + i.toString(), textAlign: TextAlign.center,),
+          child: Text(
+            "Question " + i.toString(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontFamily: "Asap",
+            ),
+          ),
           margin: EdgeInsets.symmetric(vertical: 10),
         ),
         Container(
-          child: Text(value, textAlign: TextAlign.center),
+          child: Text(
+              value,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: "Asap",
+              ),
+          ),
           margin: EdgeInsets.symmetric(vertical: 10),
         ),
       ]));
@@ -60,11 +86,23 @@ class _QuestionResultPageState extends State<QuestionResultPage> {
     }
     rows.add(TableRow(children: [
       Container(
-        child: Text("Total:", textAlign: TextAlign.center),
+        child: Text(
+            "Total:",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: "Asap",
+            ),
+        ),
         margin: EdgeInsets.symmetric(vertical: 10),
       ),
       Container(
-        child: Text(score.toString(), textAlign: TextAlign.center),
+        child: Text(
+            score.toString(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: "Asap",
+            ),
+        ),
         margin: EdgeInsets.symmetric(vertical: 10),
       ),
     ]));
@@ -90,7 +128,8 @@ class _QuestionResultPageState extends State<QuestionResultPage> {
                   contentColor: Colors.white,
                   fontStyle: TeXViewFontStyle(
                       fontSize: 24,
-                      fontWeight: TeXViewFontWeight.bold
+                      fontWeight: TeXViewFontWeight.bold,
+                      fontFamily: "Asap"
                   ),
                   backgroundColor: Colors.transparent)),
           TeXViewDocument(question,
@@ -98,7 +137,8 @@ class _QuestionResultPageState extends State<QuestionResultPage> {
                   textAlign: TeXViewTextAlign.Left,
                   contentColor: Colors.white,
                   fontStyle: TeXViewFontStyle(
-                    fontSize: 14
+                    fontSize: 14,
+                    fontFamily: "Asap"
                   ),
                   margin: TeXViewMargin.only(top: 10),
                   backgroundColor: Colors.transparent)),
@@ -109,7 +149,8 @@ class _QuestionResultPageState extends State<QuestionResultPage> {
                   margin: TeXViewMargin.only(top: 10),
                   fontStyle: TeXViewFontStyle(
                       fontSize: 16,
-                      fontWeight: TeXViewFontWeight.bold
+                      fontWeight: TeXViewFontWeight.bold,
+                      fontFamily: "Asap"
                   ),
               )
           ),
@@ -120,7 +161,8 @@ class _QuestionResultPageState extends State<QuestionResultPage> {
                 margin: TeXViewMargin.only(top: 10),
                 fontStyle: TeXViewFontStyle(
                     fontSize: 16,
-                    fontWeight: TeXViewFontWeight.bold
+                    fontWeight: TeXViewFontWeight.bold,
+                    fontFamily: "Asap"
                 ),
               )
           ),
@@ -177,6 +219,8 @@ class _QuestionResultPageState extends State<QuestionResultPage> {
                               "Answers",
                               textAlign: TextAlign.start,
                               style: TextStyle(
+                                  fontFamily: "Asap",
+                                  fontWeight: FontWeight.w700,
                                   color: Colors.black,
                                   fontSize: 16
                               ),
@@ -191,6 +235,9 @@ class _QuestionResultPageState extends State<QuestionResultPage> {
                           )
                         ),
                         TeXView(
+                            fonts: [
+                              TeXViewFont(fontFamily: "Asap", src: "assets/font/asap/Asap-Regular.ttf"),
+                            ],
                             child: TeXViewColumn(
                               children: answersWidget()
                             )

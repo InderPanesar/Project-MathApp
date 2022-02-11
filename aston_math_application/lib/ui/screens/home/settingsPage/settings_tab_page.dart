@@ -35,11 +35,9 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                 ),
 
                 TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       AuthenticationService service = GetIt.instance();
-                      service.signOut();
-                      FirebaseFirestore firestore = GetIt.instance();
-                      firestore.clearPersistence();
+                      await service.signOut();
                     },
                     child: Text("LogOut")
                 )

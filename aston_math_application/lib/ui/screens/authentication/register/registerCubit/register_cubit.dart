@@ -23,11 +23,11 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterState.loading());
 
     String statusSignUp = await service.signUp(email.trim(), password.trim());
-    await detailsRepository.addUserDetails(new UserDetails(name: "", age: "", doneHomeQuiz: false, scores: new Map(), lastActive: Timestamp.fromDate(new DateTime(2000)), questions: new Map(), recommendedVideo: []));
 
     if(statusSignUp != "Signed up") {
       emit(RegisterState.failed());
     } else {
+      await detailsRepository.addUserDetails(new UserDetails(name: "", age: "", doneHomeQuiz: false, scores: new Map(), lastActive: Timestamp.fromDate(new DateTime(2000)), questions: new Map(), recommendedVideo: []));
       emit(RegisterState.success());
     }
     return;

@@ -20,8 +20,7 @@ class LoginCubit extends Cubit<LoginState> {
     String statusSignUp = await service.signIn(email.trim(), password.trim());
 
     if(statusSignUp != "Signed in") {
-      print(statusSignUp);
-      emit(LoginState.failed());
+      emit(LoginState.failed(statusSignUp));
     } else {
       print("SIGNED IN TO APPLICATION");
       emit(LoginState.success());

@@ -28,6 +28,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Log in"),
+          backgroundColor: Color.fromRGBO(219, 233, 247, 1),
+          foregroundColor: Colors.black,
+          elevation: 0,
+          centerTitle: true,
         ),
         body: Container(
         color: Color.fromRGBO(219, 233, 247, 1),
@@ -54,8 +58,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           controller: passwordController,
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(),
+
                             labelText: 'Password',
                           ),
+                          obscureText: true,
                         ),
                         margin: EdgeInsets.symmetric(vertical: 4, horizontal: 0),
                       )
@@ -82,28 +88,36 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         });
                       }
                       else {
+                        if(state is LoginStateFailed) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Error: " + state.errorMessage),
+                          ));
+                        }
                         setState(() {
                           loginButtonState = ButtonState.idle;
                         });
                       }
                     },
                     builder: (context, state) {
-                      return ProgressButton(
-                        stateWidgets: {
-                          ButtonState.idle: Text("Log In",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),),
-                          ButtonState.loading: Text("Loading",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),),
-                          ButtonState.fail: Text("",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),),
-                          ButtonState.success: Text("",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),)
-                        },
-                        stateColors: {
-                          ButtonState.idle: Colors.grey.shade400,
-                          ButtonState.loading: Colors.blue.shade300,
-                          ButtonState.fail: Colors.red.shade300,
-                          ButtonState.success: Colors.green.shade400,
-                        },
-                        onPressed: () => onLogInPressed(context, emailController.text, passwordController.text),
-                        state: loginButtonState,
+                      return Center(
+                        child: ProgressButton(
+                          stateWidgets: {
+                            ButtonState.idle: Text("Log In",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),),
+                            ButtonState.loading: Text("Loading",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),),
+                            ButtonState.fail: Text("",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),),
+                            ButtonState.success: Text("",style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),)
+                          },
+                          stateColors: {
+                            ButtonState.idle: Colors.grey.shade400,
+                            ButtonState.loading: Colors.blue.shade300,
+                            ButtonState.fail: Colors.red.shade300,
+                            ButtonState.success: Colors.green.shade400,
+                          },
+                          onPressed: () => onLogInPressed(context, emailController.text, passwordController.text),
+                          state: loginButtonState,
+                        )
                       );
+
                     },
                   ),
                 ],

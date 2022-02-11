@@ -4,7 +4,7 @@ part of 'login_cubit.dart';
 abstract class LoginState {
   factory LoginState.loading() = LoginStateLoading;
   factory LoginState.empty() = LoginStateEmpty;
-  factory LoginState.failed() = LoginStateFailed;
+  factory LoginState.failed(String errorMessage) = LoginStateFailed;
   factory LoginState.success() = LoginStateSuccess;
 }
 
@@ -17,6 +17,8 @@ class LoginStateEmpty extends Equatable implements LoginState {
 }
 
 class LoginStateFailed extends Equatable implements LoginState {
+  final String errorMessage;
+  LoginStateFailed(this.errorMessage);
   @override List<Object> get props => [];
 }
 
