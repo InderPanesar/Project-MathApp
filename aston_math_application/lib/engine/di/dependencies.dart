@@ -1,4 +1,5 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
+import 'package:aston_math_application/engine/notifications/notification_service.dart';
 import 'package:aston_math_application/engine/repository/question_repository.dart';
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
 import 'package:aston_math_application/engine/repository/user_details_repository.dart';
@@ -8,11 +9,13 @@ import 'package:aston_math_application/ui/screens/home/questionsPage/questionDet
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questions_detail_page.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_service.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionsTabPageCubit/questions_tab_page_cubit.dart';
+import 'package:aston_math_application/ui/screens/home/settingsPage/settings_tab_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/videosPage/videosTabPageCubit/videos_tab_page_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 
 class Dependencies {
@@ -37,8 +40,9 @@ class Dependencies {
 
   void _setupUtils() {
       //_getIt.registerSingleton<NavigationService>(NavigationService());
-    _getIt.registerSingleton<AuthenticationService>(AuthenticationService(FirebaseAuth.instance));
     _getIt.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
+    _getIt.registerLazySingleton<NotificationService>(() => NotificationService(FirebaseMessaging.instance));
+    _getIt.registerSingleton<AuthenticationService>(AuthenticationService(FirebaseAuth.instance,_getIt.get<NotificationService>()));
     _getIt.registerLazySingleton<QuestionService>(() => QuestionService(
       repo: _getIt.get<UserDetailsRepository>(),
     ));
@@ -84,6 +88,10 @@ class Dependencies {
 
     _getIt.registerFactory<QuestionDetailPageCubit>(() => QuestionDetailPageCubit(
       repo: _getIt.get<QuestionRepository>(),
+    ));
+
+    _getIt.registerFactory<SettingsTabPageCubit>(() => SettingsTabPageCubit(
+      service: _getIt.get<NotificationService>(),
     ));
 
 

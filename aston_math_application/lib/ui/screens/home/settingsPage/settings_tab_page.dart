@@ -1,4 +1,5 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
+import 'package:aston_math_application/ui/screens/home/settingsPage/settings_tab_page_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -9,6 +10,8 @@ class SettingsTabPage extends StatefulWidget {
 }
 
 class _SettingsTabPageState extends State<SettingsTabPage> {
+
+  SettingsTabPageCubit _bloc = GetIt.instance();
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +43,39 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                       await service.signOut();
                     },
                     child: Text("LogOut")
-                )
-
+                ),
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  margin: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                  color: Colors.red,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children:[
+                        Row(
+                          children: [
+                            Text("Push Notifications", style: TextStyle(fontSize: 20, color: Colors.white),),
+                            Spacer(),
+                            Switch(
+                              value: _bloc.isPushNotificationsActive(),
+                              onChanged: (bool) {
+                                _bloc.updateNotificationStatus();
+                                setState(() {
+                                  _bloc.isPushNotificationsActive();
+                                });
+                              },
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ]
           )
       ),
