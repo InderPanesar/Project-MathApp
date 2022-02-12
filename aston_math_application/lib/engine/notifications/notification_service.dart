@@ -3,8 +3,6 @@ import 'dart:io' show Platform;
 import 'package:aston_math_application/util/shared_preferences_keys.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 
 
 class NotificationService {
@@ -24,19 +22,14 @@ class NotificationService {
 
   Future<void> subscribeToTopic() async {
     await firebaseMessaging.subscribeToTopic('DailyQuizNotification');
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(SharedPreferencesKeys.PushNotifications, true);
     notifcationsActive = true;
   }
   Future<void> unsubscribeFromTopic() async {
     await firebaseMessaging.unsubscribeFromTopic('DailyQuizNotification');
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(SharedPreferencesKeys.PushNotifications, false);
     notifcationsActive = false;
   }
 
-  Future initialiseNotificationService() async {
-    final prefs = await SharedPreferences.getInstance();
+  Future initialiseNotificationService(bool? pushNotificationActive) async {
 
     if (Platform.isIOS) {
       settings = await firebaseMessaging.requestPermission(
@@ -59,12 +52,10 @@ class NotificationService {
     }
 
     if(settings!.authorizationStatus == AuthorizationStatus.authorized) {
-      bool? sharedPreferencesValue = prefs.getBool(SharedPreferencesKeys.PushNotifications);
-      if(sharedPreferencesValue != null) {
-        notifcationsActive = sharedPreferencesValue;
+      if(pushNotificationActive != null) {
+        notifcationsActive = pushNotificationActive;
       }
       else {
-        await prefs.setBool(SharedPreferencesKeys.PushNotifications, true);
         notifcationsActive = true;
       }
       if(notifcationsActive) await firebaseMessaging.subscribeToTopic('DailyQuizNotification');
@@ -96,7 +87,6 @@ class NotificationService {
       });
 
     } else {
-      await prefs.setBool(SharedPreferencesKeys.PushNotifications, false);
       notifcationsActive = false;
     }
   }

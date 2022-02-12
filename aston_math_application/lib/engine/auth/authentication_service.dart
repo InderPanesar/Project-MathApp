@@ -21,17 +21,16 @@ class AuthenticationService {
     } on FirebaseAuthException catch(e) {
       return e.message ?? "";
     }
-    await _notificationService.initialiseNotificationService();
     return "Signed in";
   }
 
   Future<String> signUp(String email, String password) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-      return "Signed up";
     } on FirebaseAuthException catch(e) {
       return e.message ?? "";
     }
+    return "Signed up";
   }
 
   FirebaseAuth getAuth() {

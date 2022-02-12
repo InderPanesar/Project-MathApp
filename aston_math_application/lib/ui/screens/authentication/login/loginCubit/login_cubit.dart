@@ -1,8 +1,13 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
+import 'package:aston_math_application/engine/model/UserDetails/UserDetails.dart';
 import 'package:bloc/bloc.dart';
 
 import 'package:equatable/equatable.dart';
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
+
+import '../../../../../engine/notifications/notification_service.dart';
+import '../../../../../engine/repository/user_details_repository.dart';
 
 part 'login_state.dart';
 
@@ -13,6 +18,8 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   AuthenticationService service;
+  NotificationService _notificationService = GetIt.I();
+  UserDetailsRepository detailsRepository = GetIt.I();
 
   Future<void> signInUser(String email, String password) async {
     emit(LoginState.loading());
@@ -22,7 +29,8 @@ class LoginCubit extends Cubit<LoginState> {
     if(statusSignUp != "Signed in") {
       emit(LoginState.failed(statusSignUp));
     } else {
-      print("SIGNED IN TO APPLICATION");
+      UserDetails? details = await detailsRepository.getUserDetails();
+      await _notificationService.initialiseNotificationService(details!.notificationsActive);
       emit(LoginState.success());
     }
     return;

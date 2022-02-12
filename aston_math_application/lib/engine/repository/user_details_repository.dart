@@ -25,7 +25,8 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
       'scores' : details.scores,
       'last_active' : details.lastActive,
       'recommendation_quiz' : details.questions,
-      'recommended_video' : details.recommendedVideo
+      'recommended_video' : details.recommendedVideo,
+      'notifications_active' : details.notificationsActive
     }, SetOptions(merge: true),
     ).then((value) => print("'full_name' & 'age' merged with existing data!")
     ).catchError((error) => print("Failed to merge data: $error"));
@@ -63,8 +64,9 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
             scores: values,
             lastActive: value['last_active'] as Timestamp,
             questions: questions,
-            recommendedVideo: new List<String>.from(value['recommended_video'])
-        );
+            recommendedVideo: new List<String>.from(value['recommended_video']),
+            notificationsActive: value['notifications_active'] as bool
+      );
       }
     });
     return details;

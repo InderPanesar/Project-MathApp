@@ -1,5 +1,6 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
 import 'package:aston_math_application/engine/model/UserDetails/UserDetails.dart';
+import 'package:aston_math_application/engine/notifications/notification_service.dart';
 import 'package:aston_math_application/engine/repository/user_details_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,6 +18,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   AuthenticationService service;
+  NotificationService _notificationService = GetIt.I();
   UserDetailsRepository detailsRepository = GetIt.I();
 
   Future<void> signUpUser(String email, String password) async {
@@ -27,7 +29,8 @@ class RegisterCubit extends Cubit<RegisterState> {
     if(statusSignUp != "Signed up") {
       emit(RegisterState.failed());
     } else {
-      await detailsRepository.addUserDetails(new UserDetails(name: "", age: "", doneHomeQuiz: false, scores: new Map(), lastActive: Timestamp.fromDate(new DateTime(2000)), questions: new Map(), recommendedVideo: []));
+      await _notificationService.initialiseNotificationService(null);
+      await detailsRepository.addUserDetails(new UserDetails(name: "", age: "", doneHomeQuiz: false, scores: new Map(), lastActive: Timestamp.fromDate(new DateTime(2000)), questions: new Map(), recommendedVideo: [], notificationsActive: _notificationService.notifcationsActive));
       emit(RegisterState.success());
     }
     return;
