@@ -2,6 +2,7 @@ import 'package:aston_math_application/ui/screens/home/homePage/home_page_cubit.
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questionDetailPageCubit/questions_detail_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_page.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_service.dart';
+import 'package:aston_math_application/util/styles/CustomColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -33,6 +34,8 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
         title: Text(topicName),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
+        elevation: 0,
+        centerTitle: true,
       ),
       body: CustomScrollView(
             slivers: [
@@ -58,8 +61,15 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
                                 Row(
                                   children: [
                                     Container(
-                                      child: Text(topicName, style: TextStyle(fontSize: 32, color: Colors.black), textAlign: TextAlign.start,),
-                                      padding: EdgeInsets.all(16),
+                                      child: Text(topicName,
+                                        style: TextStyle(
+                                            fontSize: 32,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w700
+                                        ),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                                     ),
                                     Spacer()
                                   ],
@@ -73,16 +83,28 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
                                   width: double.infinity,
                                   child: TextButton(
                                     style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(Colors.red),
+                                      backgroundColor: MaterialStateProperty.all(CustomColors.BlueZodiac),
                                       foregroundColor: MaterialStateProperty.all(Colors.white),
                                     ),
                                     onPressed: () {
                                       QuestionService service = GetIt.I();
                                       service.start(context, state.questions, topicName);
                                     },
-                                    child: Text('Start Quiz'),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(vertical: 8),
+                                      child: Text(
+                                        'Start Quiz',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontFamily: "Asap",
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+
+
                                   ),
-                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                                 ),
 
                                 Spacer(),

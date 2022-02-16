@@ -2,6 +2,7 @@ import 'package:aston_math_application/engine/auth/authentication_service.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questions_tab_page.dart';
 import 'package:aston_math_application/ui/screens/home/settingsPage/settings_tab_page.dart';
 import 'package:aston_math_application/ui/screens/home/videosPage/videos_tab_page.dart';
+import 'package:aston_math_application/util/styles/CustomColors.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -85,7 +86,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: getSelectedInt(_selectedIndex),
         body: _pageOptions[_selectedIndex],
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
@@ -113,18 +114,26 @@ class _HomePageState extends State<HomePage> {
                 tabs: [
                   GButton(
                     icon: Icons.home_rounded,
+                    iconColor: CustomColors.BlueZodiac,
+                    iconActiveColor: CustomColors.FunBlue,
                     text: 'Home',
                   ),
                   GButton(
-                    icon: Icons.line_style_rounded,
+                    icon: Icons.help_center,
+                    iconColor: CustomColors.BlueZodiac,
+                    iconActiveColor: CustomColors.FunBlue,
                     text: 'Questions',
                   ),
                   GButton(
-                    icon: Icons.search_rounded,
+                    icon: Icons.video_collection,
+                    iconColor: CustomColors.BlueZodiac,
+                    iconActiveColor: CustomColors.FunBlue,
                     text: 'Videos',
                   ),
                   GButton(
                     icon: Icons.settings,
+                    iconColor: CustomColors.BlueZodiac,
+                    iconActiveColor: CustomColors.FunBlue,
                     text: 'Settings',
                   ),
                 ],
@@ -139,5 +148,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
     );
+  }
+
+  Color getSelectedInt(int? selectedIndex) {
+    if(selectedIndex != null) {
+      if(selectedIndex == 0) {
+        return CustomColors.BlueZodiac;
+      }
+    }
+    return Colors.white;
   }
 }

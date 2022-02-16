@@ -199,6 +199,8 @@ class _QuestionResultPageState extends State<QuestionResultPage> {
         title: Text("Results"),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
+        elevation: 0,
+        centerTitle: true,
       ),
       body: CustomScrollView(
           slivers: [

@@ -55,6 +55,8 @@ class _QuestionPageState extends State<QuestionPage> {
               icon: Icon(Icons.help),
             ),
           ],
+          elevation: 0,
+          centerTitle: true,
         ),
         body: CustomScrollView(
             slivers: [

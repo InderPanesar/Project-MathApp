@@ -37,6 +37,9 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: "Asap"
+      ),
       home: AuthenticationWrapper(),
     );
   }

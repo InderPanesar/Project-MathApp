@@ -75,7 +75,9 @@ class LandingPageWidget extends StatelessWidget {
                 ),
                 padding: EdgeInsets.all(12),
               ),
-              
+
+              SizedBox(height: 10,),
+
               Padding(
                 padding: const EdgeInsets.only(
                   left: 40,

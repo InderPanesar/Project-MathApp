@@ -3,6 +3,7 @@ import 'package:aston_math_application/ui/screens/authentication/login/login_pag
 import 'package:aston_math_application/ui/screens/authentication/register/register_page.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questions_detail_page.dart';
 import 'package:aston_math_application/util/styles/ButtonStyles.dart';
+import 'package:aston_math_application/util/styles/CustomColors.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_svg/svg.dart';
@@ -53,9 +54,9 @@ class _ExpandableTileState extends State<ExpandableTile>  {
                   ),
                   clipBehavior: Clip.antiAlias,
                   margin: EdgeInsets.symmetric(vertical: 1, horizontal: 12),
-                  color: Colors.deepPurple,
+                  color: CustomColors.FunBlue,
                   child: InkWell(
-                    splashColor: Colors.blue.withAlpha(30),
+                    splashColor: CustomColors.FunBlue.withAlpha(30),
                     onTap: () {
                       navigateToPage(context, topic, i);
                     },
@@ -88,20 +89,32 @@ class _ExpandableTileState extends State<ExpandableTile>  {
           borderRadius: topRadius,
         ),
         margin: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-        color: Colors.deepPurple,
+        color: CustomColors.BlueZodiac,
         child: InkWell(
-          splashColor: Colors.blue.withAlpha(30),
+          splashColor: CustomColors.BlueZodiac.withAlpha(30),
           onTap: () {
             navigateToPage(context, topic, 0);
           },
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children:[
                 Row(
                   children: [
+                    Container(
+                      child: Padding(
+                        padding: EdgeInsets.zero,
+                        child: Icon(
+                          Icons.calculate,
+                          color: Colors.white,
+                          size: 50,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8,),
+
                     Text( topic.name, style: TextStyle(fontSize: 20, color: Colors.white),),
                     Spacer(),
                   ],
@@ -124,9 +137,9 @@ class _ExpandableTileState extends State<ExpandableTile>  {
             ),
             clipBehavior: Clip.antiAlias,
             margin: EdgeInsets.symmetric(vertical: 1, horizontal: 12),
-            color: Colors.deepPurple,
+            color: CustomColors.BlueZodiac,
             child: InkWell(
-              splashColor: Colors.blue.withAlpha(30),
+              splashColor: CustomColors.BlueZodiac.withAlpha(30),
               onTap: () {
                 setState(() {
                   isExpanded = !isExpanded;
@@ -136,13 +149,24 @@ class _ExpandableTileState extends State<ExpandableTile>  {
                 });
               },
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 16),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children:[
                     Row(
                       children: [
+                        Container(
+                          child: Padding(
+                            padding: EdgeInsets.zero,
+                            child: Icon(
+                              Icons.calculate,
+                              color: Colors.white,
+                              size: 50,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 8,),
                         Text( topic.name, style: TextStyle(fontSize: 20, color: Colors.white),),
                         Spacer(),
                         new RotationTransition(

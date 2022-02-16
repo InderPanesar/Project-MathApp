@@ -64,255 +64,275 @@ class _HomeTabPageState extends State<HomeTabPage> {
 
     _bloc.getAccountDetails();
 
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.all(16),
-      color: CustomColors.BlueZodiac,
-      child: BlocBuilder<HomePageCubit, HomePageState>(
-        bloc: _bloc,
-        builder: (context, state) {
-          if(state is HomePageStateFailed) {
-            return Center(
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 20),
-                  backgroundColor: Colors.white,
-                ),
-                onPressed: () async {
-                   await _bloc.getAccountDetails();
-                },
-                child: const Text('Retry'),
-              ),
-            ); //ToDo: Implement Error State
-          }
-          if (state is HomePageStateLoading) {
-            return Center(
-                child: CircularProgressIndicator()
+    return SingleChildScrollView(
 
-            );
-          }
-
-          //If Data Received
-          if(state is HomePageStateSuccess) {
-            details = state.details;
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(
-                  height: 25,
-                  width: 1,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: new CircularPercentIndicator(
-                        radius: 75.0,
-                        lineWidth: 13.0,
-                        animation: true,
-                        percent: getPercentageNumber(details!),
-                        center: new Text(
-                          getPercentageString(details!),
-                          style:
-                          new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white),
-                        ),
-                        circularStrokeCap: CircularStrokeCap.round,
-                        progressColor: Colors.white,
-                        backgroundColor: Color.fromRGBO(222, 226, 230, 0.5),
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Home",
-                            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
-                          ),
-                          SizedBox(
-                            height: 16,
-                          ),
-                          Text(
-                            "Good Morning",
-                            style: const TextStyle(fontSize: 20, color: Colors.white),
-                          ),
-                          Text(
-                            details?.name ?? "",
-                            style: const TextStyle(fontSize: 20, color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    )
-
-
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Visibility(
-                  visible: !details!.doneHomeQuiz,
+      child: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(16),
+          color: CustomColors.BlueZodiac,
+          child: BlocBuilder<HomePageCubit, HomePageState>(
+            bloc: _bloc,
+            builder: (context, state) {
+              if(state is HomePageStateFailed) {
+                return Center(
                   child: TextButton(
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 20),
                       backgroundColor: Colors.white,
                     ),
-
                     onPressed: () async {
-                      var result = await showDialog(
-                        context: context,
-                        builder: (context) =>
-                            FutureProgressDialog(
-                                _bloc.getIntroQuestions(),
-                                message: Text('Getting Intro Questions...')
-                            ),
-                      ) as List<Question>?;
-
-                      if(result != null) {
-                        QuestionService service = GetIt.I();
-                        service.startIntroQuiz(context, result);
-                      }
-                      else {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text("Error: Unable to start personal quizzes"),
-                        ));
-                      }
+                      await _bloc.getAccountDetails();
                     },
-                    child: const Text('Do initial quiz'),
+                    child: const Text('Retry'),
                   ),
-                ),
-                Visibility(
-                  visible: details!.doneHomeQuiz,
-                  child: Text(
-                    "Daily Tasks",
-                    style: const TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                ),
-                Visibility(
-                  visible: details!.doneHomeQuiz,
-                  child: Container(
-                    color: Colors.transparent,
-                    child: ListView.builder(
-                      padding: EdgeInsets.only(top: 5, bottom: 5),
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: details!.questions.length,
-                      itemBuilder: (context, index) {
-                        String topicName = details!.questions.keys.toList()[index];
-                        String idName = details!.questions.values.toList()[index][0];
-                        String isValid = details!.questions.values.toList()[index][1];
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          margin: EdgeInsets.symmetric(vertical: 6, horizontal: 1),
-                          color: Colors.white,
-                          child: InkWell(
-                            splashColor: Colors.blue.withAlpha(30),
-                            onTap: () async {
-                              if(isValid == "false") {
-                                var result = await showDialog(
-                                  context: context,
-                                  builder: (context) =>
-                                      FutureProgressDialog(
-                                          _bloc.getQuestions(idName),
-                                          message: Text('Getting Personalisation Questions...')
-                                      ),
-                                ) as List<Question>?;
+                ); //ToDo: Implement Error State
+              }
+              if (state is HomePageStateLoading) {
+                return Center(
+                    child: CircularProgressIndicator()
 
-                                if(result != null) {
-                                  QuestionService service = GetIt.instance();
-                                  UserDetails _temp = details!;
-                                  _temp.questions.values.toList()[index][1] = "true";
-                                  service.startPersonalisationQuiz(context, result, idName, _temp);
-                                }
-                                else {
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    content: Text("Error: Unable to start personal quizzes"),
-                                  ));
-                                }
-                              }
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children:[
-                                  Row(
-                                    children: [
-                                      Text( topicName, style: TextStyle(fontSize: 20, color: Colors.black),),
-                                      Spacer(),
-                                      Checkbox(value: isValid == "true", onChanged: null)
+                );
+              }
+
+              //If Data Received
+              if(state is HomePageStateSuccess) {
+                details = state.details;
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(
+                      height: 25,
+                      width: 1,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CircularPercentIndicator(
+                              radius: 75.0,
+                              lineWidth: 13.0,
+                              animation: true,
+                              percent: getPercentageNumber(details!),
+                              center: new Text(
+                                getPercentageString(details!),
+                                style:
+                                new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white),
+                              ),
+                              circularStrokeCap: CircularStrokeCap.round,
+                              progressColor: Colors.white,
+                              backgroundColor: Color.fromRGBO(222, 226, 230, 0.5),
+                            ),
+                          ],
+                        ),
+
+                        Spacer(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              "Home",
+                              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              "Good Morning",
+                              style: const TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                            Text(
+                              details?.name ?? "",
+                              style: const TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Visibility(
+                      visible: !details!.doneHomeQuiz,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 20),
+                          backgroundColor: Colors.white,
+                        ),
+
+                        onPressed: () async {
+                          var result = await showDialog(
+                            context: context,
+                            builder: (context) =>
+                                FutureProgressDialog(
+                                    _bloc.getIntroQuestions(),
+                                    message: Text('Getting Intro Questions...')
+                                ),
+                          ) as List<Question>?;
+
+                          if(result != null) {
+                            QuestionService service = GetIt.I();
+                            service.startIntroQuiz(context, result);
+                          }
+                          else {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Error: Unable to start personal quizzes"),
+                            ));
+                          }
+                        },
+                        child: const Text('Do initial quiz'),
+                      ),
+                    ),
+                    Visibility(
+                      visible: details!.doneHomeQuiz,
+                      child: Text(
+                        "Daily Tasks",
+                        style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: details!.doneHomeQuiz,
+                      child: Container(
+                        color: Colors.transparent,
+                        child: ListView.builder(
+                          padding: EdgeInsets.only(top: 5, bottom: 5),
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: details!.questions.length,
+                          itemBuilder: (context, index) {
+                            String topicName = details!.questions.keys.toList()[index];
+                            String idName = details!.questions.values.toList()[index][0];
+                            String isValid = details!.questions.values.toList()[index][1];
+                            return Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              ),
+                              clipBehavior: Clip.antiAlias,
+                              margin: EdgeInsets.symmetric(vertical: 6, horizontal: 1),
+                              color: Colors.white,
+                              child: InkWell(
+                                splashColor: Colors.blue.withAlpha(30),
+                                onTap: () async {
+                                  if(isValid == "false") {
+                                    var result = await showDialog(
+                                      context: context,
+                                      builder: (context) =>
+                                          FutureProgressDialog(
+                                              _bloc.getQuestions(idName),
+                                              message: Text('Getting Personalisation Questions...')
+                                          ),
+                                    ) as List<Question>?;
+
+                                    if(result != null) {
+                                      QuestionService service = GetIt.instance();
+                                      UserDetails _temp = details!;
+                                      _temp.questions.values.toList()[index][1] = "true";
+                                      service.startPersonalisationQuiz(context, result, idName, _temp);
+                                    }
+                                    else {
+                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                        content: Text("Error: Unable to start personal quizzes"),
+                                      ));
+                                    }
+                                  }
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children:[
+                                      Row(
+                                        children: [
+                                          Text( topicName, style: TextStyle(fontSize: 20, color: Colors.black),),
+                                          Spacer(),
+                                          Checkbox(
+                                            value: isValid == "true",
+                                            onChanged: null,
+                                            checkColor: Colors.white,
+                                            fillColor: isValid == "true" ? MaterialStateProperty.all(Colors.green) : MaterialStateProperty.all(Colors.black),
+                                            activeColor: Colors.green,
+                                          )
+                                        ],
+                                      ),
                                     ],
                                   ),
-                                ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: details!.recommendedVideo.length == 3,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            "Recommended Video",
+                            style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          SizedBox(height: 4,),
+                          Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
+                            clipBehavior: Clip.antiAlias,
+                            margin: EdgeInsets.symmetric(vertical: 6, horizontal: 1),
+                            color: Colors.white,
+                            child: InkWell(
+                              splashColor: Colors.blue.withAlpha(30),
+                              onTap: () async {
+                                navigateToVideoModal(context, new VideoModel(title: details!.recommendedVideo[0], attributes: [details!.recommendedVideo[1], details!.recommendedVideo[2]]));
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children:[
+                                    Row(
+                                      children: [
+                                        Text( getRecommendedVideoTitle(details!), style: TextStyle(fontSize: 20, color: Colors.black),),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        );
-                      },
+                        ],
+                      ),
+
+
                     ),
-                  ),
-                ),
-                Visibility(
-                  visible: details!.recommendedVideo.length == 3,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        "Recommended Video",
-                        style: const TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                      Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        clipBehavior: Clip.antiAlias,
-                        margin: EdgeInsets.symmetric(vertical: 6, horizontal: 1),
-                        color: Colors.white,
-                        child: InkWell(
-                          splashColor: Colors.blue.withAlpha(30),
-                          onTap: () async {
-                            navigateToVideoModal(context, new VideoModel(title: details!.recommendedVideo[0], attributes: [details!.recommendedVideo[1], details!.recommendedVideo[2]]));
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children:[
-                                Row(
-                                  children: [
-                                    Text( getRecommendedVideoTitle(details!), style: TextStyle(fontSize: 20, color: Colors.black),),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
 
 
-                ),
+                  ],
+                );
 
 
-              ],
-            );
+              }
+              else return Spacer();
 
+            },
 
-          }
-          else return Spacer();
-
-        },
-
-      )
+          )
+      ),
     );
+
   }
 
   String getRecommendedVideoTitle(UserDetails details) {
@@ -323,15 +343,26 @@ class _HomeTabPageState extends State<HomeTabPage> {
   }
 
   String getPercentageString(UserDetails details) {
-    return "n/a";
+    double percentage = getPercentageNumber(details) * 100;
+    return percentage.toStringAsFixed(1) + "%";
   }
 
   double getPercentageNumber(UserDetails details) {
+    if(details.doneHomeQuiz) {
+      int total = 0;
+      int scores = 0;
+      for(List<String> values in details.questions.values) {
+        total++;
+        if(values[1] == "true") scores++;
+      }
+
+      double values = scores/total;
+      return values;
+    }
     return 0.0;
   }
 
   void navigateToVideoModal(BuildContext context, VideoModel topic) {
-    print('Card tapped. Code: ' + topic.attributes.first);
     String url = topic.attributes.first;
     if(url != null) {
       url = YoutubePlayer.convertUrlToId(url)!;
