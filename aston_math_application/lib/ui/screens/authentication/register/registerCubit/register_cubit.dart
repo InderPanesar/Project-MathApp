@@ -24,15 +24,16 @@ class RegisterCubit extends Cubit<RegisterState> {
   Future<void> signUpUser(String email, String password) async {
     emit(RegisterState.loading());
 
-    String statusSignUp = await service.signUp(email.trim(), password.trim());
+    await _notificationService.initialiseNotificationService(null);
+    String statusSignUp = await service.signUp(email.trim(), password.trim(), _notificationService.notifcationsActive);
 
     if(statusSignUp != "Signed up") {
-      emit(RegisterState.failed());
+      emit(RegisterState.failed(statusSignUp));
     } else {
-      await _notificationService.initialiseNotificationService(null);
-      await detailsRepository.addUserDetails(new UserDetails(name: "", age: "", doneHomeQuiz: false, scores: new Map(), lastActive: Timestamp.fromDate(new DateTime(2000)), questions: new Map(), recommendedVideo: [], notificationsActive: _notificationService.notifcationsActive));
       emit(RegisterState.success());
     }
     return;
   }
+
+
 }

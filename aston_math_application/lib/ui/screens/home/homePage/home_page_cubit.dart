@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:aston_math_application/engine/model/Questions/QuestionTopic.dart';
 import 'package:aston_math_application/engine/model/Questions/question.dart';
 import 'package:aston_math_application/engine/model/UserDetails/UserDetails.dart';
+import 'package:aston_math_application/engine/notifications/notification_service.dart';
 import 'package:aston_math_application/engine/repository/question_repository.dart';
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
 import 'package:aston_math_application/engine/repository/user_details_repository.dart';
@@ -21,7 +22,7 @@ part 'home_page_state.dart';
 
 
 class HomePageCubit extends Cubit<HomePageState> {
-  HomePageCubit({required this.repo, required this.secondaryRepo, required this.thirdRepo, required this.videosRepository}) : super(HomePageState.loading()) {
+  HomePageCubit({required this.repo, required this.secondaryRepo, required this.thirdRepo, required this.videosRepository, required this.notificationService}) : super(HomePageState.loading()) {
     getAccountDetails();
   }
 
@@ -29,6 +30,7 @@ class HomePageCubit extends Cubit<HomePageState> {
   QuestionRepository secondaryRepo;
   QuestionMapRepository thirdRepo;
   VideosRepository videosRepository;
+  NotificationService notificationService;
 
 
 
@@ -44,9 +46,13 @@ class HomePageCubit extends Cubit<HomePageState> {
       return;
     }
 
+
     if(data == null){
       emit(HomePageState.failed());
     } else {
+      notificationService.notifcationsActive = data.notificationsActive;
+      await notificationService.initialiseNotificationService(data.notificationsActive);
+
       DateTime currentTime = Timestamp.now().toDate();
       DateTime serverTime = data.lastActive.toDate();
       final difference = currentTime.difference(serverTime).inDays;

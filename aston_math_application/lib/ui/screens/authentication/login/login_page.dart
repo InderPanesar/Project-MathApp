@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:progress_state_button/progress_button.dart';
+import '../forgotten/forgot_password_page.dart';
 import '../register/register_page.dart';
 import 'loginCubit/login_cubit.dart';
 
@@ -100,6 +101,21 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   onTap: () => onRegisterPressed(context)
                               ),
                             ],
+                          ),
+                          SizedBox(height: 6,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                  child: Text(
+                                    'Forgotten Password?',
+                                    style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                  onTap: () => onForgottenPassword(context)
+                              ),
+                            ],
                           )
 
                         ],
@@ -120,6 +136,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => RegisterPageWidget()),
+    );
+  }
+
+  void onForgottenPassword(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ForgotPasswordPageWidget()),
     );
   }
 

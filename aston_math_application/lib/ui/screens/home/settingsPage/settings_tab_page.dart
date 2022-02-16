@@ -62,6 +62,7 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                                   _bloc.isPushNotificationsActive();
                                 });
                               },
+                              activeColor: Colors.lightGreen,
                             )
                           ],
                         ),

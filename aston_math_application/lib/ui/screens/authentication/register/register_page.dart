@@ -135,6 +135,11 @@ class _RegisterPageWidgetState extends State<RegisterPageWidget> {
           });
         }
         else {
+          if (state is RegisterStateFailed) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("Error: " + state.errorMessage),
+            ));
+          }
           setState(() {
             loginButtonState = ButtonState.idle;
           });                        }

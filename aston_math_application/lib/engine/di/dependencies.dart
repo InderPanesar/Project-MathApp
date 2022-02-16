@@ -51,6 +51,7 @@ class Dependencies {
       secondaryRepo: _getIt.get<QuestionRepository>(),
       thirdRepo: _getIt.get<QuestionMapRepository>(),
       videosRepository: _getIt.get<VideosRepository>(),
+      notificationService: _getIt.get<NotificationService>()
     ));
   }
 

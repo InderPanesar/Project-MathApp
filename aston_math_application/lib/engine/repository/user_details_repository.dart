@@ -16,9 +16,9 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
   UserDetailsRepositoryImpl(this._firebaseFirestore, this._authenticationService);
 
   @override
-  Future<void> addUserDetails(UserDetails details) {
+  Future<void> addUserDetails(UserDetails details) async {
     CollectionReference users = _firebaseFirestore.collection('user');
-    return users.doc(_authenticationService.getAuth().currentUser!.uid).set({
+    await users.doc(_authenticationService.getAuth().currentUser!.uid).set({
       'full_name': details.name,
       'age': details.age,
       'done_home_quiz' : details.doneHomeQuiz,
@@ -28,15 +28,15 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
       'recommended_video' : details.recommendedVideo,
       'notifications_active' : details.notificationsActive
     }, SetOptions(merge: true),
-    ).then((value) => print("'full_name' & 'age' merged with existing data!")
+    ).then((value) => print("")
     ).catchError((error) => print("Failed to merge data: $error"));
+    return;
   }
 
   @override
   Future<UserDetails?> getUserDetails() async {
+
     UserDetails? details;
-
-
     print("UID: "+ _authenticationService.getAuth().currentUser!.uid);
     await _firebaseFirestore.collection('user').doc(_authenticationService.getAuth().currentUser!.uid).get().then((value) {
       if(value.exists) {

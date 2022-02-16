@@ -9,10 +9,12 @@ class SettingsTabPageCubit {
 
   NotificationService service;
   UserDetailsRepository detailsRepository = GetIt.I();
+  bool pushNotificationsActive = false;
 
   SettingsTabPageCubit({required this.service});
 
   bool isPushNotificationsActive()  {
+    print("PUSH NOTIFICATIONS: " + service.notifcationsActive.toString());
     return service.notifcationsActive;
   }
 

@@ -4,7 +4,7 @@ part of 'register_cubit.dart';
 abstract class RegisterState {
   factory RegisterState.loading() = RegisterStateLoading;
   factory RegisterState.empty() = RegisterStateEmpty;
-  factory RegisterState.failed() = RegisterStateFailed;
+  factory RegisterState.failed(String errorMessage) = RegisterStateFailed;
   factory RegisterState.success() = RegisterStateSuccess;
 }
 
@@ -17,6 +17,8 @@ class RegisterStateEmpty extends Equatable implements RegisterState {
 }
 
 class RegisterStateFailed extends Equatable implements RegisterState {
+  final String errorMessage;
+  RegisterStateFailed(this.errorMessage);
   @override List<Object> get props => [];
 }
 
