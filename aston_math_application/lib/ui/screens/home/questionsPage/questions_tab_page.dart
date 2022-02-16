@@ -39,8 +39,12 @@ class _QuestionTabPageState extends State<QuestionTabPage> {
                   child: Row(
                     children: [
                       Container(
-                          child: Text("Questions", style: TextStyle(fontSize: 32, color: Colors.white),),
-                          padding: EdgeInsets.fromLTRB(20,60,20,40)
+                          child: Icon(Icons.live_help_rounded, color: Colors.white, size: 150,),
+                          padding: EdgeInsets.fromLTRB(0,30,0,5)
+                      ),
+                      Container(
+                          child: Text("Questions", style: TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.bold),),
+                          padding: EdgeInsets.fromLTRB(0,100,20,5)
                       ),
                       Spacer()
                     ],

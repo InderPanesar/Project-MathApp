@@ -33,8 +33,12 @@ class _VideosTabPageState extends State<VideosTabPage> {
                   child: Row(
                     children: [
                       Container(
-                          child: Text("Videos", style: TextStyle(fontSize: 32, color: Colors.white),),
-                          padding: EdgeInsets.fromLTRB(20,60,20,40)
+                          child: Icon(Icons.smart_display, color: Colors.white, size: 150,),
+                          padding: EdgeInsets.fromLTRB(10,30,0,5)
+                      ),
+                      Container(
+                          child: Text("Videos", style: TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.bold),),
+                          padding: EdgeInsets.fromLTRB(10,100,20,5)
                       ),
                       Spacer()
                     ],

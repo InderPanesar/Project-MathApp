@@ -39,8 +39,10 @@ class LandingPageWidget extends StatelessWidget {
             width: double.infinity,
             alignment: Alignment.topCenter,
             margin: EdgeInsets.only(top: 120),
-            color: Colors.black,
-            height: 250,
+            color: Colors.transparent,
+            height: 300,
+            child: Image.asset('assets/images/landing_page.png'),
+
           ),
 
           Column(
@@ -76,7 +78,7 @@ class LandingPageWidget extends StatelessWidget {
                 padding: EdgeInsets.all(12),
               ),
 
-              SizedBox(height: 10,),
+              SizedBox(height: 20,),
 
               Padding(
                 padding: const EdgeInsets.only(

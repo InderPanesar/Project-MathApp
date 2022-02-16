@@ -55,8 +55,9 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
                               children: [
                                 Container(
                                   height: 200,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   margin: EdgeInsets.all(16),
+                                  child: Image.asset("assets/images/exam_image.png"),
                                 ),
                                 Row(
                                   children: [
@@ -69,7 +70,7 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
                                         ),
                                         textAlign: TextAlign.start,
                                       ),
-                                      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                                     ),
                                     Spacer()
                                   ],
@@ -85,6 +86,11 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
                                     style: ButtonStyle(
                                       backgroundColor: MaterialStateProperty.all(CustomColors.BlueZodiac),
                                       foregroundColor: MaterialStateProperty.all(Colors.white),
+                                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(8.0),
+                                          )
+                                      )
                                     ),
                                     onPressed: () {
                                       QuestionService service = GetIt.I();
@@ -101,6 +107,7 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
                                         ),
                                       ),
                                     ),
+
 
 
                                   ),
