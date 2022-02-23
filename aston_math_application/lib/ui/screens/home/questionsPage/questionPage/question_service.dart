@@ -76,13 +76,23 @@ class QuestionService {
     }
 
     if(isLastPage(index)) {
-
       Map<Question, bool> _map = Map();
       int score = 0;
       for(int i = 0; i < _questions.length; i++) {
-         bool answer = _questions[i].answer == _answers[i];
-         if(answer) score++;
-         _map[_questions[i]] = answer;
+        final answers = _questions[i].answer.split(',');
+        if(answers.isNotEmpty) {
+          for(String answerString in answers) {
+            bool answer = answerString == _answers[i];
+            if(answer) score++;
+            _map[_questions[i]] = answer;
+          }
+        }
+        else {
+          bool answer = _questions[i].answer == _answers[i];
+          if(answer) score++;
+          _map[_questions[i]] = answer;
+        }
+
       }
       UserDetails? details = await repo.getUserDetails();
       if(_details != null) {

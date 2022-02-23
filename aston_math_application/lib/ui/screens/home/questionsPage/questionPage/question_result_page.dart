@@ -154,7 +154,7 @@ class _QuestionResultPageState extends State<QuestionResultPage> {
                   ),
               )
           ),
-          TeXViewDocument("Actual Answer: " + actualAnswer,
+          TeXViewDocument("Actual Answer/s: " + actualAnswer,
               style: TeXViewStyle(
                 textAlign: TeXViewTextAlign.Left,
                 contentColor: Colors.white,
