@@ -37,7 +37,7 @@ class VideoTabPageModal extends StatelessWidget {
                 player,
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 12),
-                  child: Text(video.attributes.last, style: TextStyle(fontSize: 16),),
+                  child: Text(video.attributes.last, style: TextStyle(fontSize: 16, fontFamily: "AsapCondensed"),),
                 ),
               ],
             ),

@@ -23,7 +23,7 @@ class PageViewPages {
             children: [
               Text(title, style: TextStyle(fontSize: 24, color: Colors.black, decoration: TextDecoration.none, fontFamily: "Asap", fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
               SizedBox(height: 10,),
-              Text(description, style: TextStyle(fontSize: 12, color: Colors.black, decoration: TextDecoration.none, fontFamily: "Asap", fontWeight: FontWeight.normal),textAlign: TextAlign.center,),
+              Text(description, style: TextStyle(fontSize: 12, color: Colors.black, decoration: TextDecoration.none, fontFamily: "AsapCondensed", fontWeight: FontWeight.normal),textAlign: TextAlign.center,),
             ],
           )
         ),
@@ -42,7 +42,7 @@ class PageViewPages {
               children: [
                 Text(title, style: TextStyle(fontSize: 24, color: Colors.black, decoration: TextDecoration.none, fontFamily: "Asap", fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
                 SizedBox(height: 10,),
-                Text(description, style: TextStyle(fontSize: 12, color: Colors.black, decoration: TextDecoration.none, fontFamily: "Asap", fontWeight: FontWeight.normal),textAlign: TextAlign.center,),
+                Text(description, style: TextStyle(fontSize: 12, color: Colors.black, decoration: TextDecoration.none, fontFamily: "AsapCondensed", fontWeight: FontWeight.normal),textAlign: TextAlign.center,),
               ],
             )
         ),
@@ -61,7 +61,7 @@ class PageViewPages {
               children: [
                 Text(title, style: TextStyle(fontSize: 24, color: Colors.black, decoration: TextDecoration.none, fontFamily: "Asap", fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
                 SizedBox(height: 10,),
-                Text(description, style: TextStyle(fontSize: 12, color: Colors.black, decoration: TextDecoration.none, fontFamily: "Asap", fontWeight: FontWeight.normal),textAlign: TextAlign.center,),
+                Text(description, style: TextStyle(fontSize: 12, color: Colors.black, decoration: TextDecoration.none, fontFamily: "AsapCondensed", fontWeight: FontWeight.normal),textAlign: TextAlign.center,),
               ],
             )
         ),

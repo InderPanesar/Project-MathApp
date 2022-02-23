@@ -105,4 +105,15 @@ flutter:
           weight: 600
         - asset: assets/font/asap/Asap-Bold.ttf
           weight: 700
+    - family: AsapCondensed
+      fonts:
+        - asset: assets/font/asap_condensed/AsapCondensed-Regular.ttf
+        - asset: assets/font/asap_condensed/AsapCondensed-Italic.ttf
+          style: italic
+        - asset: assets/font/asap_condensed/AsapCondensed-Regular.ttf
+          weight: 400
+        - asset: assets/font/asap_condensed/AsapCondensed-SemiBold.ttf
+          weight: 600
+        - asset: assets/font/asap_condensed/AsapCondensed-Bold.ttf
+          weight: 700
 

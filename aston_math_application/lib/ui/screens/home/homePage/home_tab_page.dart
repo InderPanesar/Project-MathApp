@@ -250,7 +250,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                                     children:[
                                       Row(
                                         children: [
-                                          Text( topicName, style: TextStyle(fontSize: 20, color: Colors.black),),
+                                          Text( topicName, style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
                                           Spacer(),
                                           Checkbox(
                                             value: isValid == "true",
@@ -305,7 +305,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                                   children:[
                                     Row(
                                       children: [
-                                        Text( getRecommendedVideoTitle(details!), style: TextStyle(fontSize: 20, color: Colors.black),),
+                                        Text( getRecommendedVideoTitle(details!), style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
                                       ],
                                     ),
                                   ],

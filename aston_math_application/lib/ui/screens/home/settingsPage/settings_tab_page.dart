@@ -57,7 +57,7 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                       children:[
                         Row(
                           children: [
-                            Text("Push Notifications", style: TextStyle(fontSize: 20, color: Colors.white),),
+                            Text("Push Notifications", style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
                             Spacer(),
                             Switch(
                               value: _bloc.isPushNotificationsActive(),
@@ -85,7 +85,6 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                   child: InkWell(
                     splashColor: CustomColors.BlueZodiac.withAlpha(30),
                     onTap: ()  {
-                      //ToDo: Add Details
                       onChangeDetails(context);
                     },
                     child: Padding(
@@ -96,7 +95,7 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                         children:[
                           Row(
                             children: [
-                              Text( "Change Details", style: TextStyle(fontSize: 20, color: Colors.white),),
+                              Text( "Change Details", style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
                               Spacer(),
                             ],
                           ),
@@ -126,7 +125,7 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                         children:[
                           Row(
                             children: [
-                              Text( "Log Out", style: TextStyle(fontSize: 20, color: Colors.white),),
+                              Text( "Log Out", style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
                               Spacer(),
                             ],
                           ),

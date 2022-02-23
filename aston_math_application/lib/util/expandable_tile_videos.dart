@@ -90,7 +90,7 @@ class _ExpandableTileVideoState extends State<ExpandableTileVideos>  {
                         children:[
                           Row(
                             children: [
-                              Text( topic.videos[i].title, style: TextStyle(fontSize: 20, color: Colors.white),),
+                              Text( topic.videos[i].title, style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed"),),
                             ],
                           ),
                         ],
@@ -136,7 +136,7 @@ class _ExpandableTileVideoState extends State<ExpandableTileVideos>  {
                       ),
                     ),
                     SizedBox(width: 8,),
-                    Text( topic.videos.first.title, style: TextStyle(fontSize: 20, color: Colors.white),),
+                    Text( topic.videos.first.title, style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
                     Spacer(),
                   ],
                 ),
@@ -188,7 +188,7 @@ class _ExpandableTileVideoState extends State<ExpandableTileVideos>  {
                           ),
                         ),
                         SizedBox(width: 8,),
-                        Text( topic.category, style: TextStyle(fontSize: 20, color: Colors.white),),
+                        Text( topic.category, style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
                         Spacer(),
                         new RotationTransition(
                             turns: new AlwaysStoppedAnimation(rotation / 360),

@@ -1,15 +1,12 @@
+import 'dart:ui';
 import 'package:aston_math_application/engine/model/Questions/question.dart';
-import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questionDetailPageCubit/questions_detail_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_page_cubit.dart';
-import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_service.dart';
 import 'package:dialogs/dialogs/message_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tex/flutter_tex.dart';
-import 'package:get_it/get_it.dart';
 import 'package:math_keyboard/math_keyboard.dart';
 import 'package:easy_localization/easy_localization.dart';
-
+import '../../../../../util/styles/CustomColors.dart';
 
 class QuestionPage extends StatefulWidget {
 
@@ -52,7 +49,7 @@ class _QuestionPageState extends State<QuestionPage> {
                     iconButtonOk: Icon(Icons.one_k));
                 messageDialog.show(context, barrierColor: Colors.white);
               },
-              icon: Icon(Icons.help),
+              icon: Icon(Icons.help, color: CustomColors.BlueZodiac,),
             ),
           ],
           elevation: 0,
@@ -75,7 +72,7 @@ class _QuestionPageState extends State<QuestionPage> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             child: LinearProgressIndicator(
                               value: cubit.getPercentage(),
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                              valueColor: AlwaysStoppedAnimation<Color>(CustomColors.BlueZodiac),
                               backgroundColor: Colors.grey,
                             ),
                           ),
@@ -141,13 +138,19 @@ class _QuestionPageState extends State<QuestionPage> {
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
           child: TextButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.black),
+              backgroundColor: MaterialStateProperty.all(CustomColors.BlueZodiac),
               foregroundColor: MaterialStateProperty.all(Colors.white),
             ),
             onPressed: () {
               cubit.goToNextPage(context, input);
             },
-            child: Text(cubit.buttonText()),
+            child: Text(
+              cubit.buttonText(),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Asap'// double
+              ),
+            ),
           )
       )
     );

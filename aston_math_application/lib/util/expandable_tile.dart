@@ -68,7 +68,7 @@ class _ExpandableTileState extends State<ExpandableTile>  {
                         children:[
                           Row(
                             children: [
-                              Text( topic.name + " " + (i+1).toString(), style: TextStyle(fontSize: 20, color: Colors.white),),
+                              Text( topic.name + " " + (i+1).toString(), style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed"),),
                             ],
                           ),
                         ],
@@ -115,7 +115,7 @@ class _ExpandableTileState extends State<ExpandableTile>  {
                     ),
                     SizedBox(width: 8,),
 
-                    Text( topic.name, style: TextStyle(fontSize: 20, color: Colors.white),),
+                    Text( topic.name, style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
                     Spacer(),
                   ],
                 ),
@@ -167,7 +167,7 @@ class _ExpandableTileState extends State<ExpandableTile>  {
                           ),
                         ),
                         SizedBox(width: 8,),
-                        Text( topic.name, style: TextStyle(fontSize: 20, color: Colors.white),),
+                        Text( topic.name, style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
                         Spacer(),
                         new RotationTransition(
                           turns: new AlwaysStoppedAnimation(rotation / 360),

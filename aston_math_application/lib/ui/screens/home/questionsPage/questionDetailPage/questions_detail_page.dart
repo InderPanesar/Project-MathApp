@@ -77,7 +77,7 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
                                 ),
 
                                 Container(
-                                  child: Text(state.questions[0].description, style: TextStyle(fontSize: 16, color: Colors.black),),
+                                  child: Text(state.questions[0].description, style: TextStyle(fontSize: 18, color: Colors.black, fontFamily: "AsapCondensed"),),
                                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                                 ),
                                 Container(
