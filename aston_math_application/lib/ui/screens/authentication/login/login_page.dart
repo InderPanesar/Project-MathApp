@@ -62,6 +62,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           ),
                           Container(
                             child: TextFormField(
+                              key: new Key('emailField'),
                               controller: emailController,
                               decoration: InputDecoration(
                                 border: UnderlineInputBorder(),
@@ -72,6 +73,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           ),
                           Container(
                             child: TextFormField(
+                              key: new Key('passwordField'),
                               controller: passwordController,
                               decoration: InputDecoration(
                                 border: UnderlineInputBorder(),

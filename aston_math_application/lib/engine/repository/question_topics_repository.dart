@@ -1,9 +1,6 @@
-import 'package:aston_math_application/engine/auth/authentication_service.dart';
 import 'package:aston_math_application/engine/model/Questions/QuestionTopic.dart';
 import 'package:aston_math_application/engine/model/Questions/question.dart';
-import 'package:aston_math_application/engine/model/UserDetails/UserDetails.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 
 abstract class QuestionMapRepository {
   Future<List<QuestionTopic>> getQuestionTopics();

@@ -61,7 +61,7 @@ class LandingPageWidget extends StatelessWidget {
                   },
                 ),
               ),
-              
+
               Container(
                 alignment: Alignment.center,
                 child: SmoothPageIndicator(

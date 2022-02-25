@@ -27,7 +27,7 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
       'recommendation_quiz' : details.questions,
       'recommended_video' : details.recommendedVideo,
       'notifications_active' : details.notificationsActive
-    }, SetOptions(merge: true),
+    }, SetOptions(merge: false),
     ).then((value) => print("")
     ).catchError((error) => print("Failed to merge data: $error"));
     return;

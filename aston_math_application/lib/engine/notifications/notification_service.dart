@@ -30,7 +30,7 @@ class NotificationService {
     notifcationsActive = false;
   }
 
-  Future initialiseNotificationService(bool? pushNotificationActive) async {
+  Future<void> initialiseNotificationService(bool? pushNotificationActive) async {
 
     if (Platform.isIOS) {
       settings = await firebaseMessaging.requestPermission(

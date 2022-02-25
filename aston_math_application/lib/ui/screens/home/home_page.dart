@@ -98,54 +98,56 @@ class _HomePageState extends State<HomePage> {
               )
             ],
           ),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-              child: GNav(
-                rippleColor: Colors.grey[300]!,
-                hoverColor: Colors.grey[100]!,
-                gap: 8,
-                activeColor: Colors.black,
-                iconSize: 24,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                duration: Duration(milliseconds: 400),
-                tabBackgroundColor: Colors.grey[100]!,
-                color: Colors.black,
-                tabs: [
-                  GButton(
-                    icon: Icons.home_rounded,
-                    iconColor: CustomColors.BlueZodiac,
-                    iconActiveColor: CustomColors.FunBlue,
-                    text: 'Home',
-                  ),
-                  GButton(
-                    icon: Icons.help_center,
-                    iconColor: CustomColors.BlueZodiac,
-                    iconActiveColor: CustomColors.FunBlue,
-                    text: 'Questions',
-                  ),
-                  GButton(
-                    icon: Icons.video_collection,
-                    iconColor: CustomColors.BlueZodiac,
-                    iconActiveColor: CustomColors.FunBlue,
-                    text: 'Videos',
-                  ),
-                  GButton(
-                    icon: Icons.settings,
-                    iconColor: CustomColors.BlueZodiac,
-                    iconActiveColor: CustomColors.FunBlue,
-                    text: 'Settings',
-                  ),
-                ],
-                selectedIndex: _selectedIndex,
-                onTabChange: (index) {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-               },
+          child: SingleChildScrollView(
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+                child: GNav(
+                  rippleColor: Colors.grey[300]!,
+                  hoverColor: Colors.grey[100]!,
+                  gap: 8,
+                  activeColor: Colors.black,
+                  iconSize: 24,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  duration: Duration(milliseconds: 400),
+                  tabBackgroundColor: Colors.grey[100]!,
+                  color: Colors.black,
+                  tabs: [
+                    GButton(
+                      icon: Icons.home_rounded,
+                      iconColor: CustomColors.BlueZodiac,
+                      iconActiveColor: CustomColors.FunBlue,
+                      text: 'Home',
+                    ),
+                    GButton(
+                      icon: Icons.help_center,
+                      iconColor: CustomColors.BlueZodiac,
+                      iconActiveColor: CustomColors.FunBlue,
+                      text: 'Questions',
+                    ),
+                    GButton(
+                      icon: Icons.video_collection,
+                      iconColor: CustomColors.BlueZodiac,
+                      iconActiveColor: CustomColors.FunBlue,
+                      text: 'Videos',
+                    ),
+                    GButton(
+                      icon: Icons.settings,
+                      iconColor: CustomColors.BlueZodiac,
+                      iconActiveColor: CustomColors.FunBlue,
+                      text: 'Settings',
+                    ),
+                  ],
+                  selectedIndex: _selectedIndex,
+                  onTabChange: (index) {
+                    setState(() {
+                      _selectedIndex = index;
+                    });
+                  },
+                ),
               ),
             ),
-          ),
+          )
         ),
     );
   }

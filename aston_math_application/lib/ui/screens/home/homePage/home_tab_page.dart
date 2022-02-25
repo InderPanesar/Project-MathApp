@@ -233,7 +233,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                                       QuestionService service = GetIt.instance();
                                       UserDetails _temp = details!;
                                       _temp.questions.values.toList()[index][1] = "true";
-                                      service.startPersonalisationQuiz(context, result, idName, _temp);
+                                      service.startPersonalisationQuiz(context, result, topicName, _temp);
                                     }
                                     else {
                                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

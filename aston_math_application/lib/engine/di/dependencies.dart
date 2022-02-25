@@ -6,13 +6,11 @@ import 'package:aston_math_application/engine/repository/user_details_repository
 import 'package:aston_math_application/engine/repository/videos_repository.dart';
 import 'package:aston_math_application/ui/screens/home/homePage/home_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questionDetailPageCubit/questions_detail_page_cubit.dart';
-import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questions_detail_page.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_service.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionsTabPageCubit/questions_tab_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/settingsPage/settings_tab_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/videosPage/videosTabPageCubit/videos_tab_page_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -22,20 +20,10 @@ class Dependencies {
   GetIt _getIt = GetIt.instance;
 
   void setup() {
-    _setupAPIs();
     _setupAnalytics();
     _setupRepositories();
     _setupUtils();
     _setupBlocs();
-  }
-
-  void _setupAPIs() {
-    _getIt.registerLazySingleton<Dio>((){
-      final Dio dio = Dio();
-      dio.options.baseUrl = "https://ghibliapi.herokuapp.com";
-      return dio;
-    }, instanceName: "authorised");
-
   }
 
   void _setupUtils() {

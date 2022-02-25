@@ -59,6 +59,7 @@ class _RegisterPageWidgetState extends State<RegisterPageWidget> {
                           ),
                           Container(
                             child: TextFormField(
+                              key: new Key('emailField'),
                               controller: emailController,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
@@ -71,6 +72,7 @@ class _RegisterPageWidgetState extends State<RegisterPageWidget> {
                           ),
                           Container(
                             child: TextFormField(
+                              key: new Key('passwordField'),
                               controller: passwordController,
                               decoration: InputDecoration(
                                 border: UnderlineInputBorder(),

@@ -87,29 +87,32 @@ class HomePageCubit extends Cubit<HomePageState> {
     else {
       data = details;
     }
-    if(topicsMap == null) {
+    if(topicsMap.isEmpty) {
       emit(HomePageState.failed());
       return;
     }
-    data.questions = topicsMap;
-    try {
-      await repo.addUserDetails(data);
+    else {
+      data.questions = topicsMap;
+      try {
+        await repo.addUserDetails(data);
+      }
+      catch(e) {
+        emit(HomePageState.failed());
+        return;
+      }
+      emit(HomePageState.success(data));
     }
-    catch(e) {
-      emit(HomePageState.failed());
-      return;
-    }
-    emit(HomePageState.success(data));
+
   }
 
   Future<Map<String, List<String>>> setNewDailyTasks(Map<String, int> scores) async {
-    print(scores.length);
     final sorted = new SplayTreeMap<String,dynamic>.from(scores, (a, b) => scores[a]! > scores[b]! ? 1 : -1 );
     List<String> weakestCategories = [];
     sorted.forEach((key, value) {
-      weakestCategories.add(key);
       if(weakestCategories.length == 4) return;
+      weakestCategories.add(key);
     });
+
     List<QuestionTopic> topics = [];
     try {
       topics = await thirdRepo.getQuestionTopics();
@@ -118,7 +121,10 @@ class HomePageCubit extends Cubit<HomePageState> {
       emit(HomePageState.failed());
     }
 
+
     Map<String, List<String>> topicsMap = new Map();
+
+
 
     for(QuestionTopic questionTopic in topics) {
       if(weakestCategories.contains(questionTopic.name)) {
