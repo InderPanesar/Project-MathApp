@@ -74,26 +74,33 @@ class DependenciesMock {
 }
 
 class UserDetailsRepositoryMock implements UserDetailsRepository {
-  UserDetails details = new UserDetails(name: "", age: "", doneHomeQuiz: false, scores: new Map(), lastActive: Timestamp.fromDate(new DateTime(2000)), questions: new Map(), recommendedVideo: [], notificationsActive: true);
 
   @override
   Future<void> addUserDetails(UserDetails details) async {
-    this.details = details;
+    UserDetailsInfo._details = details;
   }
 
   @override
   Future<UserDetails?> getUserDetails() {
-    return Future.value(details);
+    return Future.value(UserDetailsInfo._details);
   }
 
+}
+
+class UserDetailsInfo {
+  static UserDetails _details = new UserDetails(name: "", age: "", doneHomeQuiz: false, scores: new Map(), lastActive: Timestamp.fromDate(new DateTime(2000)), questions: new Map(), recommendedVideo: [], notificationsActive: true);
 }
 
 class QuestionMapRepositoryMock implements QuestionMapRepository {
   @override
   Future<List<QuestionTopic>> getQuestionTopics() {
     List<QuestionTopic> topics = [];
-    topics.add(QuestionTopic(name: "QUESTION 1", id: ["1"]));
-    topics.add(QuestionTopic(name: "QUESTION 2", id: ["2"]));
+    topics.add(QuestionTopic(name: "TOPIC 1", id: ["1"]));
+    topics.add(QuestionTopic(name: "TOPIC 2", id: ["2"]));
+    topics.add(QuestionTopic(name: "TOPIC 3", id: ["3"]));
+    topics.add(QuestionTopic(name: "TOPIC 4", id: ["4"]));
+    topics.add(QuestionTopic(name: "TOPIC 5", id: ["5"]));
+
     return Future.value(topics);
   }
 
@@ -118,8 +125,12 @@ class VideosRepositoryMock implements VideosRepository {
   @override
   Future<List<VideoTopic>> getVideos() {
     List<VideoTopic> topics = [];
-    topics.add(VideoTopic(category: "VIDEOS", videos: [new VideoModel(title: 'VIDEOS 1', attributes: ["https://www.youtube.com/watch?v=93YGZ6q_ucA, description"])]));
-    topics.add(VideoTopic(category: "VIDEOS", videos: [new VideoModel(title: 'VIDEOS 2', attributes: ["https://www.youtube.com/watch?v=93YGZ6q_ucA, description"])]));
+    topics.add(VideoTopic(category: "TOPIC 1", videos: [new VideoModel(title: 'VIDEOS 1', attributes: ["https://www.youtube.com/watch?v=93YGZ6q_ucA, description"])]));
+    topics.add(VideoTopic(category: "TOPIC 2", videos: [new VideoModel(title: 'VIDEOS 2', attributes: ["https://www.youtube.com/watch?v=93YGZ6q_ucA, description"])]));
+    topics.add(VideoTopic(category: "TOPIC 3", videos: [new VideoModel(title: 'VIDEOS 3', attributes: ["https://www.youtube.com/watch?v=93YGZ6q_ucA, description"])]));
+    topics.add(VideoTopic(category: "TOPIC 4", videos: [new VideoModel(title: 'VIDEOS 4', attributes: ["https://www.youtube.com/watch?v=93YGZ6q_ucA, description"])]));
+    topics.add(VideoTopic(category: "TOPIC 5", videos: [new VideoModel(title: 'VIDEOS 5', attributes: ["https://www.youtube.com/watch?v=93YGZ6q_ucA, description"])]));
+
     return Future.value(topics);
   }
 

@@ -33,8 +33,6 @@ class HomePageCubit extends Cubit<HomePageState> {
   NotificationService notificationService;
 
 
-
-
   Future<void> getAccountDetails() async {
     emit(HomePageState.loading());
     UserDetails? data;
@@ -45,6 +43,7 @@ class HomePageCubit extends Cubit<HomePageState> {
       emit(HomePageState.failed());
       return;
     }
+
 
 
     if(data == null){
@@ -63,10 +62,6 @@ class HomePageCubit extends Cubit<HomePageState> {
         await addDailyTask(data);
       }
       else {
-        data.questions.forEach((key, value) {
-          print(key);
-          print(value);
-        });
         emit(HomePageState.success(data));
       }
 
