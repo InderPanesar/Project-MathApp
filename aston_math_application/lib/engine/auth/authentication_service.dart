@@ -13,6 +13,7 @@ class AuthenticationService {
   AuthenticationService(this._firebaseAuth, this._notificationService);
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
+  final emailVerification = RegExp(r'^[a-z0-9](\.?[a-z0-9]){5,}@aston\.ac.uk$');
 
   Future<void> signOut() async{
     await _notificationService.unsubscribeFromTopic();
@@ -20,7 +21,7 @@ class AuthenticationService {
   }
 
   Future<String> signIn(String email, String password) async {
-    if(!email.contains("@aston.ac.uk")) {
+    if(!emailVerification.hasMatch(email)) {
       return "A aston university email must be used to sign in to the application.";
     }
     try {
@@ -32,7 +33,7 @@ class AuthenticationService {
   }
 
   Future<String> signUp(String email, String password, bool notificationsActive) async {
-    if(!email.contains("@aston.ac.uk")) {
+    if(!emailVerification.hasMatch(email)) {
       return "A aston university email must be used to sign up to the application.";
     }
     try {

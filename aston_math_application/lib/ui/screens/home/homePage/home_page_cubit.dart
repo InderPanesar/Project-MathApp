@@ -164,7 +164,7 @@ class HomePageCubit extends Cubit<HomePageState> {
   Future<List<Question>?> getIntroQuestions() async {
     List<Question>? data;
     try {
-      data = await secondaryRepo.getQuestions("LzLJPpz8dkwFKYfDJNH7");
+      data = await secondaryRepo.getQuestions("initialisation_quiz");
     } catch(e) {
       return null;
     }

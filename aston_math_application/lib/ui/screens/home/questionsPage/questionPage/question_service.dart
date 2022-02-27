@@ -96,7 +96,6 @@ class QuestionService {
           if(answer) score++;
           _map[_questions[i]] = answer;
         }
-
       }
       UserDetails? details = await repo.getUserDetails();
       if(_details != null) {
@@ -112,12 +111,25 @@ class QuestionService {
         //ToDo: Handle Personalisation Quiz Categories
       if(isIntroQuiz) {
         if(details != null) {
-          int? userHistoryScore = details.scores[_id];
-          if (userHistoryScore == null) {
-            userHistoryScore = 0;
+          List<String> names = ["Bodmas", "Changing The Subject", "Expanding Brackets", "Fractions", "Indices", "Percentage", "Quadratic Equations", "Ratio", "Rounding"];
+          int i = 0;
+          for(bool value in _map.values) {
+            int c = i ~/ 2;
+
+            int? userHistoryScore = details.scores[names[c]];
+            if (userHistoryScore == null) {
+              userHistoryScore = 0;
+            }
+            if(value) {
+              userHistoryScore += score;
+            }
+            details.scores[names[c]] = userHistoryScore;
+
+            for(int i = 0; i < 18; i++) {
+              print("VALUES OF NAME [ " + c.toString() + " ] : " + names[c]);
+            }
+            i++;
           }
-          userHistoryScore += score;
-          details.scores[_id] = userHistoryScore;
 
           print("ID OF QUIZ : " + _id);
 
@@ -127,7 +139,6 @@ class QuestionService {
       }
 
       else {
-        print("HIT");
         if(details != null) {
           int? userHistoryScore = details.scores[_id];
           if (userHistoryScore == null) {

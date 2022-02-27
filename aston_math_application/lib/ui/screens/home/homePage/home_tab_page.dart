@@ -271,7 +271,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                       ),
                     ),
                     Visibility(
-                      visible: details!.recommendedVideo.length == 3,
+                      visible: details!.recommendedVideo.length == 3 && details!.doneHomeQuiz,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
