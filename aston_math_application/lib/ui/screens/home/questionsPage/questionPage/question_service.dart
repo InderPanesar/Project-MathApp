@@ -113,14 +113,13 @@ class QuestionService {
         if(details != null) {
           List<String> names = ["Bodmas", "Changing The Subject", "Expanding Brackets", "Fractions", "Indices", "Percentage", "Quadratic Equations", "Ratio", "Rounding"];
           int i = 0;
-          for(bool value in _map.values) {
+          for(Question question in _map.keys) {
             int c = i ~/ 2;
-
             int? userHistoryScore = details.scores[names[c]];
             if (userHistoryScore == null) {
               userHistoryScore = 0;
             }
-            if(value) {
+            if(_map[question]!) {
               userHistoryScore += score;
             }
             details.scores[names[c]] = userHistoryScore;

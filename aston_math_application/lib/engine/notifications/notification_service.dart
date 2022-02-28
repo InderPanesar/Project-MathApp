@@ -30,7 +30,7 @@ class NotificationService {
     notifcationsActive = false;
   }
 
-  Future<void> initialiseNotificationService(bool? pushNotificationActive) async {
+  Future initialiseNotificationService(bool? pushNotificationActive) async {
 
     if (Platform.isIOS) {
       settings = await firebaseMessaging.requestPermission(
@@ -53,42 +53,44 @@ class NotificationService {
     }
 
     if(settings!.authorizationStatus == AuthorizationStatus.authorized) {
+      print("SETUP");
       if(pushNotificationActive != null) {
         notifcationsActive = pushNotificationActive;
       }
       else {
         notifcationsActive = true;
       }
-      if(notifcationsActive) await firebaseMessaging.subscribeToTopic('DailyQuizNotification');
-      final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-      await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
+      print("NOTIFICATIONS ACTIVE? :" + notifcationsActive.toString());
+      if(notifcationsActive)  {
+        await firebaseMessaging.subscribeToTopic('DailyQuizNotification');
+        final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+        await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
 
 
-      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        RemoteNotification? notification = message.notification;
-        AndroidNotification? android = message.notification?.android;
-        print("message recieved");
-        if(notification != null) {
-          if(android != null) {
-            print("HIT!");
+        FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+          RemoteNotification? notification = message.notification;
+          AndroidNotification? android = message.notification?.android;
+          var androidNotification = new AndroidNotificationDetails(
+              channel.id, channel.name, channelDescription: channel.description,
+              priority: Priority.max, importance: Importance.max);
+          var iOSNotification = new IOSNotificationDetails();
+          var platform = new NotificationDetails(android: androidNotification, iOS: iOSNotification);
+          print("message recieved");
+          if(notification != null) {
             flutterLocalNotificationsPlugin.show(
                 notification.hashCode,
                 notification.title,
                 notification.body,
-                NotificationDetails(
-                  android: AndroidNotificationDetails(
-                    channel.id,
-                    channel.name,
-                    channelDescription: channel.description,
-                    icon: "@mipmap/ic_launcher",
-                  ),
-                ));
+                platform
+            );
           }
-        }
-      });
+        });
+        print("NOTIFICATIONS SETUP");
+      }
 
     } else {
       notifcationsActive = false;
+      print("NOT SETUP");
     }
   }
 

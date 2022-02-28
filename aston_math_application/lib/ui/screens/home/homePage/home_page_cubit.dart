@@ -71,7 +71,9 @@ class HomePageCubit extends Cubit<HomePageState> {
   }
 
   Future <void> addDailyTask(UserDetails data) async {
-    data.lastActive = Timestamp.now();
+    DateTime currentDateTime = DateTime.now();
+    currentDateTime = new DateTime(currentDateTime.year, currentDateTime.month, currentDateTime.day, 9, 0, 0, 0, 0);
+    data.lastActive = Timestamp.fromDate(currentDateTime);
     Map<String, List<String>> topicsMap = await setNewDailyTasks(data.scores);
     var details = await setDailyVideoRecommendation(topicsMap, data);
 
