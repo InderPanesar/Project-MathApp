@@ -74,18 +74,22 @@ class _HomeTabPageState extends State<HomeTabPage> {
             bloc: _bloc,
             builder: (context, state) {
               if(state is HomePageStateFailed) {
-                return Center(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 20),
-                      backgroundColor: Colors.white,
-                    ),
-                    onPressed: () async {
-                      await _bloc.getAccountDetails();
-                    },
-                    child: const Text('Retry'),
-                  ),
-                ); //ToDo: Implement Error State
+                return Column(
+                    children: [
+                      SizedBox(height: 20,),
+                      Text('An Error Occurred!', style: const TextStyle(fontSize: 20, fontFamily:"Asap", color: Colors.white)),
+                      SizedBox(height: 10,),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 20),
+                          backgroundColor: Colors.white,
+                        ),
+                        onPressed: () async {
+                          await _bloc.getAccountDetails();
+                        },
+                        child: const Text('Retry', style: const TextStyle(fontSize: 20, fontFamily:"Asap", color: CustomColors.BlueZodiac)),
+                      )
+                    ]); //ToDo: Implement Error State
               }
               if (state is HomePageStateLoading) {
                 return Container(

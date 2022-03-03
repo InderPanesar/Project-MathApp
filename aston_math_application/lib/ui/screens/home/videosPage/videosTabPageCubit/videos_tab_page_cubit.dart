@@ -12,18 +12,24 @@ part 'videos_tab_page_state.dart';
 
 class VideosTabPageCubit extends Cubit<VideosTabPageState> {
   VideosTabPageCubit({required this.repo}) : super(VideosTabPageState.loading()) {
-    getQuestions();
+    getVideos();
   }
 
   VideosRepository repo;
 
-  Future<void> getQuestions() async {
+  Future<void> getVideos() async {
     emit(VideosTabPageState.loading());
-    List<VideoTopic>? videos = await repo.getVideos();
+    List<VideoTopic>? videos;
+    try {
+      videos = await repo.getVideos();
+    } catch(e) {
+      emit(VideosTabPageState.failed());
+    }
+
     if(videos == null){
       emit(VideosTabPageState.failed());
     } else if (videos.isEmpty) {
-      emit(VideosTabPageState.empty());
+      emit(VideosTabPageState.failed());
     } else {
       emit(VideosTabPageState.success(videos));
     }

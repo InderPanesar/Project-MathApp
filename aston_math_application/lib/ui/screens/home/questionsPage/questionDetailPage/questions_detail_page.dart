@@ -45,7 +45,7 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
                     alignment: Alignment.center,
                     color: Colors.white,
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
-                    child: BlocBuilder<QuestionDetailPageCubit, QuestionDetailPageState>(
+                    child: BlocConsumer<QuestionDetailPageCubit, QuestionDetailPageState>(
                       bloc: _bloc,
                       builder: (context, state) {
                         if(state is QuestionDetailPageStateSuccess) {
@@ -118,13 +118,20 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
                               ]
                           );
                         }
-                        if(state is QuestionDetailPageStateFailed) return Spacer(); //ToDo: Implement Error State
-                        if (state is QuestionDetailPageStateLoading) {
+                        else {
                           return Center(
-                              child: CircularProgressIndicator()
+                              child: CircularProgressIndicator( color: CustomColors.BlueZodiac,)
                           );
                         }
                         return Spacer();
+                      },
+                      listener: (BuildContext context, state) {
+                        if(state is QuestionDetailPageStateFailed) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Error: Cannot start quiz as you currently have no Internet Connection!"),
+                          ));
+                          Navigator.of(context).pop();
+                        }
                       },
                     )
 

@@ -1,6 +1,7 @@
 import 'package:aston_math_application/engine/model/Questions/QuestionTopic.dart';
 import 'package:aston_math_application/engine/model/Questions/question.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 abstract class QuestionMapRepository {
   Future<List<QuestionTopic>> getQuestionTopics();
@@ -15,6 +16,12 @@ class QuestionMapRepositoryImpl implements QuestionMapRepository {
 
   @override
   Future<List<QuestionTopic>> getQuestionTopics() async {
+    var connectivityResult = await Connectivity().checkConnectivity();// User defined class
+
+    if (connectivityResult == ConnectivityResult.none) {
+      throw Exception();
+    }
+
     Map<String, dynamic>? details;
     List<QuestionTopic> topics = [];
     await _firebaseFirestore.collection('question-map').doc("2x5m7WRDcjtqSCdqJg7y").get().then((value) {
@@ -33,6 +40,12 @@ class QuestionMapRepositoryImpl implements QuestionMapRepository {
   @override
   Future<List<Question>> getQuestions(String id) async {
     List<Question> details = [];
+    var connectivityResult = await Connectivity().checkConnectivity();// User defined class
+
+    if (connectivityResult == ConnectivityResult.none) {
+      return details;
+    }
+
     await _firebaseFirestore.collection('questions').doc(id).get().then((value) {
       if(value.exists) {
         List questions = value["questions"];

@@ -4,6 +4,7 @@ import 'package:aston_math_application/ui/screens/home/settingsPage/openSourceLi
 import 'package:aston_math_application/ui/screens/home/settingsPage/settings_tab_page_cubit.dart';
 import 'package:aston_math_application/util/styles/CustomColors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -116,8 +117,18 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                   child: InkWell(
                     splashColor: CustomColors.BlueZodiac.withAlpha(30),
                     onTap: () async {
-                      AuthenticationService service = GetIt.instance();
-                      await service.signOut();
+                      var connectivityResult = await Connectivity().checkConnectivity();// User defined class
+
+                      if (connectivityResult == ConnectivityResult.none) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("Error: Cannot process log out command as you currently have no Internet Connection!"),
+                        ));
+                      }
+                      else {
+                        AuthenticationService service = GetIt.instance();
+                        await service.signOut();
+                      }
+
                     },
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),

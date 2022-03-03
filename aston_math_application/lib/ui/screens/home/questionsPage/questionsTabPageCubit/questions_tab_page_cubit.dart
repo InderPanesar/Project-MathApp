@@ -18,11 +18,17 @@ class QuestionTabPageCubit extends Cubit<QuestionTabPageState> {
 
   Future<void> getQuestions() async {
     emit(QuestionTabPageState.loading());
-    List<QuestionTopic> data = await repo.getQuestionTopics();
+    List<QuestionTopic>? data;
+    try {
+      data = await repo.getQuestionTopics();
+    } catch(e) {
+      emit(QuestionTabPageState.failed());
+    }
+
     if(data == null){
       emit(QuestionTabPageState.failed());
     } else if (data.isEmpty) {
-      emit(QuestionTabPageState.empty());
+      emit(QuestionTabPageState.failed());
     } else {
       emit(QuestionTabPageState.success(data));
     }

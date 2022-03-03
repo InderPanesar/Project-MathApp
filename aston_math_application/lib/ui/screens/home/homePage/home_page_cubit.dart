@@ -47,6 +47,7 @@ class HomePageCubit extends Cubit<HomePageState> {
 
 
     if(data == null){
+      print("ERROR HAPPENED");
       emit(HomePageState.failed());
     } else {
       notificationService.notifcationsActive = data.notificationsActive;
@@ -64,6 +65,8 @@ class HomePageCubit extends Cubit<HomePageState> {
       else {
         emit(HomePageState.success(data));
       }
+
+
 
 
     }

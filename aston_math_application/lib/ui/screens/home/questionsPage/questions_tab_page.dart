@@ -54,7 +54,23 @@ class _QuestionTabPageState extends State<QuestionTabPage> {
                 BlocBuilder<QuestionTabPageCubit, QuestionTabPageState>(
                   bloc: _bloc,
                   builder: (context, state) {
-                    if(state is QuestionTabPageStateFailed) return Spacer(); //ToDo: Implement Error State
+                    print(state);
+                    if(state is QuestionTabPageStateFailed) return Column(
+                        children: [
+                          SizedBox(height: 20,),
+                          Text('An Error Occurred!', style: const TextStyle(fontSize: 20, fontFamily:"Asap", color: CustomColors.BlueZodiac)),
+                          SizedBox(height: 10,),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 20),
+                              backgroundColor: CustomColors.BlueZodiac,
+                            ),
+                            onPressed: () async {
+                              await _bloc.getQuestions();
+                            },
+                            child: const Text('Retry', style: const TextStyle(fontSize: 20, fontFamily:"Asap", color: Colors.white)),
+                          )
+                        ]);
                     if (state is QuestionTabPageStateLoading) {
                       return Center(
                           child: CircularProgressIndicator()

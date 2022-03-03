@@ -48,7 +48,23 @@ class _VideosTabPageState extends State<VideosTabPage> {
                 BlocBuilder<VideosTabPageCubit, VideosTabPageState>(
                   bloc: _bloc,
                   builder: (context, state) {
-                    if(state is VideosTabPageStateFailed) return Spacer(); //ToDo: Implement Error State
+                    print(state);
+                    if(state is VideosTabPageStateFailed) return Column(
+                        children: [
+                          SizedBox(height: 20,),
+                          Text('An Error Occurred!', style: const TextStyle(fontSize: 20, fontFamily:"Asap", color: CustomColors.BlueZodiac)),
+                          SizedBox(height: 10,),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 20),
+                              backgroundColor: CustomColors.BlueZodiac,
+                            ),
+                            onPressed: () async {
+                              await _bloc.getVideos();
+                            },
+                            child: const Text('Retry', style: const TextStyle(fontSize: 20, fontFamily:"Asap", color: Colors.white)),
+                          )
+                        ]);
                     if (state is VideosTabPageStateLoading) {
                       return Center(
                           child: CircularProgressIndicator()

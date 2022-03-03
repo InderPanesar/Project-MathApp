@@ -18,16 +18,14 @@ class QuestionDetailPageCubit extends Cubit<QuestionDetailPageState> {
     try {
        data = await repo.getQuestions(id);
     } catch(e) {
-      print(e.toString());
       emit(QuestionDetailPageState.failed());
       return;
     }
 
     if(data == null){
-      print("ERROR");
       emit(QuestionDetailPageState.failed());
     } else if (data.isEmpty) {
-      emit(QuestionDetailPageState.empty());
+      emit(QuestionDetailPageState.failed());
     } else {
       emit(QuestionDetailPageState.success(data));
     }

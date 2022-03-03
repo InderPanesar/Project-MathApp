@@ -3,6 +3,7 @@ import 'package:aston_math_application/engine/model/UserDetails/UserDetails.dart
 import 'package:aston_math_application/engine/model/video/VideoTopic.dart';
 import 'package:aston_math_application/engine/model/video/video_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class VideosRepository {
@@ -16,6 +17,12 @@ class VideosRepositoryImpl implements VideosRepository {
 
   @override
   Future<List<VideoTopic>> getVideos() async {
+
+    var connectivityResult = await Connectivity().checkConnectivity();// User defined class
+    if (connectivityResult == ConnectivityResult.none) {
+      return throw Exception();
+    }
+
     Map<String, dynamic>? details;
     List<VideoTopic> models = [];
 

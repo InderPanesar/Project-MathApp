@@ -1,6 +1,7 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
 import 'package:aston_math_application/engine/model/UserDetails/UserDetails.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 abstract class UserDetailsRepository {
   Future<void> addUserDetails(UserDetails details);
@@ -17,6 +18,7 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
 
   @override
   Future<void> addUserDetails(UserDetails details) async {
+
     CollectionReference users = _firebaseFirestore.collection('user');
     await users.doc(_authenticationService.getAuth().currentUser!.uid).set({
       'full_name': details.name,
@@ -29,15 +31,21 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
       'notifications_active' : details.notificationsActive
     }, SetOptions(merge: false),
     ).then((value) => print("")
-    ).catchError((error) => print("Failed to merge data: $error"));
+    ).catchError((error) => throw Exception());
     return;
   }
 
   @override
   Future<UserDetails?> getUserDetails() async {
 
+    var connectivityResult = await Connectivity().checkConnectivity();// User defined class
+    if (connectivityResult == ConnectivityResult.none) {
+      return null;
+    }
+
     UserDetails? details;
     print("UID: "+ _authenticationService.getAuth().currentUser!.uid);
+
     await _firebaseFirestore.collection('user').doc(_authenticationService.getAuth().currentUser!.uid).get().then((value) {
       if(value.exists) {
 
@@ -68,6 +76,8 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
             notificationsActive: value['notifications_active'] as bool
       );
       }
+    }).catchError((e) {
+      return null;
     });
     return details;
 

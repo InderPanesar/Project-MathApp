@@ -2,6 +2,7 @@ import 'package:aston_math_application/engine/auth/authentication_service.dart';
 import 'package:aston_math_application/engine/notifications/notification_service.dart';
 import 'package:aston_math_application/ui/screens/home/home_page.dart';
 import 'package:aston_math_application/ui/screens/landing/landing_page.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -51,9 +52,7 @@ class AuthenticationWrapper extends StatelessWidget {
     return StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          final user = snapshot.data;
           if(snapshot.hasData) {
-            print("user is logged in");
             return new HomePage();
           }
           else {
@@ -64,5 +63,6 @@ class AuthenticationWrapper extends StatelessWidget {
     );
     //return LandingPageWidget();
   }
+
 
 }
