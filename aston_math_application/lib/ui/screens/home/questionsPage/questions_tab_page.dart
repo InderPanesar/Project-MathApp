@@ -64,6 +64,7 @@ class _QuestionTabPageState extends State<QuestionTabPage> {
                       _topic = state.questions;
                       return Container(
                         child: ListView.builder(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: _topic.length,

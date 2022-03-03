@@ -88,9 +88,18 @@ class _HomeTabPageState extends State<HomeTabPage> {
                 ); //ToDo: Implement Error State
               }
               if (state is HomePageStateLoading) {
-                return Center(
-                    child: CircularProgressIndicator()
-
+                return Container(
+                  margin: EdgeInsets.only(top: 40),
+                  child: Column(
+                      children: [
+                        CircularProgressIndicator(color: Colors.white,),
+                        SizedBox(height: 16,),
+                        Text(
+                          "Loading Details...",
+                          style: const TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ],
+                  ),
                 );
               }
 
@@ -140,7 +149,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                               height: 16,
                             ),
                             Text(
-                              "Good Morning",
+                              _bloc.appropriateGreeting(),
                               style: const TextStyle(fontSize: 20, color: Colors.white),
                             ),
                             Text(

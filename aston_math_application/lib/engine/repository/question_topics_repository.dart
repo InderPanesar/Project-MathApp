@@ -25,6 +25,7 @@ class QuestionMapRepositoryImpl implements QuestionMapRepository {
         }
       }
     });
+    topics.sort((a, b) => a.name.compareTo(b.name));
     return topics;
 
   }
@@ -45,12 +46,12 @@ class QuestionMapRepositoryImpl implements QuestionMapRepository {
                   afterQuestion: value["after-question"][i],
                   description: value["description"],
                   characters: value["characters"][i].split(",")
-
               )
           );
         }
       }
     });
+
     return details;
 
   }

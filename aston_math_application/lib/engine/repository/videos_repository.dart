@@ -41,6 +41,8 @@ class VideosRepositoryImpl implements VideosRepository {
       }
     });
 
+    models.sort((a, b) => a.category.compareTo(b.category));
+
     return models;
 
   }
