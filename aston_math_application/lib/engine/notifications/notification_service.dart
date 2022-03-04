@@ -67,7 +67,7 @@ class NotificationService {
         await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
 
 
-        FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
           RemoteNotification? notification = message.notification;
           AndroidNotification? android = message.notification?.android;
           var androidNotification = new AndroidNotificationDetails(
@@ -75,6 +75,12 @@ class NotificationService {
               priority: Priority.max, importance: Importance.max);
           var iOSNotification = new IOSNotificationDetails();
           var platform = new NotificationDetails(android: androidNotification, iOS: iOSNotification);
+
+          var initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
+          var initializationSettingsIOS = IOSInitializationSettings();
+          var initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+          await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
           print("message recieved");
           if(notification != null) {
             flutterLocalNotificationsPlugin.show(
