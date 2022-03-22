@@ -15,13 +15,24 @@ void main() {
     await testingSetUp();
   });
 
+  String appropriateGreeting() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good Morning';
+    }
+    if (hour < 17) {
+      return 'Good Afternoon';
+    }
+    return 'Good Evening';
+  }
+
   testWidgets('Title, Text-fields and Buttons Exist, but no name', (tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(PageSetup.setupPage(HomeTabPage()));
       await tester.pumpAndSettle();
 
       final title = find.text("Home");
-      final timeOfDay = find.text("Good Morning");
+      final timeOfDay = find.text(appropriateGreeting());
       final button = find.byType(TextButton);
       final buttonText = find.text("Do initial quiz");
       final nameText = find.text("John");
@@ -95,6 +106,8 @@ void main() {
 
     });
   });
+
+
 
 
 

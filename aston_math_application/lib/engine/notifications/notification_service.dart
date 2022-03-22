@@ -53,14 +53,12 @@ class NotificationService {
     }
 
     if(settings!.authorizationStatus == AuthorizationStatus.authorized) {
-      print("SETUP");
       if(pushNotificationActive != null) {
         notifcationsActive = pushNotificationActive;
       }
       else {
         notifcationsActive = true;
       }
-      print("NOTIFICATIONS ACTIVE? :" + notifcationsActive.toString());
       if(notifcationsActive)  {
         await firebaseMessaging.subscribeToTopic('DailyQuizNotification');
         final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -81,7 +79,6 @@ class NotificationService {
           var initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
           await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
-          print("message recieved");
           if(notification != null) {
             flutterLocalNotificationsPlugin.show(
                 notification.hashCode,
@@ -91,12 +88,10 @@ class NotificationService {
             );
           }
         });
-        print("NOTIFICATIONS SETUP");
       }
 
     } else {
       notifcationsActive = false;
-      print("NOT SETUP");
     }
   }
 

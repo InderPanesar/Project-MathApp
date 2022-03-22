@@ -89,7 +89,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                         },
                         child: const Text('Retry', style: const TextStyle(fontSize: 20, fontFamily:"Asap", color: CustomColors.BlueZodiac)),
                       )
-                    ]); //ToDo: Implement Error State
+                    ]);
               }
               if (state is HomePageStateLoading) {
                 return Container(
