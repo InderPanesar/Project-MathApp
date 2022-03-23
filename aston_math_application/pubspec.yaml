@@ -57,6 +57,7 @@ dependencies:
   future_progress_dialog: ^0.2.0
   mockito: ^5.0.15
   flutter_launcher_icons: ^0.9.2
+  url_launcher: ^6.0.20
 
 
 

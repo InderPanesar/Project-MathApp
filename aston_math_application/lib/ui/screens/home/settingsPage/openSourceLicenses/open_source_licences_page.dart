@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 
@@ -26,13 +27,26 @@ class OpenSourceLicencePageState extends State<OpenSourceLicencePage> {
         centerTitle: true,
       ),
       body: WebView(
+        javascriptMode: JavascriptMode.unrestricted,
         initialUrl: 'about:blank',
         onWebViewCreated: (WebViewController webViewController) {
           _controller = webViewController;
           _loadHtmlFromAssets();
         },
+        navigationDelegate: (NavigationRequest request) {
+          _launchURL(request.url);
+          return NavigationDecision.prevent;
+        },
       ),
     );
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   _loadHtmlFromAssets() async {

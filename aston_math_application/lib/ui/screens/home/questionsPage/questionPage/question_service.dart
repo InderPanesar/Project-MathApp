@@ -47,8 +47,6 @@ class QuestionService {
     _details = details;
     _id = id;
 
-    print("VALUE OF QUIZ: "+ _id);
-
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => QuestionPage(question: _questions[0], index: 0,)),
@@ -60,8 +58,7 @@ class QuestionService {
 
     _questions = questions;
     _answers = [];
-    //ToDo; Update with finalised quiz answers
-    _id ="Bodmas";
+    _id ="initialisation_quiz";
     isIntroQuiz = true;
     _details = null;
 
@@ -102,11 +99,6 @@ class QuestionService {
         details = _details;
       }
 
-      for(String values in details!.scores.keys) {
-        print("VALUES: " + values);
-
-      }
-
 
         //ToDo: Handle Personalisation Quiz Categories
       if(isIntroQuiz) {
@@ -123,15 +115,8 @@ class QuestionService {
               userHistoryScore += score;
             }
             details.scores[names[c]] = userHistoryScore;
-
-            for(int i = 0; i < 18; i++) {
-              print("VALUES OF NAME [ " + c.toString() + " ] : " + names[c]);
-            }
             i++;
           }
-
-          print("ID OF QUIZ : " + _id);
-
           details.doneHomeQuiz = true;
           await repo.addUserDetails(details);
         }
