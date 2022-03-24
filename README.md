@@ -1,9 +1,5 @@
 # Emp Maths - Final Year Project
 
-**Table of Contents**
-
-[TOC]
-
 # Images Used
 <a href="https://www.freepik.com/vectors/school">School vector created by storyset - www.freepik.com</a>
 <a href="https://www.freepik.com/vectors/education">Education vector created by freepik - www.freepik.com</a>
