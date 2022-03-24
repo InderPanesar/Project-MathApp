@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -14,8 +11,6 @@ class OpenSourceLicencePage extends StatefulWidget {
 }
 
 class OpenSourceLicencePageState extends State<OpenSourceLicencePage> {
-  WebViewController? _controller;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,15 +22,17 @@ class OpenSourceLicencePageState extends State<OpenSourceLicencePage> {
         centerTitle: true,
       ),
       body: WebView(
-        javascriptMode: JavascriptMode.unrestricted,
-        initialUrl: 'about:blank',
-        onWebViewCreated: (WebViewController webViewController) {
-          _controller = webViewController;
-          _loadHtmlFromAssets();
-        },
+        //Where the open source licenses are stored as local html doesn't work on iOS
+        initialUrl: 'https://inderpanesar.github.io',
         navigationDelegate: (NavigationRequest request) {
-          _launchURL(request.url);
-          return NavigationDecision.prevent;
+          if(request.url == "https://inderpanesar.github.io/") {
+            return NavigationDecision.navigate;
+          }
+          else {
+            //Launch Any URL links in a external browser.
+            _launchURL(request.url);
+            return NavigationDecision.prevent;
+          }
         },
       ),
     );
@@ -49,13 +46,6 @@ class OpenSourceLicencePageState extends State<OpenSourceLicencePage> {
     }
   }
 
-  _loadHtmlFromAssets() async {
-    String fileText = await rootBundle.loadString('assets/text/licenses.html');
-    _controller?.loadUrl( Uri.dataFromString(
-        fileText,
-        mimeType: 'text/html',
-        encoding: Encoding.getByName('utf-8')
-    ).toString());
 
-  }
+
 }
