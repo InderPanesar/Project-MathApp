@@ -1,5 +1,12 @@
 # Emp Maths - Final Year Project
 
+> Please use Dart version - 2.16.0 <br>
+> And Flutter Version - 2.10.0
+
+<a href="https://dart.dev/get-dart/archive">Dart Archives - to get Dart 2.16.0</a> <br>
+<a href="https://docs.flutter.dev/development/tools/sdk/releases">Flutter Archives - to get Flutter 2.10.0</a>
+
+
 # Images Used
 IMAGE 1 - Question Detail Page
 <a href="https://www.freepik.com/vectors/school">School vector created by storyset - www.freepik.com</a>
