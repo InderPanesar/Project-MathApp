@@ -1,17 +1,16 @@
-#Emp Maths - Final Year Project
+# Emp Maths - Final Year Project
 
 **Table of Contents**
 
 [TOC]
 
-#Images Used
+# Images Used
 <a href="https://www.freepik.com/vectors/school">School vector created by storyset - www.freepik.com</a>
 <a href="https://www.freepik.com/vectors/education">Education vector created by freepik - www.freepik.com</a>
 
-#Libraries Used
+# Libraries Used
 1. <a href="https://pub.dev/packages/dio">dio</a>
-2. <a href="import 'package:connectivity_plus/connectivity_plus.dart';
-">connectivity_plus</a>
+2. <a href="https://pub.dev/packages/connectivity_plus">connectivity_plus</a>
 3. <a href="https://pub.dev/packages/retrofit">retrofit</a>
 4. <a href="https://pub.dev/packages/json_serializable">json_serializable</a>
 5. <a href="https://pub.dev/packages/flutter_svg">flutter_svg</a>
