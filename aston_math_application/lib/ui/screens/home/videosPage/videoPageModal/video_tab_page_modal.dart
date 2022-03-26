@@ -14,7 +14,6 @@ class VideoTabPageModal extends StatefulWidget {
 }
 
 class _VideosTabPageModelState extends State<VideoTabPageModal> {
-  // This widget is the root of your application.
   YoutubePlayerController controller;
   VideoModel video;
 
@@ -29,14 +28,10 @@ class _VideosTabPageModelState extends State<VideoTabPageModal> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.portraitUp
     ]);
-
-    print("HIT! 1");
   }
   @override
   void dispose() {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    print("HIT! 2");
-
     super.dispose();
   }
 
@@ -48,6 +43,7 @@ class _VideosTabPageModelState extends State<VideoTabPageModal> {
 
   @override
   Widget build(BuildContext context) {
+    //Made This Widget Root So Fullscreen works for any modal.
     return YoutubePlayerBuilder(
         player: YoutubePlayer(
           controller: controller,
