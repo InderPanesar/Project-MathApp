@@ -10,8 +10,8 @@ import '../../../../../util/styles/CustomColors.dart';
 
 class QuestionPage extends StatefulWidget {
 
-  Question question;
-  int index;
+  final Question question;
+  final int index;
 
   QuestionPage({required this.question, required this.index});
 

@@ -1,14 +1,50 @@
 import 'package:aston_math_application/engine/model/video/video_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class VideoTabPageModal extends StatelessWidget {
-  // This widget is the root of your application.
+class VideoTabPageModal extends StatefulWidget {
   final YoutubePlayerController controller;
   final VideoModel video;
 
-  VideoTabPageModal({required this.controller, required this.video });
+  VideoTabPageModal(this.controller, this.video);
+
+  @override
+  _VideosTabPageModelState createState() => _VideosTabPageModelState(this.controller, this.video);
+}
+
+class _VideosTabPageModelState extends State<VideoTabPageModal> {
+  // This widget is the root of your application.
+  YoutubePlayerController controller;
+  VideoModel video;
+
+  _VideosTabPageModelState(this.controller, this.video);
+
+  @override
+  void initState() {
+    super.initState();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp
+    ]);
+
+    print("HIT! 1");
+  }
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    print("HIT! 2");
+
+    super.dispose();
+  }
+
+  void resetRotation(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,4 +84,6 @@ class VideoTabPageModal extends StatelessWidget {
 
 
   }
+
 }
+

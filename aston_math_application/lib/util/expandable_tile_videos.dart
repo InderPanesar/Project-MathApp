@@ -56,7 +56,7 @@ class _ExpandableTileVideoState extends State<ExpandableTileVideos>  {
         enableDrag: false,
         context: context,
         builder: (context) =>
-            VideoTabPageModal(video: topic, controller: _controller)
+            VideoTabPageModal(_controller, topic)
     );
 
   }

@@ -400,7 +400,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
         enableDrag: false,
         context: context,
         builder: (context) =>
-            VideoTabPageModal(video: topic, controller: _controller)
+            VideoTabPageModal(_controller,topic )
     );
 
   }
