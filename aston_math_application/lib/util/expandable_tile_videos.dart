@@ -1,4 +1,4 @@
-import 'package:aston_math_application/engine/model/video/VideoTopic.dart';
+import 'package:aston_math_application/engine/model/video/video_topic.dart';
 import 'package:aston_math_application/engine/model/video/video_model.dart';
 import 'package:aston_math_application/util/styles/CustomColors.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:aston_math_application/engine/model/Questions/QuestionTopic.dart';
+import 'package:aston_math_application/engine/model/Questions/question_topic.dart';
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questions_detail_page.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionsTabPageCubit/questions_tab_page_cubit.dart';

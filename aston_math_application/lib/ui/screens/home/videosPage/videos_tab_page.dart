@@ -1,4 +1,4 @@
-import 'package:aston_math_application/engine/model/video/VideoTopic.dart';
+import 'package:aston_math_application/engine/model/video/video_topic.dart';
 import 'package:aston_math_application/ui/screens/home/videosPage/videosTabPageCubit/videos_tab_page_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

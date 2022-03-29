@@ -1,6 +1,6 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
 import 'package:aston_math_application/engine/model/Questions/question.dart';
-import 'package:aston_math_application/engine/model/UserDetails/UserDetails.dart';
+import 'package:aston_math_application/engine/model/UserDetails/user_details.dart';
 import 'package:aston_math_application/engine/model/video/video_model.dart';
 import 'package:aston_math_application/engine/repository/question_repository.dart';
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';

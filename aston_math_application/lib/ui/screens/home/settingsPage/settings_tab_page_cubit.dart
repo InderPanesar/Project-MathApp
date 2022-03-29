@@ -2,7 +2,7 @@ import 'package:aston_math_application/engine/notifications/notification_service
 import 'package:aston_math_application/util/shared_preferences_keys.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../../engine/model/UserDetails/UserDetails.dart';
+import '../../../../engine/model/UserDetails/user_details.dart';
 import '../../../../engine/repository/user_details_repository.dart';
 
 class SettingsTabPageCubit {

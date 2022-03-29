@@ -1,7 +1,7 @@
-import 'package:aston_math_application/engine/model/Questions/QuestionTopic.dart';
+import 'package:aston_math_application/engine/model/Questions/question_topic.dart';
 import 'package:aston_math_application/engine/model/Questions/question.dart';
-import 'package:aston_math_application/engine/model/UserDetails/UserDetails.dart';
-import 'package:aston_math_application/engine/model/video/VideoTopic.dart';
+import 'package:aston_math_application/engine/model/UserDetails/user_details.dart';
+import 'package:aston_math_application/engine/model/video/video_topic.dart';
 import 'package:aston_math_application/engine/model/video/video_model.dart';
 import 'package:aston_math_application/engine/notifications/notification_service.dart';
 import 'package:aston_math_application/engine/repository/question_repository.dart';

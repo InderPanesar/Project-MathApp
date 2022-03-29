@@ -1,5 +1,5 @@
 import 'package:aston_math_application/engine/model/Questions/question.dart';
-import 'package:aston_math_application/engine/model/UserDetails/UserDetails.dart';
+import 'package:aston_math_application/engine/model/UserDetails/user_details.dart';
 import 'package:aston_math_application/engine/repository/question_repository.dart';
 import 'package:aston_math_application/engine/repository/user_details_repository.dart';
 import 'package:aston_math_application/ui/screens/home/homePage/home_page_cubit.dart';

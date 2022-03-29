@@ -1,4 +1,4 @@
-import 'package:aston_math_application/engine/model/video/VideoTopic.dart';
+import 'package:aston_math_application/engine/model/video/video_topic.dart';
 import 'package:aston_math_application/engine/model/video/video_model.dart';
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
 import 'package:aston_math_application/engine/repository/videos_repository.dart';
