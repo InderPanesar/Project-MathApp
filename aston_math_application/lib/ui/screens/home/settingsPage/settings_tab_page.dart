@@ -5,6 +5,7 @@ import 'package:aston_math_application/ui/screens/home/settingsPage/settings_tab
 import 'package:aston_math_application/util/styles/CustomColors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -36,7 +37,7 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                           padding: EdgeInsets.fromLTRB(0,30,0,5)
                       ),
                       Container(
-                          child: Text("Settings", style: TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.bold),),
+                          child: Text("settings_title", style: TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.bold),).tr(),
                           padding: EdgeInsets.fromLTRB(0,100,20,5)
                       ),
                       Spacer()
@@ -60,7 +61,7 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                       children:[
                         Row(
                           children: [
-                            Text("Push Notifications", style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
+                            Text("push_notifications", style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),).tr(),
                             Spacer(),
                             Switch(
                               value: _bloc.isPushNotificationsActive(),
@@ -98,7 +99,7 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                         children:[
                           Row(
                             children: [
-                              Text( "Change Details", style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
+                              Text( "change_details", style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),).tr(),
                               Spacer(),
                             ],
                           ),
@@ -138,7 +139,7 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                         children:[
                           Row(
                             children: [
-                              Text( "Log Out", style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
+                              Text( "log_out", style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),).tr(),
                               Spacer(),
                             ],
                           ),
@@ -167,7 +168,7 @@ class _SettingsTabPageState extends State<SettingsTabPage> {
                         children:[
                           Row(
                             children: [
-                              Text( "Open Source Licenses", style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),),
+                              Text( "open_source_licenses", style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "AsapCondensed", fontWeight: FontWeight.w700),).tr(),
                               Spacer(),
                             ],
                           ),

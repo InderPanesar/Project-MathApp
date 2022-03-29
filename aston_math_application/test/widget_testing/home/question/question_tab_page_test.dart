@@ -18,8 +18,8 @@ void main() {
 
       final title = find.text('Questions');
       final card = find.byType(Card);
-      final tab1 = find.text("QUESTION 1");
-      final tab2 = find.text("QUESTION 2");
+      final tab1 = find.text("TOPIC 1");
+      final tab2 = find.text("TOPIC 2");
 
       expect(title, findsOneWidget);
       expect(card, findsWidgets);

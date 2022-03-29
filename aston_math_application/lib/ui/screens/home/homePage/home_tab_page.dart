@@ -10,6 +10,7 @@ import 'package:aston_math_application/ui/screens/home/questionsPage/questionPag
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionsTabPageCubit/questions_tab_page_cubit.dart';
 import 'package:aston_math_application/util/styles/CustomColors.dart';
 import 'package:dialogs/dialogs/progress_dialog.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -146,9 +147,9 @@ class _HomeTabPageState extends State<HomeTabPage> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              "Home",
+                              "home_title",
                               style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
-                            ),
+                            ).tr(),
                             SizedBox(
                               height: 16,
                             ),

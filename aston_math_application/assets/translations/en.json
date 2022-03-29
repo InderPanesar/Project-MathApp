@@ -1,7 +1,16 @@
 {
   "login":"Login",
-  "signin":"Sign In",
+  "sign_in":"Sign In",
   "title":"Essential Mathematics Preparation",
-  "hint_message":"Two adjacent letters are treated as a single variable: xy is not interpreted as the product of x and \uD835\uDC66, \uD835\uDC65×\uD835\uDC66\n\nYou must use the multiplication symbol to separate the two variables, i.e. enter x*y."
+  "hint_message":"Two adjacent letters are treated as a single variable: xy is not interpreted as the product of x and \uD835\uDC66, \uD835\uDC65×\uD835\uDC66\n\nYou must use the multiplication symbol to separate the two variables, i.e. enter x*y.",
+  "register": "Register",
+  "push_notifications": "Push Notifications",
+  "change_details": "Change Details",
+  "log_out": "Log Out",
+  "open_source_licenses": "Open Source Licenses",
+  "home_title": "Home",
+  "question_title": "Questions",
+  "videos_title": "Videos",
+  "settings_title": "Settings"
 
 }

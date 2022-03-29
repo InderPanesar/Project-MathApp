@@ -3,6 +3,7 @@ import 'package:aston_math_application/engine/repository/question_topics_reposit
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionDetailPage/questions_detail_page.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionsTabPageCubit/questions_tab_page_cubit.dart';
 import 'package:aston_math_application/util/expandable_tile.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -43,7 +44,7 @@ class _QuestionTabPageState extends State<QuestionTabPage> {
                           padding: EdgeInsets.fromLTRB(0,30,0,5)
                       ),
                       Container(
-                          child: Text("Questions", style: TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.bold),),
+                          child: Text("question_title", style: TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.bold),).tr(),
                           padding: EdgeInsets.fromLTRB(0,100,20,5)
                       ),
                       Spacer()

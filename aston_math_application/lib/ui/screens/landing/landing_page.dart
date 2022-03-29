@@ -91,7 +91,7 @@ class LandingPageWidget extends StatelessWidget {
                   children: [
                     Container(
                       child: TextButton(
-                        child: Text('signin').tr(),
+                        child: Text('sign_in').tr(),
                         style: buttonMainStyle,
                         onPressed: () => onSignInPressed(context),
                       ),
@@ -99,7 +99,7 @@ class LandingPageWidget extends StatelessWidget {
                     ),
                     Container(
                       child: TextButton(
-                        child: Text('Register'),
+                        child: Text('register').tr(),
                         style: secondaryMainStyle,
                         onPressed: () => onRegisterPressed(context),
                       ),

@@ -1,6 +1,3 @@
-/// Gained from the website: https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart
-/// Licensed under BSD 3-Clause "New" or "Revised" License
-
 import 'package:aston_math_application/engine/di/dependencies.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,6 +8,9 @@ import 'package:easy_logger/easy_logger.dart';
 
 import 'dependencies_mock.dart';
 
+/// Gained from the website: https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart
+/// Licensed under BSD 3-Clause "New" or "Revised" License
+/// Lines 14-56
 typedef Callback = void Function(MethodCall call);
 
 void setupFirebaseAuthMocks([Callback? customHandlers]) {

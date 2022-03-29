@@ -15,7 +15,7 @@ void main() {
       await tester.pumpWidget(PageSetup.setupPage(LandingPageWidget()));
       await tester.pump();
 
-      final title = find.text('Do quizzes');
+      final title = find.text('Do Quizzes');
       final subtitle = find.text('Do quizzes to help you get better at the maths content need for foundation year and beyond!');
 
       expect(title, findsWidgets);
