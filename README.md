@@ -52,3 +52,8 @@ IMAGE 2 - Landing Page
 35. <a href="https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html">flutter_test</a>
 36. <a href="https://pub.dev/packages/build_runner">build_runner</a>
 37. <a href="https://pub.dev/packages/retrofit_generator">retrofit_generator</a>
+
+# Font Families Used
+1.	Asap Font Family [SIL Open Font License, 1.1 - https://github.com/Omnibus-Type/Asap]
+2.	Asap Condensed Font Family [SIL Open Font License, 1.1  - https://github.com/Omnibus-Type/AsapCondensed]
+
