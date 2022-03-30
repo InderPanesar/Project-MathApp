@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../ui/screens/home/videosPage/videoPageModal/video_tab_page_modal.dart';
+import '../../ui/screens/home/videosPage/videoPageModal/video_tab_page_modal.dart';
 
 
 class ExpandableTileVideos extends StatefulWidget {

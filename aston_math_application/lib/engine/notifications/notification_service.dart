@@ -1,7 +1,6 @@
 import 'dart:ffi';
 import 'dart:io' show Platform;
 
-import 'package:aston_math_application/util/shared_preferences_keys.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 

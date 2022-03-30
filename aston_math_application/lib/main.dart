@@ -1,6 +1,6 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
 import 'package:aston_math_application/engine/notifications/notification_service.dart';
-import 'package:aston_math_application/ui/screens/home/home_page.dart';
+import 'package:aston_math_application/ui/screens/home/root_page.dart';
 import 'package:aston_math_application/ui/screens/landing/landing_page.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';

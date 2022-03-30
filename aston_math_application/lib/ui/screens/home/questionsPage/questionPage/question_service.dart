@@ -100,22 +100,21 @@ class QuestionService {
       }
 
 
-        //ToDo: Handle Personalisation Quiz Categories
       if(isIntroQuiz) {
         if(details != null) {
-          List<String> names = ["Bodmas", "Changing The Subject", "Expanding Brackets", "Fractions", "Indices", "Percentage", "Quadratic Equations", "Ratio", "Rounding"];
-          int i = 0;
+          List<String> categories = ["Bodmas", "Changing The Subject", "Expanding Brackets", "Fractions", "Indices", "Percentage", "Quadratic Equations", "Ratio", "Rounding"];
+          int index = 0;
           for(Question question in _map.keys) {
-            int c = i ~/ 2;
-            int? userHistoryScore = details.scores[names[c]];
+            int categoryIndex = index ~/ 2;
+            int? userHistoryScore = details.scores[categories[categoryIndex]];
             if (userHistoryScore == null) {
               userHistoryScore = 0;
             }
             if(_map[question]!) {
               userHistoryScore += score;
             }
-            details.scores[names[c]] = userHistoryScore;
-            i++;
+            details.scores[categories[categoryIndex]] = userHistoryScore;
+            index++;
           }
           details.doneHomeQuiz = true;
           await repo.addUserDetails(details);
