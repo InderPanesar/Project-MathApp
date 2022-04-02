@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:aston_math_application/engine/model/Questions/question_topic.dart';
 import 'package:aston_math_application/engine/model/Questions/question.dart';
-import 'package:aston_math_application/engine/model/UserDetails/user_details.dart';
 import 'package:aston_math_application/engine/notifications/notification_service.dart';
 import 'package:aston_math_application/engine/repository/question_repository.dart';
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
@@ -15,6 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../engine/model/user_details/user_details.dart';
 import '../../../../engine/model/video/video_topic.dart';
 import '../../../../engine/repository/videos_repository.dart';
 

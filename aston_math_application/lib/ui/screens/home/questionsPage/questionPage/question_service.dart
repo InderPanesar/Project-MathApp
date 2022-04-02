@@ -1,6 +1,4 @@
 import 'package:aston_math_application/engine/model/Questions/question.dart';
-import 'package:aston_math_application/engine/model/UserDetails/user_details.dart';
-import 'package:aston_math_application/engine/repository/question_repository.dart';
 import 'package:aston_math_application/engine/repository/user_details_repository.dart';
 import 'package:aston_math_application/ui/screens/home/homePage/home_page_cubit.dart';
 import 'package:aston_math_application/ui/screens/home/questionsPage/questionPage/question_page.dart';
@@ -8,7 +6,7 @@ import 'package:aston_math_application/ui/screens/home/questionsPage/questionPag
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import '../questions_tab_page.dart';
+import '../../../../../engine/model/user_details/user_details.dart';
 
 class QuestionService {
 

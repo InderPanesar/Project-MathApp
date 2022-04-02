@@ -1,10 +1,7 @@
-import 'package:aston_math_application/engine/auth/authentication_service.dart';
-import 'package:aston_math_application/engine/model/UserDetails/user_details.dart';
 import 'package:aston_math_application/engine/model/video/video_topic.dart';
 import 'package:aston_math_application/engine/model/video/video_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/cupertino.dart';
 
 abstract class VideosRepository {
   Future<List<VideoTopic>> getVideos();

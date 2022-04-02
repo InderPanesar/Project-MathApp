@@ -1,10 +1,7 @@
 import 'package:aston_math_application/engine/notifications/notification_service.dart';
-import 'package:aston_math_application/engine/repository/user_details_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get_it/get_it.dart';
 
-import '../model/UserDetails/user_details.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;

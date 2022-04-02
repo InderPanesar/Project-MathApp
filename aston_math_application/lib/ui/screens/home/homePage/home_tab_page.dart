@@ -1,6 +1,5 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
 import 'package:aston_math_application/engine/model/Questions/question.dart';
-import 'package:aston_math_application/engine/model/UserDetails/user_details.dart';
 import 'package:aston_math_application/engine/model/video/video_model.dart';
 import 'package:aston_math_application/engine/repository/question_repository.dart';
 import 'package:aston_math_application/engine/repository/question_topics_repository.dart';
@@ -21,6 +20,8 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../videosPage/videoPageModal/video_tab_page_modal.dart';
+import '../../../../engine/model/user_details/user_details.dart';
+
 import 'home_page_cubit.dart';
 
 class HomeTabPage extends StatefulWidget {

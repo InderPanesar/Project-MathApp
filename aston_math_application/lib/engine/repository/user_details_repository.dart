@@ -1,7 +1,8 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
-import 'package:aston_math_application/engine/model/UserDetails/user_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+
+import '../model/user_details/user_details.dart';
 
 abstract class UserDetailsRepository {
   Future<void> addUserDetails(UserDetails details);

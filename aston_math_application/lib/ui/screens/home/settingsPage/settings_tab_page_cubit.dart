@@ -1,7 +1,7 @@
 import 'package:aston_math_application/engine/notifications/notification_service.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../../engine/model/UserDetails/user_details.dart';
+import '../../../../engine/model/user_details/user_details.dart';
 import '../../../../engine/repository/user_details_repository.dart';
 
 class SettingsTabPageCubit {

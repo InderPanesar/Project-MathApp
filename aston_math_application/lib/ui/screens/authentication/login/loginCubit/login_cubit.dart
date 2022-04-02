@@ -1,11 +1,11 @@
 import 'package:aston_math_application/engine/auth/authentication_service.dart';
-import 'package:aston_math_application/engine/model/UserDetails/user_details.dart';
 import 'package:bloc/bloc.dart';
 
 import 'package:equatable/equatable.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../engine/model/user_details/user_details.dart';
 import '../../../../../engine/notifications/notification_service.dart';
 import '../../../../../engine/repository/user_details_repository.dart';
 

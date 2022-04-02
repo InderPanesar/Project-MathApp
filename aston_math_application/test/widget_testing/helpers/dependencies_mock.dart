@@ -1,6 +1,6 @@
 import 'package:aston_math_application/engine/model/Questions/question_topic.dart';
 import 'package:aston_math_application/engine/model/Questions/question.dart';
-import 'package:aston_math_application/engine/model/UserDetails/user_details.dart';
+import 'package:aston_math_application/engine/model/user_details/user_details.dart';
 import 'package:aston_math_application/engine/model/video/video_topic.dart';
 import 'package:aston_math_application/engine/model/video/video_model.dart';
 import 'package:aston_math_application/engine/notifications/notification_service.dart';
@@ -20,6 +20,7 @@ import 'package:aston_math_application/ui/screens/home/questionsPage/questionPag
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+
 
 class DependenciesMock {
   GetIt _getIt = GetIt.instance;
