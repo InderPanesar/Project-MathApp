@@ -53,6 +53,8 @@ IMAGE 2 - Landing Page
 36. <a href="https://pub.dev/packages/build_runner">build_runner</a>
 37. <a href="https://pub.dev/packages/retrofit_generator">retrofit_generator</a>
 
+Indepth Licenses found at https://inderpanesar.github.io/
+
 # Font Families Used
 1.	Asap Font Family [SIL Open Font License, 1.1 - https://github.com/Omnibus-Type/Asap]
 2.	Asap Condensed Font Family [SIL Open Font License, 1.1  - https://github.com/Omnibus-Type/AsapCondensed]
