@@ -1,3 +1,4 @@
+//Video Model defined from Firebase DB Model
 class VideoModel {
   VideoModel({required this.title, required this.attributes});
 

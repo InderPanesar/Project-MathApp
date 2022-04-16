@@ -4,12 +4,16 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../model/user_details/user_details.dart';
 
+//Abstract class for User Details Repository
 abstract class UserDetailsRepository {
+  //Add/Update User Details
   Future<void> addUserDetails(UserDetails details);
+  //Get the User Details
   Future<UserDetails?> getUserDetails();
 
 }
 
+//Implementation of User Details Repository
 class UserDetailsRepositoryImpl implements UserDetailsRepository {
 
   final FirebaseFirestore _firebaseFirestore;

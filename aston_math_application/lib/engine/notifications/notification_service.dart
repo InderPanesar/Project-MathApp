@@ -1,10 +1,9 @@
-import 'dart:ffi';
 import 'dart:io' show Platform;
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-
+//Notification Service handles anything to do with Notifications in the application.
 class NotificationService {
   final FirebaseMessaging firebaseMessaging;
   final AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -18,15 +17,18 @@ class NotificationService {
 
   NotificationSettings? settings;
 
-  bool notifcationsActive = false;
+  bool notificationsActive = false;
 
+  //Subscribe to Notifications
   Future<void> subscribeToTopic() async {
     await firebaseMessaging.subscribeToTopic('DailyQuizNotification');
-    notifcationsActive = true;
+    notificationsActive = true;
   }
+
+  //Unsubscribe to Notifications
   Future<void> unsubscribeFromTopic() async {
     await firebaseMessaging.unsubscribeFromTopic('DailyQuizNotification');
-    notifcationsActive = false;
+    notificationsActive = false;
   }
 
   Future initialiseNotificationService(bool? pushNotificationActive) async {
@@ -53,12 +55,12 @@ class NotificationService {
 
     if(settings!.authorizationStatus == AuthorizationStatus.authorized) {
       if(pushNotificationActive != null) {
-        notifcationsActive = pushNotificationActive;
+        notificationsActive = pushNotificationActive;
       }
       else {
-        notifcationsActive = true;
+        notificationsActive = true;
       }
-      if(notifcationsActive)  {
+      if(notificationsActive)  {
         await firebaseMessaging.subscribeToTopic('DailyQuizNotification');
         final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
         await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
@@ -66,7 +68,6 @@ class NotificationService {
 
         FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
           RemoteNotification? notification = message.notification;
-          AndroidNotification? android = message.notification?.android;
           var androidNotification = new AndroidNotificationDetails(
               channel.id, channel.name, channelDescription: channel.description,
               priority: Priority.max, importance: Importance.max);
@@ -90,13 +91,13 @@ class NotificationService {
       }
 
     } else {
-      notifcationsActive = false;
+      notificationsActive = false;
     }
   }
 
   Future<void> updateNotificationStatus() async{
-    notifcationsActive = !notifcationsActive;
-    if(notifcationsActive) {
+    notificationsActive = !notificationsActive;
+    if(notificationsActive) {
       await subscribeToTopic();
     }
     else {

@@ -49,7 +49,7 @@ class HomePageCubit extends Cubit<HomePageState> {
     if(data == null){
       emit(HomePageState.failed());
     } else {
-      notificationService.notifcationsActive = data.notificationsActive;
+      notificationService.notificationsActive = data.notificationsActive;
       await notificationService.initialiseNotificationService(data.notificationsActive);
 
       DateTime currentTime = Timestamp.now().toDate();

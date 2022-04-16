@@ -1,3 +1,4 @@
+//Question Topic Model defined from Firebase DB Model
 class QuestionTopic {
   QuestionTopic( {required this.name, required this.id});
 

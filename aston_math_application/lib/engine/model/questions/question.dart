@@ -1,3 +1,4 @@
+//Question Model defined from Firebase DB Model
 class Question {
   Question( {required this.preQuestion, required this.question, required this.afterQuestion, required this.answer, required this.description, required this.characters});
 

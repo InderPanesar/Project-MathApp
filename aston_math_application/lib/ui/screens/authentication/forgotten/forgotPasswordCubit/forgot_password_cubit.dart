@@ -15,6 +15,7 @@ class ForgottenPasswordCubit extends Cubit<ForgottenPasswordState> {
 
   AuthenticationService service;
 
+  //Handles reset password.
   Future<void> resetPassword(String email) async {
     emit(ForgottenPasswordState.loading());
     String value = await service.resetPassword(email);

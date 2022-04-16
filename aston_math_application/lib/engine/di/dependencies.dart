@@ -14,9 +14,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 
+//Where all dependencies are registered.
 class Dependencies {
   GetIt _getIt = GetIt.instance;
 
@@ -27,14 +27,15 @@ class Dependencies {
     _setupBlocs();
   }
 
+  //Set up various different services and other useful utilities.
   void _setupUtils() {
-      //_getIt.registerSingleton<NavigationService>(NavigationService());
     _getIt.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
     _getIt.registerLazySingleton<NotificationService>(() => NotificationService(FirebaseMessaging.instance));
     _getIt.registerSingleton<AuthenticationService>(AuthenticationService(FirebaseAuth.instance,_getIt.get<NotificationService>()));
     _getIt.registerLazySingleton<QuestionService>(() => QuestionService(
       repo: _getIt.get<UserDetailsRepository>(),
     ));
+    //Cubit registered here to allow easy access of state from other pages.
     _getIt.registerLazySingleton<HomePageCubit>(() => HomePageCubit(
       repo: _getIt.get<UserDetailsRepository>(),
       secondaryRepo: _getIt.get<QuestionRepository>(),
@@ -44,6 +45,7 @@ class Dependencies {
     ));
   }
 
+  //All repositories which need to be registered.
   void _setupRepositories() {
 
 
@@ -65,9 +67,8 @@ class Dependencies {
     ));
   }
 
+  //All blocs which need to be registered
   void _setupBlocs() {
-
-
     _getIt.registerFactory<QuestionTabPageCubit>(() => QuestionTabPageCubit(
       repo: _getIt.get<QuestionMapRepository>(),
     ));
@@ -87,6 +88,7 @@ class Dependencies {
 
   }
 
+  //Set Up Firebase Crashlytics.
   void _setupAnalytics() {
     _getIt.registerLazySingleton<FirebaseCrashlytics>(() => FirebaseCrashlytics.instance);
   }

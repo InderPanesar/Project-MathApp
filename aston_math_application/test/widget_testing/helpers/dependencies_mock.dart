@@ -191,7 +191,7 @@ class AuthenticationServiceMock implements AuthenticationService {
 
 class NotificationServiceMock implements NotificationService {
   @override
-  bool notifcationsActive = true;
+  bool notificationsActive = true;
 
   @override
   NotificationSettings? settings;
@@ -204,22 +204,22 @@ class NotificationServiceMock implements NotificationService {
 
   @override
   Future<void> initialiseNotificationService(bool? pushNotificationActive) async {
-    notifcationsActive = true;
+    notificationsActive = true;
   }
 
   @override
   Future<void> subscribeToTopic() async {
-    notifcationsActive = true;
+    notificationsActive = true;
   }
 
   @override
   Future<void> unsubscribeFromTopic() async {
-    notifcationsActive = false;
+    notificationsActive = false;
   }
 
   @override
   Future<void> updateNotificationStatus() async {
-    notifcationsActive = !notifcationsActive;
+    notificationsActive = !notificationsActive;
   }
 
 }

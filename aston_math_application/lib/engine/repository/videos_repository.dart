@@ -3,10 +3,13 @@ import 'package:aston_math_application/engine/model/video/video_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
+//Abstract class for Videos Repository
 abstract class VideosRepository {
+  //Get the videos the user can click.
   Future<List<VideoTopic>> getVideos();
 }
 
+//Implementation of Videos Repository
 class VideosRepositoryImpl implements VideosRepository {
 
   final FirebaseFirestore _firebaseFirestore;

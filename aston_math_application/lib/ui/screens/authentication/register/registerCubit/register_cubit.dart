@@ -22,7 +22,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterState.loading());
 
     await _notificationService.initialiseNotificationService(null);
-    String statusSignUp = await service.signUp(email.trim(), password.trim(), _notificationService.notifcationsActive);
+    String statusSignUp = await service.signUp(email.trim(), password.trim(), _notificationService.notificationsActive);
 
     if(statusSignUp != "Signed up") {
       emit(RegisterState.failed(statusSignUp));

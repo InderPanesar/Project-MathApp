@@ -1,11 +1,14 @@
 import 'package:aston_math_application/engine/model/Questions/question.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+//Abstract class for Question Repository
 abstract class QuestionRepository {
+  //Get All Questions for a specific id.
   Future<List<Question>> getQuestions(String id);
 
 }
 
+//Implementation of Question Repository
 class QuestionRepositoryImpl implements QuestionRepository {
 
   final FirebaseFirestore _firebaseFirestore;

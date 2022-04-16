@@ -13,15 +13,15 @@ class SettingsTabPageCubit {
   SettingsTabPageCubit({required this.service});
 
   bool isPushNotificationsActive()  {
-    print("PUSH NOTIFICATIONS: " + service.notifcationsActive.toString());
-    return service.notifcationsActive;
+    print("PUSH NOTIFICATIONS: " + service.notificationsActive.toString());
+    return service.notificationsActive;
   }
 
   Future<void> updateNotificationStatus() async {
     await service.updateNotificationStatus();
     UserDetails? details = await detailsRepository.getUserDetails();
     if(details != null) {
-      details.notificationsActive = service.notifcationsActive;
+      details.notificationsActive = service.notificationsActive;
       await detailsRepository.addUserDetails(details);
     }
 

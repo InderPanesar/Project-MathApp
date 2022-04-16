@@ -2,7 +2,7 @@ import 'package:aston_math_application/engine/notifications/notification_service
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
+//Auth service which defines all the functionality for FirebaseAuth
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
   final NotificationService _notificationService;
@@ -17,6 +17,7 @@ class AuthenticationService {
     await _firebaseAuth.signOut();
   }
 
+  //Returns the message from Firebase Auth if error occurs.
   Future<String> signIn(String email, String password) async {
     if(!emailVerification.hasMatch(email)) {
       return "A aston university email must be used to sign in to the application.";
@@ -29,11 +30,13 @@ class AuthenticationService {
     return "Signed in";
   }
 
+  //Returns the message from Firebase Auth if error occurs.
   Future<String> signUp(String email, String password, bool notificationsActive) async {
     if(!emailVerification.hasMatch(email)) {
       return "A aston university email must be used to sign up to the application.";
     }
     try {
+      //Ensures the database entry is created before sign up is completed
       await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password).then(
               (value) => createUserDetails(notificationsActive));
     } on FirebaseAuthException catch(e) {
@@ -51,10 +54,12 @@ class AuthenticationService {
     return "Email Sent";
   }
 
+  //Get Firebase Auth Instance.
   FirebaseAuth getAuth() {
     return _firebaseAuth;
   }
 
+  //Local instance of creating a User Details Entry with Users UID.
   Future<void> createUserDetails(bool notificationActive) async {
     CollectionReference users = FirebaseFirestore.instance.collection('user');
     await users.doc(FirebaseAuth.instance.currentUser!.uid).set({

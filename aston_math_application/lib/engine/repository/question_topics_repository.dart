@@ -3,12 +3,16 @@ import 'package:aston_math_application/engine/model/Questions/question.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
+//Abstract class for Question Map Repository
 abstract class QuestionMapRepository {
+  //Get All Questions topics.
   Future<List<QuestionTopic>> getQuestionTopics();
+  //Get All Questions for a specific id.
   Future<List<Question>> getQuestions(String id);
 
 }
 
+//Implementation of Question Topics Repository
 class QuestionMapRepositoryImpl implements QuestionMapRepository {
 
   final FirebaseFirestore _firebaseFirestore;
