@@ -8,6 +8,7 @@ import 'package:get_it/get_it.dart';
 
 import '../../../../../engine/model/user_details/user_details.dart';
 
+//Question Service used to navigate the pages.
 class QuestionService {
 
   QuestionService({required this.repo});
@@ -20,6 +21,7 @@ class QuestionService {
   bool isIntroQuiz = false;
   UserDetails? _details;
 
+  //Starting a quiz with an already retrieved question and appropriate ID (Questions Page)
   void start(BuildContext context, List<Question> questions, String id) {
     if(questions.length == 0) throw Exception;
 
@@ -36,6 +38,7 @@ class QuestionService {
     );
   }
 
+  //Starting a one-time personalisation quiz (daily tasks).
   void startPersonalisationQuiz(BuildContext context, List<Question> questions, String id, UserDetails details) {
     if(questions.length == 0) throw Exception;
 
@@ -51,6 +54,7 @@ class QuestionService {
     );
   }
 
+  //Start Intro Quiz to get personalisation (One-Time Home-Page)
   void startIntroQuiz(BuildContext context, List<Question> questions) {
     if(questions.length == 0) throw Exception;
 
@@ -66,6 +70,7 @@ class QuestionService {
     );
   }
 
+  //Move to the next page
   void nextPage(BuildContext context, String answer, int index) async {
     if (_answers.length <= index) {
       _answers.add(answer);
@@ -153,10 +158,12 @@ class QuestionService {
 
   }
 
+  //Returns if question is last page
   bool isLastPage(int index) {
     return (index+1) == _questions.length;
   }
 
+  //Get the amount of questions left in the quiz
   double percentage(int index) {
     return (index)/_questions.length;
   }

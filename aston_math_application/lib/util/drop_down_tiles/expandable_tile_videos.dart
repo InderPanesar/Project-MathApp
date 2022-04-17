@@ -8,7 +8,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../ui/screens/home/videosPage/videoPageModal/video_tab_page_modal.dart';
 
-
+//Expandable Tiles Widget for Videos
 class ExpandableTileVideos extends StatefulWidget {
 
   final VideoTopic topic;
