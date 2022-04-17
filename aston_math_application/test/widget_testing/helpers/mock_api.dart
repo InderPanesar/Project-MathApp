@@ -8,9 +8,19 @@ import 'package:easy_logger/easy_logger.dart';
 
 import 'dependencies_mock.dart';
 
+/***************************************************************************************
+ *    Title: mock.dart
+ *    Author: The Chromium Authors (Google)
+ *    Date: 2020
+ *    Code version: 1.0
+ *    Availability: https://github.com/firebase/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart
+ *
+ ***************************************************************************************/
 /// Gained from the website: https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart
 /// Licensed under BSD 3-Clause "New" or "Revised" License
-/// Lines 14-56
+/// Lines 24-65 in this class
+/// GitHub. (2021). mock.dart. [online] Available at: https://github.com/firebase/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart [Accessed 6 March 2021].
+
 typedef Callback = void Function(MethodCall call);
 
 void setupFirebaseAuthMocks([Callback? customHandlers]) {
@@ -49,12 +59,12 @@ void setupFirebaseAuthMocks([Callback? customHandlers]) {
 }
 
 Future<T> neverEndingFuture<T>() async {
-  // ignore: literal_only_boolean_expressions
   while (true) {
     await Future.delayed(const Duration(minutes: 5));
   }
 }
 
+//Setup lines for other parts of the code
 Future<void> testingSetUp() async {
   await Firebase.initializeApp();
   TestWidgetsFlutterBinding.ensureInitialized();

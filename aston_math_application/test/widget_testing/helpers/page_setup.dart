@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+//Contains code for the page to be setup for testing.
 class MockApp extends StatelessWidget {
   final Widget widget;
   MockApp(this.widget);

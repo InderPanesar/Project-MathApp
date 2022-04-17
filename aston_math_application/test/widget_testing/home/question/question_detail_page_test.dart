@@ -11,6 +11,7 @@ void main() {
     await testingSetUp();
   });
 
+  //Ensures that descriptions and test buttons exist
   testWidgets('Title, Text-fields and Buttons Exist', (tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(PageSetup.setupPage(QuestionDetailPage(id: "1", topicName: "Question 1")));

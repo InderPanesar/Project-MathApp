@@ -26,6 +26,7 @@ void main() {
     return 'Good Evening';
   }
 
+  //Buttons Exist but no name
   testWidgets('Title, Text-fields and Buttons Exist, but no name', (tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(PageSetup.setupPage(HomeTabPage()));
@@ -46,6 +47,7 @@ void main() {
     });
   });
 
+  //Buttons Exist and name shown
   testWidgets('Ensure that name is now shown', (tester) async {
     await tester.runAsync(() async {
       UserDetailsRepository repo = GetIt.instance();
@@ -64,6 +66,7 @@ void main() {
     });
   });
 
+  //Buttons 4 daily tasks are shown on the page.
   testWidgets('4 Widgets of Daily Tasks are shown, and Video Shown', (tester) async {
     await tester.runAsync(() async {
       UserDetailsRepository repo = GetIt.instance();

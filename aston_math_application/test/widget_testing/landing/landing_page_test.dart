@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../helpers/mock_api.dart';
 import '../helpers/page_setup.dart';
 
+//All Landing Page Tests
 void main() {
   setupFirebaseAuthMocks();
 
@@ -10,6 +11,7 @@ void main() {
     await testingSetUp();
   });
 
+  //Test that the values are appropriate on the Landing page on UI.
   testWidgets('Landing Page App Description Values Exist', (tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(PageSetup.setupPage(LandingPageWidget()));
@@ -24,6 +26,7 @@ void main() {
     });
   });
 
+  //Test that the values the buttons text values are correct on UI
   testWidgets('Landing Page App Description Values Exist', (tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(PageSetup.setupPage(LandingPageWidget()));

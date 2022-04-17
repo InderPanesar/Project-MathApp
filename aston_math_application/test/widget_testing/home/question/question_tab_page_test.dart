@@ -11,6 +11,7 @@ void main() {
     await testingSetUp();
   });
 
+  //Check that cards are shown on the question page.
   testWidgets('Title, Text-fields and Buttons Exist', (tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(PageSetup.setupPage(QuestionTabPage()));

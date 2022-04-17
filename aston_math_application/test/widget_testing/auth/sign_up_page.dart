@@ -13,6 +13,7 @@ void main() {
     await testingSetUp();
   });
 
+  //Check if widgets exist
   testWidgets('Title, Text-fields and Buttons Exist', (tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(PageSetup.setupPage(RegisterPageWidget()));
@@ -29,7 +30,8 @@ void main() {
     });
   });
 
-  testWidgets('Check Error State - Login', (tester) async {
+  //Check Ensure that general error state exists
+  testWidgets('Check Error State - Sign Up', (tester) async {
     await tester.runAsync(() async {
 
       await tester.pumpWidget(PageSetup.setupPage(RegisterPageWidget()));
@@ -46,6 +48,7 @@ void main() {
     });
   });
 
+  //Check Ensure that error state exists
   testWidgets('Check Error State w/o password - Login', (tester) async {
     await tester.runAsync(() async {
 
@@ -66,7 +69,8 @@ void main() {
     });
   });
 
-  testWidgets('Check Success State - Login', (tester) async {
+  //Check Ensure that sign up success state exists
+  testWidgets('Check Success State - Sign up', (tester) async {
     await tester.runAsync(() async {
 
       await tester.pumpWidget(PageSetup.setupPage(LoginPageWidget()));
