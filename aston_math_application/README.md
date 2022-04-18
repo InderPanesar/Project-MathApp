@@ -1,11 +1,14 @@
 # Emp Maths - Final Year Project
 
+# Note For Running Application
 > Please use Dart version - 2.16.0 <br>
-> And Flutter Version - 2.10.0
+> And Flutter Version - 2.10.0 <br>
+> While other versions can be used, they have not been tested and may result in instability or errors.
+> "flutter pub get" should be entered into the console to download all packages <br>
+> Note: If ran on an iOS emulator, push notifications will not work as they are not supported by the emulator.
 
 <a href="https://dart.dev/get-dart/archive">Dart Archives - to get Dart 2.16.0</a> <br>
 <a href="https://docs.flutter.dev/development/tools/sdk/releases">Flutter Archives - to get Flutter 2.10.0</a>
-
 
 # Images Used
 IMAGE 1 - Question Detail Page
