@@ -20,6 +20,7 @@ class QuestionService {
   List<String> _answers = [];
   bool isIntroQuiz = false;
   UserDetails? _details;
+  int _indexOfDailyTask = 0;
 
   //Starting a quiz with an already retrieved question and appropriate ID (Questions Page)
   void start(BuildContext context, List<Question> questions, String id) {
@@ -29,8 +30,8 @@ class QuestionService {
     _answers = [];
     isIntroQuiz = false;
     _details = null;
-
     _id = id;
+    _indexOfDailyTask = -1;
 
     Navigator.push(
       context,
@@ -39,7 +40,7 @@ class QuestionService {
   }
 
   //Starting a one-time personalisation quiz (daily tasks).
-  void startPersonalisationQuiz(BuildContext context, List<Question> questions, String id, UserDetails details) {
+  void startPersonalisationQuiz(BuildContext context, List<Question> questions, String id, UserDetails details, int dailyTaskIndex) {
     if(questions.length == 0) throw Exception;
 
     _questions = questions;
@@ -47,6 +48,7 @@ class QuestionService {
     isIntroQuiz = false;
     _details = details;
     _id = id;
+    _indexOfDailyTask = dailyTaskIndex;
 
     Navigator.push(
       context,
@@ -63,6 +65,7 @@ class QuestionService {
     _id ="initialisation_quiz";
     isIntroQuiz = true;
     _details = null;
+    _indexOfDailyTask = -1;
 
     Navigator.push(
       context,
@@ -126,6 +129,9 @@ class QuestionService {
 
       else {
         if(details != null) {
+          if(_indexOfDailyTask != -1) {
+            _details?.questions.values.toList()[_indexOfDailyTask][1] = "true";
+          }
           int? userHistoryScore = details.scores[_id];
           if (userHistoryScore == null) {
             userHistoryScore = 0;
