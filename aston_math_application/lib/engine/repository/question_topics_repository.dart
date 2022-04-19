@@ -53,7 +53,6 @@ class QuestionMapRepositoryImpl implements QuestionMapRepository {
     await _firebaseFirestore.collection('questions').doc(id).get().then((value) {
       if(value.exists) {
         List questions = value["questions"];
-        print(questions);
         for(int i = 0; i < questions.length; i++) {
           details.add(
               Question(

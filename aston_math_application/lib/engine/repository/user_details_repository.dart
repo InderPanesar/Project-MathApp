@@ -49,7 +49,6 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
     }
 
     UserDetails? details;
-    print("UID: "+ _authenticationService.getAuth().currentUser!.uid);
 
     await _firebaseFirestore.collection('user').doc(_authenticationService.getAuth().currentUser!.uid).get().then((value) {
       if(value.exists) {

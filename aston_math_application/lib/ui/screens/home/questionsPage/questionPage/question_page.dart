@@ -118,7 +118,6 @@ class _QuestionPageState extends State<QuestionPage> {
       keyboardType: MathKeyboardType.expression, // Specify the keyboard type (expression or number only).
       variables: question.characters, // Specify the variables the user can use (only in expression mode).
       onSubmitted: (String value) {
-        print(value);
         input = value;
       }, // Respond to the user submitting their input.
       autofocus: false, // Enable or disable autofocus of the input field.

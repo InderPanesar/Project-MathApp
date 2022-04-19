@@ -13,7 +13,6 @@ class SettingsTabPageCubit {
   SettingsTabPageCubit({required this.service});
 
   bool isPushNotificationsActive()  {
-    print("PUSH NOTIFICATIONS: " + service.notificationsActive.toString());
     return service.notificationsActive;
   }
 

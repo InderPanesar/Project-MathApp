@@ -49,7 +49,6 @@ class _VideosTabPageState extends State<VideosTabPage> {
                 BlocBuilder<VideosTabPageCubit, VideosTabPageState>(
                   bloc: _bloc,
                   builder: (context, state) {
-                    print(state);
                     if(state is VideosTabPageStateFailed) return Column(
                         children: [
                           SizedBox(height: 20,),

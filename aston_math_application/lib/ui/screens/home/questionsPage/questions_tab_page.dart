@@ -55,7 +55,6 @@ class _QuestionTabPageState extends State<QuestionTabPage> {
                 BlocBuilder<QuestionTabPageCubit, QuestionTabPageState>(
                   bloc: _bloc,
                   builder: (context, state) {
-                    print(state);
                     if(state is QuestionTabPageStateFailed) return Column(
                         children: [
                           SizedBox(height: 20,),

@@ -39,7 +39,6 @@ class HomePageCubit extends Cubit<HomePageState> {
     try {
       data = await repo.getUserDetails();
     } catch(e) {
-      print(e.toString());
       emit(HomePageState.failed());
       return;
     }

@@ -61,7 +61,6 @@ class AuthenticationWrapper extends StatelessWidget {
             return new HomePage();
           }
           else {
-            print("user is not logged in");
             return new LandingPageWidget();
           }
         }

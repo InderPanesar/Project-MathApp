@@ -31,7 +31,6 @@ class _ExpandableTileState extends State<ExpandableTile>  {
   _ExpandableTileState(this.topic);
 
   void navigateToPage(BuildContext context, QuestionTopic topic, int arrayValue) {
-    print('Card tapped. Code: ' + topic.id[arrayValue]);
     var detailPage = QuestionDetailPage(id: topic.id[arrayValue], topicName: topic.name,);
     Navigator.push(
       context,

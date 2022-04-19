@@ -31,7 +31,6 @@ class _ExpandableTileVideoState extends State<ExpandableTileVideos>  {
   _ExpandableTileVideoState(this.topic);
 
   void navigateToPage(BuildContext context, VideoModel topic, int arrayValue) {
-    print('Card tapped. Code: ' + topic.attributes.first);
     String url = topic.attributes.first;
     if(url != null) {
       url = YoutubePlayer.convertUrlToId(url)!;
