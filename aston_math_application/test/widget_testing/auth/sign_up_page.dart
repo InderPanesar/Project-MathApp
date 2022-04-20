@@ -49,7 +49,7 @@ void main() {
   });
 
   //Check Ensure that error state exists
-  testWidgets('Check Error State w/o password - Login', (tester) async {
+  testWidgets('Check Error State w/o password - Sign Up', (tester) async {
     await tester.runAsync(() async {
 
       await tester.pumpWidget(PageSetup.setupPage(RegisterPageWidget()));
