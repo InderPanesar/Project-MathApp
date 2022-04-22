@@ -8,18 +8,15 @@ import 'package:easy_logger/easy_logger.dart';
 
 import 'dependencies_mock.dart';
 
-/***************************************************************************************
- *    Title: mock.dart
- *    Author: The Chromium Authors (Google)
- *    Date: 2020
- *    Code version: 1.0
- *    Availability: https://github.com/firebase/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart
- *
- ***************************************************************************************/
-/// Gained from the website: https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart
-/// Licensed under BSD 3-Clause "New" or "Revised" License
-/// Lines 24-65 in this class
-/// GitHub. (2021). mock.dart. [online] Available at: https://github.com/firebase/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart [Accessed 6 March 2021].
+/// *************************************************************************************
+///    Title: mock.dart
+///    Author: FlutterFire
+///    Date: 2020
+///    Code version: 1.0
+///    Availability: https://github.com/firebase/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart
+///    Lines: Lines 21-62 in this class
+///    License:Licensed under BSD 3-Clause "New" or "Revised" License
+///**************************************************************************************/
 
 typedef Callback = void Function(MethodCall call);
 
