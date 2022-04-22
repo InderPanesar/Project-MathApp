@@ -90,7 +90,7 @@ In-depth Licenses found at https://inderpanesar.github.io/
 25.	Simpleclub. (2021b). math_keyboard. [online] Available at: https://pub.dev/packages/math_keyboard [Accessed: 1 November 2021].
 26.	progress_state_button | Flutter Package. (2020). [online] Available at: https://pub.dev/packages/progress_state_button [Accessed: 1 March 2022].
 27.	Dhaubanjar, S. (2021b). youtube_player_flutter. [online] Available at: https://pub.dev/packages/youtube_player_flutter [Accessed: 15 November 2021].
-28.	López, D. (2018). percent_indicator | Flutter Package. [online] Available at: https://pub.dev/packages/percent_indicator (Accessed: 1 March 2022).
+28.	López, D. (2018). percent_indicator | Flutter Package. [online] Available at: https://pub.dev/packages/percent_indicator [Accessed: 1 March 2022].
 29.	Akarie, M. (2020). smooth_page_indicator | Flutter Package. [online] Available at: https://pub.dev/packages/smooth_page_indicator [Accessed: 1 March 2022].
 30.	Hameed, A. (2021). dialogs | Flutter Package. [online] Available at: https://pub.dev/packages/dialogs [Accessed: 1 March 2022].
 31.	Seo, D. (2020). future_progress_dialog | Flutter Package. [online] Available at: https://pub.dev/packages/future_progress_dialog [Accessed: 1 March 2022].
